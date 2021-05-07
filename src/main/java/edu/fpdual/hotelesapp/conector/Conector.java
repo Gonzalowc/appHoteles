@@ -39,10 +39,9 @@ public class Conector {
     	}
     		return null;
     }
-
     /**
      * Obtener la URL para conectar la base de datos.
-     * @return
+     * @return 
      */
 
 	private String getURL() {

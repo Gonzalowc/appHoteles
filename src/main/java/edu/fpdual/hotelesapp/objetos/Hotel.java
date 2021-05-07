@@ -11,8 +11,8 @@ public class Hotel {
 	private int estrellas;
 	private String descripcion;
 	
-	public Hotel(int id, String nombre, String localizacion, int estrellas, String descripcion) {
-		this.id = id;
+	public Hotel(String nombre, String localizacion, int estrellas, String descripcion) {
+		this.id = 0;
 		this.nombre = nombre;
 		this.localizacion = localizacion;
 		this.estrellas = estrellas;
