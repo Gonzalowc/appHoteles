@@ -55,8 +55,7 @@ public class ManejadorUsuario {
 					return true;
 				} else {
 					return false;
-				}
-				
+				}	
 			}
 			
 			return false;
@@ -91,5 +90,7 @@ public class ManejadorUsuario {
 			return 1;
 		}
 	}
+	
+	
 	
 }
