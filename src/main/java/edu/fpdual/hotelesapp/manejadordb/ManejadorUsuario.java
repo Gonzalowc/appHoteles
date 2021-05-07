@@ -34,7 +34,7 @@ public class ManejadorUsuario {
         return false;
     }
 	
-	@SuppressWarnings("null")
+
 	public boolean logging(Usuario usr, Conector con) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -64,7 +64,7 @@ public class ManejadorUsuario {
 		}
 	}
 	
-	@SuppressWarnings("null")
+	
 	public int existeUsuario(String nombre, Conector con) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
