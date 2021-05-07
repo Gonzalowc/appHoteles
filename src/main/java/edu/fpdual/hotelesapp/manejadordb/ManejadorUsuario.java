@@ -35,16 +35,15 @@ public class ManejadorUsuario {
     }
 	
 	@SuppressWarnings("null")
-	public boolean logging(Usuario usr) {
+	public boolean logging(Usuario usr, Conector con) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Connection con = null;
-		con = ((Conector) con).getMySQLConnection();
+		Connection con2 = con.getMySQLConnection();
 		
 		String sql = "SELECT id, nombre, pass FROM usuarios WHERE usuario = ?";
 		
 		try {
-			ps = con.prepareStatement(sql);
+			ps = con2.prepareStatement(sql);
 			ps.setString(1, usr.getNombre());
 			rs = ps.executeQuery();
 			
@@ -66,17 +65,16 @@ public class ManejadorUsuario {
 	}
 	
 	@SuppressWarnings("null")
-	public int existeUsuario(String nombre) {
+	public int existeUsuario(String nombre, Conector con) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Connection con = null;
-		con = ((Conector) con).getMySQLConnection();
+		Connection con2 = con.getMySQLConnection();
 		
 		
 		String sql = "SELECT count(id) FROM usuarios WHERE nombre = ?";
 		
 		try {
-			ps = con.prepareStatement(sql);
+			ps = con2.prepareStatement(sql);
 			ps.setString(1, nombre);
 			rs = ps.executeQuery();
 			
