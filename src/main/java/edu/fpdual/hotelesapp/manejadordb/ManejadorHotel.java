@@ -12,20 +12,6 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 
 public class ManejadorHotel {
-	public static void main(String[] args) {
-		Conector con = new Conector();
-		ManejadorHotel mh = new ManejadorHotel();
-		//System.out.println(mh.buscarHotel(con, "Barceló"));
-		//Hotel hotel = new Hotel("Warwick","Irlanda",4,"Con buen vino");
-		//System.out.println(mh.crearHotel(con, hotel));
-		ArrayList<Integer> ids = new ArrayList<>();
-		ids.add(1);
-		ids.add(2);
-		
-		mh.hotelPor(con,ids);
-		System.out.println("fin");
-	}
-	
 	public Hotel buscarHotel(Conector con, String nombre) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Hotel WHERE nombre LIKE ?";
