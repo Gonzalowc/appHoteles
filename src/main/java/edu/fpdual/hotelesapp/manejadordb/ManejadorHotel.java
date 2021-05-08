@@ -13,26 +13,6 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 
 public class ManejadorHotel {
-	public static void main(String[] args) {
-		Conector con = new Conector();
-		ManejadorHotel mh = new ManejadorHotel();
-		// System.out.println(mh.buscarHotel(con, "Barceló"));
-		// Hotel hotel = new Hotel("Warwick","Irlanda",4,"Con buen vino");
-		// System.out.println(mh.crearHotel(con, hotel));
-		ArrayList<Hotel> hs1 = new ArrayList<>();
-		ArrayList<Hotel> hs2 = new ArrayList<>();
-		Hotel h1 = new Hotel("pepe","marbella",5,"tete");
-		h1.setId(1);
-		Hotel h2 = new Hotel("Manuel","Madrid",5,"teta");
-		h2.setId(2);
-		Hotel h3 = new Hotel("pepe","marbella",5,"tete");
-		h3.setId(3);
-		hs1.add(h1);
-		hs1.add(h2);
-		hs2.add(h3);
-		System.out.println(mh.AgruparSinDuplicado(hs1, hs2));
-		
-	}
 
 	public Hotel buscarHotel(Conector con, String nombre) {
 		Connection con2 = con.getMySQLConnection();
