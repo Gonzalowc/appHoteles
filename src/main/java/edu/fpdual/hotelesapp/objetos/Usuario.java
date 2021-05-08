@@ -3,7 +3,7 @@ package edu.fpdual.hotelesapp.objetos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
 	
 	private int id;
 	private String nombre;
@@ -115,6 +115,11 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", pass=" + pass + ", dni=" + dni + ", telefono=" + telefono
 				+ ", email=" + email + "]";
+	}
+
+	@Override
+	public int compareTo(Usuario u) {
+		return this.id - u.getId();
 	}
 	
 	

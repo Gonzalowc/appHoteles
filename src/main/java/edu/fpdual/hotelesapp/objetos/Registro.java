@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class Registro {
+public class Registro implements Comparable<Registro>{
 	
 	private int id;
 	private Habitacion habitacion;
@@ -100,6 +100,11 @@ public class Registro {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Registro r) {
+		return this.id - r.getId();
 	}
 	
 

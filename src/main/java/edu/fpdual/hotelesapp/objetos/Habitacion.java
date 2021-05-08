@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Habitacion {
+public class Habitacion implements Comparable<Habitacion> {
 	private int id;
 	private Hotel hotel;
 	private int num_personas;
@@ -145,6 +145,11 @@ public class Habitacion {
 		return "Habitacion [id=" + id + ", hotel=" + hotel + ", num_personas=" + num_personas + ", fecha_entrada="
 				+ fecha_entrada + ", fecha_salida=" + fecha_salida + ", ocupada=" + ocupada + ", precio=" + precio
 				+ ", usuario=" + usuario + ", serviciosHabitacion=" + serviciosHabitacion + "]";
+	}
+	
+	@Override
+	public int compareTo(Habitacion h) {
+		return this.id - h.getId();
 	}
 	
 	

@@ -3,7 +3,7 @@ package edu.fpdual.hotelesapp.objetos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Servicio {
+public class Servicio implements Comparable<Servicio> {
 	
 	private int id;
 	private String nombre_servicio;
@@ -82,6 +82,10 @@ public class Servicio {
 	public String toString() {
 		return "Servicio [id=" + id + ", nombre_servicio=" + nombre_servicio + ", precio=" + precio + ", tipo=" + tipo
 				+ "]";
+	}
+	@Override
+	public int compareTo(Servicio s) {
+		return this.id - s.getId();
 	}
 	
 	
