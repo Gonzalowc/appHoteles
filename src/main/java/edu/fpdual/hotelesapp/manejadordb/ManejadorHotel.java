@@ -53,6 +53,7 @@ public class ManejadorHotel {
 			stmt.setString(2,hotel.getLocalizacion());
 			stmt.setInt(3,hotel.getEstrellas());
 			stmt.setString(4,hotel.getDescripcion());
+			stmt.execute();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,7 +81,7 @@ public class ManejadorHotel {
 		return null;
 	}
 	
-	public Hotel hotelPor(Conector con, ArrayList<Integer> ids) {
+	public ArrayList<Hotel> hotelesPor(Conector con, ArrayList<Integer> ids) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = String.format("SELECT * FROM Hotel WHERE id IN (%s)",
 				ids.stream().map(data -> "\"" + data + "\"").collect(Collectors.joining(", ")));
@@ -89,17 +90,18 @@ public class ManejadorHotel {
 			
 			ResultSet result = stmt.executeQuery();
 			result.beforeFirst();
+			ArrayList<Hotel> hoteles = new ArrayList<>();
 			while(result.next()) {
 				Hotel hotel = new Hotel(result);
-				System.out.println(hotel);
+				hoteles.add(hotel);
 			}
+			return hoteles;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
-	public String formatInt(ArrayList<Integer> ids) {
+	private String formatInt(ArrayList<Integer> ids) {
 		String cadena = ids.toString();
 		String idsFormat = cadena.replace("[", "(");
 		idsFormat = idsFormat.replace("]", ")");
