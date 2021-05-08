@@ -2,6 +2,7 @@ package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Habitacion {
@@ -13,10 +14,11 @@ public class Habitacion {
 	private boolean ocupada;
 	private double precio;
 	private Usuario usuario;
+	private ArrayList<Servicio> serviciosHabitacion;
 	
-	public Habitacion(int id, Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
+	public Habitacion( Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
 			double precio, Usuario usuario) {
-		this.id = id;
+		this.id = 0;
 		this.hotel = hotel;
 		this.num_personas = num_personas;
 		this.fecha_entrada = fecha_entrada;
@@ -24,6 +26,7 @@ public class Habitacion {
 		this.ocupada = ocupada;
 		this.precio = precio;
 		this.usuario = usuario;
+		serviciosHabitacion = new ArrayList<>();
 	}
 	public Habitacion(int id, Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
 			double precio) {
@@ -48,6 +51,7 @@ public class Habitacion {
 			this.ocupada = result.getBoolean("ocupada");
 			this.precio = result.getDouble("precio");
 			this.usuario = null;
+			this.serviciosHabitacion = new ArrayList<>();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -104,12 +108,46 @@ public class Habitacion {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	
+	public ArrayList<Servicio> getServicios() {
+		return serviciosHabitacion;
+	}
+	public void setServicios(ArrayList<Servicio> servicios) {
+		this.serviciosHabitacion = servicios;
+	}
+	
+	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Habitacion other = (Habitacion) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 	@Override
 	public String toString() {
 		return "Habitacion [id=" + id + ", hotel=" + hotel + ", num_personas=" + num_personas + ", fecha_entrada="
 				+ fecha_entrada + ", fecha_salida=" + fecha_salida + ", ocupada=" + ocupada + ", precio=" + precio
-				+ ", usuario=" + usuario + "]";
+				+ ", usuario=" + usuario + ", serviciosHabitacion=" + serviciosHabitacion + "]";
 	}
+	
+	
 	
 	
 	
