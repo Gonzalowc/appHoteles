@@ -88,7 +88,7 @@ public class ManejadorHabitacion {
 			stmt.setDate(4,(Date) habitacion.getFecha_salida());
 			stmt.setBoolean(5,habitacion.isOcupada());
 			stmt.setDouble(6,habitacion.getPrecio());
-			stmt.setObject(2,habitacion.getUsuario());
+			stmt.setObject(7,habitacion.getUsuario());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
