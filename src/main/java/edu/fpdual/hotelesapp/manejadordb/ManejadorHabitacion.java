@@ -12,27 +12,26 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
 
 public class ManejadorHabitacion {
-	public Habitacion buscarHabitacionPrecio(Conector con, double precio) {
+	public ArrayList<Habitacion> buscarHabitacionPrecio(Conector con, double precio) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion WHERE precio <= ?";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
 			stmt.setDouble(1, precio);
 			ResultSet result = stmt.executeQuery();
-			
 			result.beforeFirst();
-			result.next();
-			Habitacion habitacion = new Habitacion(result);
-			return habitacion;
-			
+			ArrayList<Habitacion> habs = new ArrayList<Habitacion>();
+			while(result.next()) {
+				Habitacion habitacion = new Habitacion(result);
+				habs.add(habitacion);
+			}
+			return habs;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	
-	public Habitacion buscarHabitacionNumPersonas(Conector con, int numPersona) {
+	public ArrayList<Habitacion> buscarHabitacionNumPersonas(Conector con, int numPersona) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion WHERE num_personas = ?";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
@@ -40,12 +39,13 @@ public class ManejadorHabitacion {
 			ResultSet result = stmt.executeQuery();
 			
 			result.beforeFirst();
-			result.next();
-			Habitacion habitacion = new Habitacion(result);
-			return habitacion;
-			
+			ArrayList<Habitacion> habs = new ArrayList<Habitacion>();
+			while(result.next()) {
+				Habitacion habitacion = new Habitacion(result);
+				habs.add(habitacion);
+			}
+			return habs;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -56,7 +56,7 @@ public class ManejadorHabitacion {
 	// Buscar por localizacion
 	// SELECT * FROM Habitacion JOIN Hotel ON Hotel.id = Habitacion.id_hotel WHERE Hotel.localizacion LIKE ?; 
 		
-	public Habitacion buscarHabitacionLocalizacion(Conector con, String localizacion) {
+	public ArrayList<Habitacion> buscarHabitacionLocalizacion(Conector con, String localizacion) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion JOIN Hotel ON Hotel.id = Habitacion.id_hotel WHERE Hotel.localizacion LIKE ?";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
@@ -64,19 +64,19 @@ public class ManejadorHabitacion {
 			ResultSet result = stmt.executeQuery();
 			
 			result.beforeFirst();
-			result.next();
-			Habitacion habitacion = new Habitacion(result);
-			return habitacion;
+			ArrayList<Habitacion> habs = new ArrayList<Habitacion>();
+			while(result.next()) {
+				Habitacion habitacion = new Habitacion(result);
+				habs.add(habitacion);
+			}
+			
+			return habs;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
-	
-	
 	
 	public boolean crearHabitacion(Conector con, Habitacion habitacion) {
 		Connection con2 = con.getMySQLConnection();
@@ -94,8 +94,6 @@ public class ManejadorHabitacion {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return false;
 	}
 	public ArrayList<Habitacion> listaHabitaciones(Conector con){
