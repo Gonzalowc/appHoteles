@@ -10,39 +10,41 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="917.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1289.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.RegisterController">
    <children>
       <Label id="lblTitle" layoutX="319.0" layoutY="31.0" text="HOTELES AG2" textFill="#2078ab">
          <font>
             <Font name="System Bold Italic" size="43.0" />
          </font>
       </Label>
-      <Button id="btnRegistrarse" layoutX="411.0" layoutY="427.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Registrarse" />
       <Label id="lblUsuario" layoutX="112.0" layoutY="132.0" text="Usuario:">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <TextField id="txtUsurio" layoutX="234.0" layoutY="132.0" />
+      <TextField fx:id="txtUsuario" layoutX="234.0" layoutY="132.0" />
       <Label id="lblPassword" layoutX="79.0" layoutY="183.0" text="Contraseña:">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <PasswordField id="txtPassword" layoutX="234.0" layoutY="183.0" />
+      <PasswordField fx:id="txtPassword" layoutX="234.0" layoutY="183.0" />
       <Label id="lblDNI" layoutX="148.0" layoutY="237.0" text="DNI:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label id="lblEmail" layoutX="542.0" layoutY="168.0" text="Email:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
+      <TextField fx:id="txtDNI" layoutX="234.0" layoutY="236.0" />
       <Label id="lblPhone" layoutX="512.0" layoutY="124.0" text="Telefono:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField id="lblDNI" layoutX="234.0" layoutY="236.0" />
+      <TextField fx:id="txtPhone" layoutX="621.0" layoutY="124.0" />
+      <Label id="lblEmail" layoutX="542.0" layoutY="168.0" text="Email:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="621.0" layoutY="168.0" prefHeight="31.0" prefWidth="300.0" />
+      <Button id="btnRegistrarse" layoutX="411.0" layoutY="427.0" mnemonicParsing="false" onAction="#registrar" prefHeight="30.0" prefWidth="95.0" text="Registrarse" />
    </children>
 </AnchorPane>

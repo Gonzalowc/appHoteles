@@ -16,31 +16,28 @@ public class LoginController {
 	private PasswordField txtPassword;
 	@FXML
 	private Label msgError;
-	
-	
+
 	public void exit() {
 		System.exit(0);
 	}
-	
+
 	@FXML
-    private void switchToSecondary() throws IOException {
-		
-        App.setRoot("secondary");
-    }
-	
-	
+	private void switchToRegister() throws IOException {
+		App.setRoot("register");
+	}
+
 	public void validar() throws IOException {
 		Conector con = new Conector();
 		ManejadorUsuario mu = new ManejadorUsuario();
-		if(mu.validarUsuario(con, txtUsuario.getText(), txtPassword.getText())) {
+		if (mu.validarUsuario(con, txtUsuario.getText(), txtPassword.getText())) {
 			msgError.setVisible(false);
 			txtUsuario.setText("");
 			txtPassword.setText("");
 			App.setRoot("menu");
-		}else {
+		} else {
 			msgError.setVisible(true);
 			txtPassword.setText("");
-			
+
 		}
 	}
 
