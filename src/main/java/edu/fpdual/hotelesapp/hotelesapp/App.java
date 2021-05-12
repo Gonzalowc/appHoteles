@@ -1,12 +1,13 @@
 package edu.fpdual.hotelesapp.hotelesapp;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.stage.StageStyle;
 
 /**
  * JavaFX App
@@ -18,8 +19,11 @@ public class App extends Application {
     @SuppressWarnings("exports")
 	@Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("logIn"), 640, 480);
+
+        scene = new Scene(loadFXML("logIn"));
+
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
@@ -35,5 +39,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
 
 }
