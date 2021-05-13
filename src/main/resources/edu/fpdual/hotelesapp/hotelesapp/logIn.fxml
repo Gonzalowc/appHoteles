@@ -37,7 +37,6 @@
             <Font name="System Bold Italic" size="43.0" />
          </font>
       </Label>
-
       <Button id="btnRegister" layoutX="173.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToRegister" text="Registrarse" />
 
 	<Button id="btnNewHotel" layoutX="50.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToNewHotel" text="Introducir Hotel" />

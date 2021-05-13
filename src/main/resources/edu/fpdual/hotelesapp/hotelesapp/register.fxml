@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1289.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="960.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.RegisterController">
    <children>
    
    		<Button id="btnLeave" fx:id="btnLeave" layoutX="696.0" layoutY="31.0" mnemonicParsing="false" onAction="#exit" prefHeight="6.0" prefWidth="38.0">
@@ -56,6 +56,25 @@
          </font>
       </Label>
       <TextField fx:id="txtEmail" layoutX="621.0" layoutY="168.0" prefHeight="31.0" prefWidth="300.0" />
-      <Button id="btnRegistrarse" layoutX="411.0" layoutY="427.0" mnemonicParsing="false" onAction="#registrar" prefHeight="30.0" prefWidth="95.0" text="Registrarse" />
+      <Button id="btnRegistrarse" layoutX="411.0" layoutY="427.0" mnemonicParsing="false" onAction="#registrar" prefHeight="39.0" prefWidth="137.0" text="Registrarse" />
+      <Label fx:id="msgError" layoutX="346.0" layoutY="356.0" prefHeight="39.0" prefWidth="372.0" text="Usuario ya registrado" textFill="#d30e0e" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="msgValid" layoutX="346.0" layoutY="356.0" prefHeight="39.0" prefWidth="372.0" text="Se ha registrado." textFill="#18721d" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="btnBack" layoutX="14.0" layoutY="14.0" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="64.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="882.0" AnchorPane.topAnchor="14.0">
+         <graphic>
+            <ImageView fx:id="imgBack" fitHeight="48.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/flecha-atrasAzul.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
    </children>
 </AnchorPane>

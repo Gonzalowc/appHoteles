@@ -104,7 +104,7 @@ public class ManejadorUsuario {
 
 	public boolean nuevoUsuario(Conector con, String nombre, String pass, String dni, String telefono, String email) {
 		Connection con2 = con.getMySQLConnection();
-		if (!existeUsuario(con, nombre)) {
+		if (!existeUsuario(con, nombre) && !nombre.equals("")) {
 			String sql = "INSERT INTO Usuario (`nombre_usuario`,`password`,`dni`,`telefono`,`email`) VALUES(?,?,?,?,?)";
 			try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 				stmt.setString(1, nombre);
