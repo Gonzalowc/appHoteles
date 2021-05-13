@@ -5,9 +5,12 @@ import java.io.IOException;
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorUsuario;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class LoginController {
 	@FXML
@@ -24,6 +27,12 @@ public class LoginController {
 	@FXML
 	private void switchToRegister() throws IOException {
 		App.setRoot("register");
+		Stage stage = App.getStage();
+		Scene scene = new Scene(App.loadFXML("register"));
+		stage.setScene(scene);
+		stage.setWidth(scene.getWidth());
+		stage.setHeight(scene.getHeight());
+		App.setStage(stage);
 	}
 
 	public void validar() throws IOException {
@@ -33,7 +42,7 @@ public class LoginController {
 			msgError.setVisible(false);
 			txtUsuario.setText("");
 			txtPassword.setText("");
-			App.setRoot("menu");
+			App.cambiarVentana("menu",StageStyle.DECORATED,true);
 		} else {
 			msgError.setVisible(true);
 			txtPassword.setText("");
@@ -41,4 +50,5 @@ public class LoginController {
 		}
 	}
 
+	
 }
