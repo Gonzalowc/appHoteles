@@ -2,6 +2,7 @@ package edu.fpdual.hotelesapp.hotelesapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.StageStyle;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 
@@ -35,5 +36,9 @@ public class InsertHotelController {
 		Hotel h = new Hotel(txtHotelName.getText(), txtHotelLocation.getText(), Integer.parseInt(txtHotelStars.getText()), txtHotelDescription.getText());
 		
 		mh.crearHotel(con, h);
+	}
+	
+	public void goBack() throws IOException {
+		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
 	}
 }

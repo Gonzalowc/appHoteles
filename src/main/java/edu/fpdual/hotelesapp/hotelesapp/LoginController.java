@@ -38,6 +38,12 @@ public class LoginController {
 	@FXML
 	private void switchToNewHotel() throws IOException {
 		App.setRoot("insertHotel");
+		Stage stage = App.getStage();
+		Scene scene = new Scene(App.loadFXML("insertHotel"));
+		stage.setScene(scene);
+		stage.setWidth(scene.getWidth());
+		stage.setHeight(scene.getHeight());
+		App.setStage(stage);
 	}
 
 
