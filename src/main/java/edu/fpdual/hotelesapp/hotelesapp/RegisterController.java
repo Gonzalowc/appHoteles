@@ -23,10 +23,14 @@ public class RegisterController {
 	@FXML
 	private TextField txtEmail;
 	
+	public void exit() {
+		System.exit(0);
+	}
+	
 	public void registrar() throws IOException {
 		Conector con = new Conector();
 		ManejadorUsuario mu = new ManejadorUsuario();
-		System.out.println(txtUsuario.getText() + txtPassword.getText() + txtDNI.getText() + txtPhone.getText() + txtEmail.getText());
+		
 		mu.nuevoUsuario(con, txtUsuario.getText(), txtPassword.getText(), txtDNI.getText(), txtPhone.getText(), txtEmail.getText());
 	}
 	

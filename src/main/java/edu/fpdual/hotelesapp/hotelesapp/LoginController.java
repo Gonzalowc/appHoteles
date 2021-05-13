@@ -25,6 +25,12 @@ public class LoginController {
 	private void switchToRegister() throws IOException {
 		App.setRoot("register");
 	}
+	
+	@FXML
+	private void switchToNewHotel() throws IOException {
+		App.setRoot("insertHotel");
+	}
+
 
 	public void validar() throws IOException {
 		Conector con = new Conector();
