@@ -34,6 +34,18 @@ public class LoginController {
 		stage.setHeight(scene.getHeight());
 		App.setStage(stage);
 	}
+	
+	@FXML
+	private void switchToNewHotel() throws IOException {
+		App.setRoot("insertHotel");
+		Stage stage = App.getStage();
+		Scene scene = new Scene(App.loadFXML("insertHotel"));
+		stage.setScene(scene);
+		stage.setWidth(scene.getWidth());
+		stage.setHeight(scene.getHeight());
+		App.setStage(stage);
+	}
+
 
 	public void validar() throws IOException {
 		Conector con = new Conector();

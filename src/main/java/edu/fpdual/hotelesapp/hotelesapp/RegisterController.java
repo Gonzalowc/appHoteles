@@ -24,6 +24,11 @@ public class RegisterController {
 	@FXML
 	private TextField txtEmail;
 	
+
+	public void exit() {
+		System.exit(0);
+	}
+
 	@FXML
 	private Label msgError;
 	
@@ -47,6 +52,7 @@ public class RegisterController {
 		}else {
 			msgError.setVisible(true);
 		}
+
 	}
 	
 	public void goBack() throws IOException {

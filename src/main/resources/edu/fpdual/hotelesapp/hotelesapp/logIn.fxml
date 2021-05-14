@@ -38,6 +38,9 @@
          </font>
       </Label>
       <Button id="btnRegister" layoutX="173.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToRegister" text="Registrarse" />
+
+	<Button id="btnNewHotel" layoutX="50.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToNewHotel" text="Introducir Hotel" />
+
       <Label fx:id="msgError" alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="137.0" prefHeight="27.0" prefWidth="370.0" text="Usuario o Contraseña Erronea" textAlignment="CENTER" textFill="#e10909" visible="false">
          <font>
             <Font name="System Bold" size="18.0" />

@@ -13,6 +13,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="960.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.RegisterController">
    <children>
+   
+   		<Button id="btnLeave" fx:id="btnLeave" layoutX="887.0" layoutY="19.0" mnemonicParsing="false" onAction="#exit" prefHeight="6.0" prefWidth="38.0">
+         <graphic>
+            <ImageView fitHeight="85.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/x-quitar2%20-%20copia.jpg" />
+               </image>
+             </ImageView>
+         </graphic></Button>
+         
       <Label id="lblTitle" layoutX="319.0" layoutY="31.0" text="HOTELES AG2" textFill="#2078ab">
          <font>
             <Font name="System Bold Italic" size="43.0" />
