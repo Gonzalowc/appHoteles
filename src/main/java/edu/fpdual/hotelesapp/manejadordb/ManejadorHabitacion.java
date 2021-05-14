@@ -10,8 +10,20 @@ import java.util.ArrayList;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
+import edu.fpdual.hotelesapp.objetos.Hotel;
 
 public class ManejadorHabitacion {
+	public static void main(String[] args) {
+		ManejadorHabitacion mh = new ManejadorHabitacion();
+		Conector con  = new Conector();
+		Hotel hotel = (Hotel)new ManejadorHotel().hotelesNombre(con, "Barceló").get(0);
+		Date d = new Date(2021,6,5);
+		
+		Habitacion h = new Habitacion(hotel, 5, d , d, false, 3, null);
+		mh.crearHabitacion(con, h);
+	}
+	
+	
 	public ArrayList<Habitacion> buscarHabitacionPrecio(Conector con, double precio) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion WHERE precio <= ?";
@@ -79,21 +91,24 @@ public class ManejadorHabitacion {
 	}
 	
 	public boolean crearHabitacion(Conector con, Habitacion habitacion) {
-		Connection con2 = con.getMySQLConnection();
-		String sql = "INSERT INTO Habitacion(`id_hotel`,`num_personas`,`fecha_entrada`,`fecha_salida`,`ocupada`,`precio`,`id_usuario`) VALUES(?,?,?,?,?,?,?)";
-		try(PreparedStatement stmt = con2.prepareStatement(sql)){
-			stmt.setObject(1,habitacion.getHotel());
-			stmt.setInt(2,habitacion.getNum_personas());
-			stmt.setDate(3,(Date) habitacion.getFecha_entrada());
-			stmt.setDate(4,(Date) habitacion.getFecha_salida());
-			stmt.setBoolean(5,habitacion.isOcupada());
-			stmt.setDouble(6,habitacion.getPrecio());
-			stmt.setObject(7,habitacion.getUsuario());
-			stmt.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(habitacion.getHotel().getId()!=0) {
+			Connection con2 = con.getMySQLConnection();
+			String sql = "INSERT INTO Habitacion(`id_hotel`,`num_personas`,`fecha_entrada`,`fecha_salida`,`ocupada`,`precio`,`id_usuario`) VALUES(?,?,?,?,?,?,?)";
+			try(PreparedStatement stmt = con2.prepareStatement(sql)){
+				stmt.setInt(1,habitacion.getHotel().getId());
+				stmt.setInt(2,habitacion.getNum_personas());
+				stmt.setDate(3,(Date) habitacion.getFecha_entrada());
+				stmt.setDate(4,(Date) habitacion.getFecha_salida());
+				stmt.setBoolean(5,habitacion.isOcupada());
+				stmt.setDouble(6,habitacion.getPrecio());
+				stmt.setObject(7,habitacion.getUsuario());
+				stmt.execute();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return false;
 	}
 	public ArrayList<Habitacion> listaHabitaciones(Conector con){
