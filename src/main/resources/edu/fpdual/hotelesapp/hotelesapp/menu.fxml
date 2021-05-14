@@ -9,58 +9,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-            <Menu mnemonicParsing="false" text="Buscar">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Hoteles" />
-                <MenuItem mnemonicParsing="false" text="Habitaciones" />
-              </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Hoteles">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Modificar" />
-                  <MenuItem mnemonicParsing="false" text="Nuevo" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Habitaciones">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Modificar" />
-                  <MenuItem mnemonicParsing="false" text="Nuevo" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Reservas">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Cancelar" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Registros">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Usuario">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Mi perfil" />
-                <MenuItem mnemonicParsing="false" text="Salir" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <center>
       <AnchorPane prefHeight="755.0" prefWidth="1152.0" BorderPane.alignment="CENTER">
          <children>
