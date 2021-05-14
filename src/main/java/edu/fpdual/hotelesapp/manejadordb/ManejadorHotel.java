@@ -138,7 +138,7 @@ public class ManejadorHotel {
 
 	public ArrayList<Hotel> hotelesNombre(Conector con, String nombre) {
 		Connection con2 = con.getMySQLConnection();
-		String sql = "SELECT * FROM Hotel WHERE nombre LIKE";
+		String sql = "SELECT * FROM Hotel WHERE nombre LIKE ?";
 		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 			stmt.setString(1, "%"+nombre+"%");
 			ResultSet result = stmt.executeQuery();
