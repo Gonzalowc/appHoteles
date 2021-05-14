@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -28,10 +29,11 @@ public class App extends Application {
         stage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static Scene setRoot(String fxml) throws IOException {
+       scene.setRoot(loadFXML(fxml));
+        return scene;
     }
-
+    
     public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
@@ -55,5 +57,9 @@ public class App extends Application {
 		stage.setMaximized(maximized);
 		App.setStage(stage);
 		stage.show();
-	}
+	}    
+    
+    public static Scene getScene() {
+    	return scene;
+    }
 }

@@ -164,7 +164,6 @@ public class ManejadorHotel {
 		hoteles.addAll(nuevo);
 		ArrayList<Hotel> hotelesAgrup = new ArrayList<>(hoteles);
 		return hotelesAgrup;
-		
 	}
 
 	private String formatInt(ArrayList<Integer> ids) {

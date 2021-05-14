@@ -54,7 +54,7 @@ public class LoginController {
 			msgError.setVisible(false);
 			txtUsuario.setText("");
 			txtPassword.setText("");
-			App.cambiarVentana("menu",StageStyle.DECORATED,true);
+			App.cambiarVentana("aplication",StageStyle.DECORATED,true);
 		} else {
 			msgError.setVisible(true);
 			txtPassword.setText("");
