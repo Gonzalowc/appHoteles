@@ -12,7 +12,16 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 
+/**
+ * Clase Manejador Habitacion para realizar todas las consultas en cuanto a habitaciones
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorHabitacion {
+	/**
+	 * Clase main para ejecutar los métodos
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ManejadorHabitacion mh = new ManejadorHabitacion();
 		Conector con  = new Conector();
@@ -23,7 +32,12 @@ public class ManejadorHabitacion {
 		mh.crearHabitacion(con, h);
 	}
 	
-	
+	/**
+	 * Metodo Buscar Habitacion para consultar habitacion por precio
+	 * @param con para conseguir la conexion
+	 * @param precio para buscar por ese parametro las habitaciones
+	 * @return ArrayList<Habitacion> lista de habitaciones segun el precio buscado
+	 */
 	public ArrayList<Habitacion> buscarHabitacionPrecio(Conector con, double precio) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion WHERE precio <= ?";
@@ -43,6 +57,12 @@ public class ManejadorHabitacion {
 		return null;
 	}
 	
+	/**
+	 * Metodo Buscar Habitacion dependiendo del numero de personas
+	 * @param con para conseguir la conexion
+	 * @param numPersona para buscar por ese parametro las habitaciones
+	 * @return ArrayList<Habitacion> lista de habitaciones segun el numero de personas buscado
+	 */
 	public ArrayList<Habitacion> buscarHabitacionNumPersonas(Conector con, int numPersona) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion WHERE num_personas = ?";
@@ -64,10 +84,13 @@ public class ManejadorHabitacion {
 		return null;
 	}
 	
-	
-	// Buscar por localizacion
-	// SELECT * FROM Habitacion JOIN Hotel ON Hotel.id = Habitacion.id_hotel WHERE Hotel.localizacion LIKE ?; 
-		
+	 
+	/**
+	 * Metodo Buscar Habitacion dependiendo de la localizacion
+	 * @param con para conseguir la conexion
+	 * @param localizacion para buscar por ese parametro las habitaciones
+	 * @return ArrayList<Habitacion> lista de habitaciones segun la localizacion buscada
+	 */
 	public ArrayList<Habitacion> buscarHabitacionLocalizacion(Conector con, String localizacion) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion JOIN Hotel ON Hotel.id = Habitacion.id_hotel WHERE Hotel.localizacion LIKE ?";
@@ -90,6 +113,12 @@ public class ManejadorHabitacion {
 		return null;
 	}
 	
+	/**
+	 * Metodo Crear Habitacion para agregar nuevas habitaciones
+	 * @param con para conseguir la conexion
+	 * @param habitacion para añadir ese nuevo objeto
+	 * @return true si se crea y añade correctamente, false en caso contrario
+	 */
 	public boolean crearHabitacion(Conector con, Habitacion habitacion) {
 		if(habitacion.getHotel().getId()!=0) {
 			Connection con2 = con.getMySQLConnection();
@@ -111,6 +140,12 @@ public class ManejadorHabitacion {
 		
 		return false;
 	}
+	
+	/**
+	 * Metodo Lista Habitaciones para sacar la lista de todas las habitaciones de las que se dispone
+	 * @param con para conseguir la conexion
+	 * @return ArrayList<Habitacion> lista de habitaciones total
+	 */
 	public ArrayList<Habitacion> listaHabitaciones(Conector con){
 		Connection con2 = con.getMySQLConnection();
 		

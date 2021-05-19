@@ -5,7 +5,9 @@ package edu.fpdual.hotelesapp.conector;
  *
  */
 public class MySQLConstants {
-
+	/**
+	 * Variables que contienen las constantes para la conexion MySQL
+	 */
 	public static final String PASSWD = "jdbc.mysql.passwd";
 	public static final String USER = "jdbc.mysql.user";
 	public static final String DRIVER = "jdbc.mysql.driver";

@@ -11,7 +11,16 @@ import java.util.logging.Logger;
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Usuario;
 
+/**
+ * Clase Manejador Usuario para realizar todas las consultas en cuanto a los usuarios
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorUsuario {
+	/**
+	 * Clase main para ejecutar los métodos
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Conector con = new Conector();
 		ManejadorUsuario mu = new ManejadorUsuario();
@@ -19,6 +28,13 @@ public class ManejadorUsuario {
 		System.out.println(mu.existeUsuario(con, "pepe"));
 	}
 
+	/**
+	 * Metodo Validar Usuario para validar los credenciales introducidos por el usuario
+	 * @param con para conseguir la conexion
+	 * @param usuario user de la persona que se ha registrado
+	 * @param passwd contraseña de la persona que se ha registrado
+	 * @return true si la informacion es correcta, false en caso contrario
+	 */
 	public boolean validarUsuario(Conector con, String usuario, String passwd) {
 
 		Connection con2 = con.getMySQLConnection();
@@ -43,6 +59,13 @@ public class ManejadorUsuario {
 		return false;
 	}
 
+	/**
+	 * Metodo Logging para iniciar sesion como usuario
+	 * @param con para conseguir la conexion
+	 * @param usuario user de la persona que inicia sesion
+	 * @param passwd contraseña de la persona que inicia sesion
+	 * @return Usuario el usuario se registra satisfactoriamente, null con un mensaje de error en caso contrario
+	 */
 	public Usuario logging(Conector con, String usuario, String passwd) {
 		Connection con2 = con.getMySQLConnection();
 		if (validarUsuario(con, usuario, passwd)) {
@@ -75,6 +98,12 @@ public class ManejadorUsuario {
 
 	}
 
+	/**
+	 * Metodo Existe Usuario para comprobar que el usuario ya existe y ha sido registrado 
+	 * @param con para conseguir la conexion
+	 * @param usuario user de la persona registrada
+	 * @return true si el usuario existe, false en caso contrario
+	 */
 	public boolean existeUsuario(Conector con, String nombre) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT count(id) as num FROM Usuario WHERE nombre_usuario = ?";
@@ -102,6 +131,16 @@ public class ManejadorUsuario {
 		return false;
 	}
 
+	/**
+	 * Metodo Nuevo Usuario para registrarse como un nuevo usuario
+	 * @param con para conseguir la conexion
+	 * @param nombre user del usuario
+	 * @param pass contraseña del usuario
+	 * @param dni dni del usuario
+	 * @param telefono telefono del usuario
+	 * @param email email del usuario
+	 * @return true si ha sido registrado con exito, false en caso contrario (ya existente o error creandolo)
+	 */
 	public boolean nuevoUsuario(Conector con, String nombre, String pass, String dni, String telefono, String email) {
 		Connection con2 = con.getMySQLConnection();
 		if (!existeUsuario(con, nombre) && !nombre.equals("")) {

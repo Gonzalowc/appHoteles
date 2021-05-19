@@ -10,9 +10,11 @@ import java.util.Properties;
  *
  */
 public class Conector {
-
     Properties prop = new Properties();
 
+    /**
+     * Constructor del conector
+     */
     public Conector() {
         try {
             prop.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
@@ -21,7 +23,10 @@ public class Conector {
         }
     }
 
-    
+    /**
+     * Método para conseguir la conexion con MySQL indicando el driver que vamos a usar y creando la conexion basada en la URL
+     * @return conexion basada en la URL
+     */
     public Connection getMySQLConnection() {
     	try {
 

@@ -25,8 +25,15 @@ import javax.mail.internet.MimeMultipart;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Clase Sender para enviar los correos
+ * @author angela.bonilla.gomez
+ *
+ */
 public class Sender {
-
+	/**
+	 * Getters y Setters generados con Lombok
+	 */
 	@Setter
 	@Getter
 	Properties mailProp = new Properties();
@@ -35,6 +42,9 @@ public class Sender {
 	@Getter
 	Properties prop = new Properties();
 
+	/**
+	 * Constructor de la clase donde se cargan las propiedades del mail y los credenciales
+	 */
 	public Sender() {
 		try {
 			mailProp.load(getClass().getClassLoader().getResourceAsStream("mail.properties"));
@@ -44,6 +54,17 @@ public class Sender {
 		}
 	}
 
+	/**
+	 * Metodo Send para enviar el email, al que le pasamos las direcciones, el asunto, el texto y algun archivo
+	 * @param from direccion del emisor 
+	 * @param to direccion del receptor
+	 * @param subject asunto del correo
+	 * @param text cuerpo de texto
+	 * @param content contenido de archivo a enviar
+	 * @return true o false si el mensaje es enviado con exito
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public boolean send(String from, String to, String subject, String text, String content) throws FileNotFoundException, IOException {
 		Session session = createSession();
 		try {
@@ -94,6 +115,10 @@ public class Sender {
 	}
 
 
+	/**
+	 * Metodo Create Session para autenticar las credenciales
+	 * @return 
+	 */
 	private Session createSession() {
 		Session session = Session.getInstance(mailProp, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -111,7 +136,7 @@ public class Sender {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// new Sender().send("mi-email", "destinatario", "Asunto","Cuerpo","ruta-archivo");
-		new Sender().send("hotelesapp@gmail.com", "alum.abonillag.2020@iesalixar.org", "Prueba", "Probando el envio de correos con Java", "C:\\Users\\angela.bonilla.gomez\\OneDrive - Accenture\\Desktop\\Angela\\Documentacion\\enviarCorreoJava.txt");
+		new Sender().send("hotelesapp@gmail.com", "alum.gwaackc.2020@iesalixar.org", "Prueba 2", "<h1>Probando el envio de correos con Java</h1>", "C:\\Users\\angela.bonilla.gomez\\OneDrive - Accenture\\Desktop\\Angela\\Documentacion\\enviarCorreoJava.txt");
 
 	}
 

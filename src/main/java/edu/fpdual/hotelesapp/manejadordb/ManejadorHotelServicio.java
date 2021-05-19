@@ -10,8 +10,16 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import edu.fpdual.hotelesapp.objetos.TipoServicio;
-
+/**
+ * Clase Manejador Hotel Servicio para realizar todas las consultas en cuanto a la relacion de Hotel y Servicio
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorHotelServicio {
+	/**
+	 * Clase main para ejecutar los métodos
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ManejadorHotelServicio mhs = new ManejadorHotelServicio();
 		Conector con = new Conector();
@@ -21,6 +29,12 @@ public class ManejadorHotelServicio {
 		System.out.println(mhs.perteneceServicioHotel(con, h, s));
 	}
 
+	/**
+	 * Metodo Servicios de hotel para consultar los servicios que nos ofrece un hotel
+	 * @param con para conseguir la conexion
+	 * @param hotel objeto del que queremos sacar los servicios
+	 * @return ArrayList<Servicio> lista de servicios segun el hotel
+	 */
 	public ArrayList<Servicio> ServiciosDeHotel(Conector con, Hotel hotel) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Servicio JOIN Rel_hotel_servicio ON Rel_hotel_servicio.id_servicio = Servicio.id JOIN Hotel ON Hotel.id = Rel_hotel_servicio.id_hotel WHERE Hotel.id=?";
@@ -44,11 +58,25 @@ public class ManejadorHotelServicio {
 		return null;
 	}
 
+	/**
+	 * Metodo para añadir un Servicio a un Hotel
+	 * @param con para conseguir la conexion
+	 * @param hotel objeto al que queremos añadir el servicio
+	 * @param servicio objeto que queremos añadir al hotel
+	 * @return true si se añade correctamente, false en caso contrario
+	 */
 	public boolean addServicioHotel(Conector con, Hotel hotel, Servicio servicio) {
 
 		return false;
 	}
 
+	/**
+	 * Metodo para consultar si un Servicio pertenece a un Hotel / si el Hotel contiene Servicios
+	 * @param con para conseguir la conexion
+	 * @param hotel objeto que usamos para comprobar y relacionar con servicio
+	 * @param servicio objeto objeto que usamos para comprobar y relacionar con hotel
+	 * @return true si el hotel contiene servicios, false en caso contrario
+	 */
 	public boolean perteneceServicioHotel(Conector con, Hotel hotel, Servicio servicio) {
 		Connection con2 = con.getMySQLConnection();
 		if (servicio.getTipo().equals(TipoServicio.HOTEL)) {

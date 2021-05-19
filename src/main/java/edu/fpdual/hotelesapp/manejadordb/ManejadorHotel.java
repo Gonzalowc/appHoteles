@@ -12,8 +12,19 @@ import java.util.stream.Collectors;
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 
+/**
+ * Clase Manejador Hotel para realizar todas las consultas en cuanto a hoteles
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorHotel {
 
+	/**
+	 * Metodo Buscar Hotel para buscar hoteles por nombre
+	 * @param con para conseguir la conexion
+	 * @param nombre para buscar por ese parametro los hoteles
+	 * @return Hotel hotel resultante
+	 */
 	public Hotel buscarHotel(Conector con, String nombre) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Hotel WHERE nombre LIKE ?";
@@ -32,7 +43,13 @@ public class ManejadorHotel {
 
 		return null;
 	}
-
+	
+	/**
+	 * Metodo Crear Hotel para la creacion de hoteles
+	 * @param con para conseguir la conexion
+	 * @param hotel objeto que se añade
+	 * @return true si se añade correctamente, false en caso contrario
+	 */
 	public boolean crearHotel(Conector con, Hotel hotel) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "INSERT INTO Hotel(`nombre`,`localizacion`,`estrellas`,`descripcion`) VALUES(?,?,?,?)";
@@ -50,6 +67,11 @@ public class ManejadorHotel {
 		return false;
 	}
 
+	/**
+	 * Metodo Lista Hoteles para mostrar la lista de todos los hoteles disponibles
+	 * @param con para conseguir la conexion
+	 * @return ArrayList<Hotel> lista de hoteles
+	 */
 	public ArrayList<Hotel> listaHoteles(Conector con) {
 		Connection con2 = con.getMySQLConnection();
 		try (Statement stmt = con2.createStatement()) {
@@ -69,6 +91,12 @@ public class ManejadorHotel {
 		return null;
 	}
 
+	/**
+	 * Metodo Hoteles Por para buscar hoteles por id
+	 * @param con para conseguir la conexion
+	 * @param ids para buscar los hoteles por ese parametro
+	 * @return ArrayList<Hotel> lista de hoteles segun id buscado
+	 */
 	public ArrayList<Hotel> hotelesPor(Conector con, ArrayList<Integer> ids) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = String.format("SELECT * FROM Hotel WHERE id IN (%s)",
@@ -90,6 +118,12 @@ public class ManejadorHotel {
 		return null;
 	}
 
+	/**
+	 * Metodo Hoteles Ciudad para buscar hoteles segun la ciudad
+	 * @param con para conseguir la conexion
+	 * @param ciudad para buscar los hoteles por ese parametro
+	 * @return ArrayList<Hotel> lista de hoteles segun ciudad introducida
+	 */
 	public ArrayList<Hotel> hotelesCiudad(Conector con, String ciudad) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Hotel WHERE localizacion LIKE ?";
@@ -111,6 +145,12 @@ public class ManejadorHotel {
 		return null;
 	}
 
+	/**
+	 * Metodo Hoteles Estrellas para buscar hoteles segun las estrellas que tenga
+	 * @param con para conseguir la conexion
+	 * @param estrellas para buscar los hoteles por ese parametro
+	 * @return ArrayList<Hotel> lista de hoteles segun estrellas introducidas
+	 */
 	public ArrayList<Hotel> hotelesEstrellas(Conector con, int estrellas) {
 		if (estrellas > 0 && estrellas <= 5) {
 			Connection con2 = con.getMySQLConnection();
@@ -136,6 +176,12 @@ public class ManejadorHotel {
 		return null;
 	}
 
+	/**
+	 * Metodo Hoteles Nombre para buscar hoteles por nombre
+	 * @param con para conseguir la conexion
+	 * @param nombre para buscar los hoteles por ese parametro
+	 * @return ArrayList<Hotel> lista de hoteles segun nombre introducido
+	 */
 	public ArrayList<Hotel> hotelesNombre(Conector con, String nombre) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Hotel WHERE nombre LIKE ?";
@@ -157,6 +203,13 @@ public class ManejadorHotel {
 
 		return null;
 	}
+	
+	/**
+	 * Metodo Agrupar sin duplicado para añadir los hoteles sin que existan duplicados
+	 * @param actual lista de hoteles actuales
+	 * @param nuevo lista de hoteles que se añaden
+	 * @return ArrayList<Hotel> lista de hoteles sin duplicados
+	 */
 	public ArrayList<Hotel> AgruparSinDuplicado(ArrayList<Hotel> actual, ArrayList<Hotel> nuevo){
 		
 		TreeSet<Hotel> hoteles = new TreeSet<>();
@@ -166,6 +219,11 @@ public class ManejadorHotel {
 		return hotelesAgrup;
 	}
 
+	/**
+	 * Metodo Format Int para dar formato 
+	 * @param ids parametro que queremos formatear
+	 * @return id formateados de int a cadena
+	 */
 	private String formatInt(ArrayList<Integer> ids) {
 		String cadena = ids.toString();
 		String idsFormat = cadena.replace("[", "(");

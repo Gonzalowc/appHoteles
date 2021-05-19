@@ -10,13 +10,30 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import edu.fpdual.hotelesapp.objetos.TipoServicio;
 
+/**
+ * Clase Manejador Servicio para realizar todas las consultas en cuanto a los servicios
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorServicio {
+	/**
+	 * Clase main para ejecutar los métodos
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Conector con = new Conector();
 		ManejadorServicio ms = new ManejadorServicio();
 		ms.nuevoServicio(con, "nuevo", 30, TipoServicio.HABITACION);
 	}
 
+	/**
+	 * Metodo Nuevo Servicio para crear nuevos servicios
+	 * @param con para conseguir la conexion
+	 * @param nombreServicio para insertar un nombre al servicio
+	 * @param precio para insertar un precio al servicio
+	 * @param tipo para insertar el tipo de servicio
+	 * @return true si se ha insertado correctamente, false en caso contrario
+	 */
 	public boolean nuevoServicio(Conector con, String nombreServicio, double precio, TipoServicio tipo) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "INSERT INTO Servicio(`nombre_servicio`,`precio`,`tipo`) VALUES(?,?,?)";
@@ -33,6 +50,12 @@ public class ManejadorServicio {
 		return false;
 	}
 	
+	/**
+	 * Metodo Servicios por tipo para buscar servicios segun su tipo
+	 * @param con para conseguir la conexion
+	 * @param tipo para buscar servicios por este parametro
+	 * @return ArrayList<Servicio> lista de servicios segun el tipo introducido
+	 */
 	public ArrayList<Servicio> ServiciosPorTipo(Conector con, TipoServicio tipo ){
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Servicio WHERE tipo=?";
