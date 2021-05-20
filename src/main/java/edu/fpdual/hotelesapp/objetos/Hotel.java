@@ -3,17 +3,48 @@ package edu.fpdual.hotelesapp.objetos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * Clase Hotel
+ * @author angela.bonilla.gomez
+ *
+ */
 public class Hotel implements Comparable<Hotel> {
-	
+	/**
+	 * ID del hotel
+	 */
 	private int id;
+	/**
+	 * Nombre del hotel
+	 */
 	private String nombre;
+	/**
+	 * Localizacion del hotel
+	 */
 	private String localizacion;
+	/**
+	 * Estrellas del hotel
+	 */
 	private int estrellas;
+	/**
+	 * Descripcion del hotel
+	 */
 	private String descripcion;
+	/**
+	 * Lista de habitaciones que contiene el hotel
+	 */
 	private ArrayList<Habitacion> habitaciones;
+	/**
+	 * Lista de servicios del que dispone el hotel
+	 */
 	private ArrayList<Servicio> serviciosHotel;
 	
+	/**
+	 * Constructor de Hotel
+	 * @param nombre
+	 * @param localizacion
+	 * @param estrellas
+	 * @param descripcion
+	 */
 	public Hotel(String nombre, String localizacion, int estrellas, String descripcion) {
 		this.id = 0;
 		this.nombre = nombre;
@@ -24,6 +55,10 @@ public class Hotel implements Comparable<Hotel> {
 		serviciosHotel = new ArrayList<>();
 	}
 	
+	/**
+	 * Constructor de Hotel a partir de la base de datos
+	 * @param result
+	 */
 	public Hotel(ResultSet result) {
 
 		try {
@@ -40,7 +75,10 @@ public class Hotel implements Comparable<Hotel> {
 		
 	}
 
-		
+	/**
+	 * Getters y setters
+	 * @return
+	 */
 	//GETTERS AND SETTERS
 	public int getId() {
 		return id;
@@ -102,6 +140,9 @@ public class Hotel implements Comparable<Hotel> {
 	}
 	
 
+	/**
+	 * HashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +151,9 @@ public class Hotel implements Comparable<Hotel> {
 		return result;
 	}
 
+	/**
+	 * Equals por id
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -124,6 +168,9 @@ public class Hotel implements Comparable<Hotel> {
 		return true;
 	}
 
+	/**
+	 * ToString para mostrar los datos de la clase
+	 */
 	@Override
 	public String toString() {
 		return "Hotel [id=" + id + ", nombre=" + nombre + ", localizacion=" + localizacion + ", estrellas=" + estrellas
@@ -131,6 +178,9 @@ public class Hotel implements Comparable<Hotel> {
 				+ serviciosHotel + "]";
 	}
 
+	/**
+	 * Comparador por id
+	 */
 	@Override
 	public int compareTo(Hotel h) {
 		return this.id - h.getId();

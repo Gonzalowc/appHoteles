@@ -2,14 +2,36 @@ package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * Clase Servicio
+ * @author angela.bonilla.gomez
+ *
+ */
 public class Servicio implements Comparable<Servicio> {
-	
+	/**
+	 * ID del servicio
+	 */
 	private int id;
+	/**
+	 * Nombre del servicio
+	 */
 	private String nombre_servicio;
+	/**
+	 * Precio del servicio a contratar
+	 */
 	private double precio;
+	/**
+	 * Tipo del servicio
+	 */
 	private TipoServicio tipo;
 	
+	/**
+	 * Constructor de Servicio
+	 * @param id
+	 * @param nombre_servicio
+	 * @param precio
+	 * @param tipo
+	 */
 	public Servicio(int id, String nombre_servicio, double precio, TipoServicio tipo) {
 		super();
 		this.id = id;
@@ -17,6 +39,11 @@ public class Servicio implements Comparable<Servicio> {
 		this.precio = precio;
 		this.tipo = tipo;
 	}
+	
+	/**
+	 * Constructor de servicio a partir de la base de datos
+	 * @param result
+	 */
 	public Servicio(ResultSet result) {
 		
 		try {
@@ -29,7 +56,10 @@ public class Servicio implements Comparable<Servicio> {
 		}
 	}
 	
-	
+	/**
+	 * Getters y setters
+	 * @return
+	 */
 	//GETTERS AND SETTERS
 	public int getId() {
 		return id;
@@ -57,7 +87,9 @@ public class Servicio implements Comparable<Servicio> {
 	}
 	
 	
-	
+	/**
+	 * HashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -65,6 +97,10 @@ public class Servicio implements Comparable<Servicio> {
 		result = prime * result + id;
 		return result;
 	}
+	
+	/**
+	 * Equals por id
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,11 +114,19 @@ public class Servicio implements Comparable<Servicio> {
 			return false;
 		return true;
 	}
+	
+	/**
+	 * ToString para mostrar los datos de la clase
+	 */
 	@Override
 	public String toString() {
 		return "Servicio [id=" + id + ", nombre_servicio=" + nombre_servicio + ", precio=" + precio + ", tipo=" + tipo
 				+ "]";
 	}
+	
+	/**
+	 * Comparador por id
+	 */
 	@Override
 	public int compareTo(Servicio s) {
 		return this.id - s.getId();

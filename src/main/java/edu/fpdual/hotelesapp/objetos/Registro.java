@@ -3,15 +3,41 @@ package edu.fpdual.hotelesapp.objetos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-
+/**
+ * Clase Registro
+ * @author angela.bonilla.gomez
+ *
+ */
 public class Registro implements Comparable<Registro>{
-	
+	/**
+	 * ID del registro
+	 */
 	private int id;
+	/**
+	 * Habitacion relacionada del registro
+	 */
 	private Habitacion habitacion;
+	/**
+	 * Usuario relacionado con el registro
+	 */
 	private Usuario usuario;
+	/**
+	 * Precio de la reserva
+	 */
 	private double precio;
+	/**
+	 * Fecha de la reserva
+	 */
 	private Date fecha;
 	
+	/**
+	 * Constructor de registro
+	 * @param id
+	 * @param habitacion
+	 * @param usuario
+	 * @param precio
+	 * @param fecha
+	 */
 	public Registro(int id, Habitacion habitacion, Usuario usuario, double precio, Date fecha) {
 		this.id = id;
 		this.habitacion = habitacion;
@@ -20,6 +46,10 @@ public class Registro implements Comparable<Registro>{
 		this.fecha = fecha;
 	}
 	
+	/**
+	 * Constructor de registro a partir de la base de datos
+	 * @param result
+	 */
 	public Registro(ResultSet result) {
 		try {
 		this.id = result.getInt("id");
@@ -33,6 +63,11 @@ public class Registro implements Comparable<Registro>{
 		
 	}
 
+	/**
+	 * Getters y setters
+	 * @return
+	 */
+	
 	//GETTERS AND SETTERS
 	public int getId() {
 		return id;
@@ -74,12 +109,18 @@ public class Registro implements Comparable<Registro>{
 		this.fecha = fecha;
 	}
 	
+	/**
+	 * ToString para mostrar los datos de la clase
+	 */
 	@Override
 	public String toString() {
 		return "Registro [id=" + id + ", habitacion=" + habitacion + ", usuario=" + usuario + ", precio=" + precio
 				+ ", fecha=" + fecha + "]";
 	}
 
+	/**
+	 * HashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,6 +129,9 @@ public class Registro implements Comparable<Registro>{
 		return result;
 	}
 
+	/**
+	 * Equals por id
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -102,6 +146,9 @@ public class Registro implements Comparable<Registro>{
 		return true;
 	}
 
+	/**
+	 * Comparador por id
+	 */
 	@Override
 	public int compareTo(Registro r) {
 		return this.id - r.getId();
