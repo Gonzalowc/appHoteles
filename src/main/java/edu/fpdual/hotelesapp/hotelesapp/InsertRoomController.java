@@ -36,9 +36,7 @@ public class InsertRoomController {
 	@FXML
 	private MenuButton selectBtnHotel;
 	
-	
-	private Hotel hotel;
-	
+	private Hotel hotel = null;
 	
 	public void exit() {
 		System.exit(0);
@@ -50,22 +48,19 @@ public class InsertRoomController {
 
 		
 		
-		Habitacion h = new Habitacion(null, 0, null, null, false, 0, null);
+		Habitacion h = new Habitacion(hotel, Integer.parseInt(txtNumPers.getText()),dateEntry.getValue(), dateLeft.getValue(), chkBusy.isSelected(),Double.parseDouble(txtPrice.getText()), null);
 		
 		mh.crearHabitacion(con, h);
 	}
 	
-	@FXML
-	public void rellenarMenu() {
-		Conector con = new Conector();
-		ManejadorHotel mho = new ManejadorHotel();
-		ArrayList<Hotel> hoteles = mho.listaHoteles(con);
+	public void setListHotel(Hotel h2){
+		MenuItem m = new MenuItem(h2.getNombre()+" - " + h2.getLocalizacion());
+		m.setOnAction(event -> {
+		    selectBtnHotel.setText(h2.getNombre()+" - " + h2.getLocalizacion());
+		    hotel = h2;
+		});
 		
-		
-		for(Hotel h1 : hoteles) {
-			MenuItem m = new MenuItem(h1.getNombre()+" - " + h1.getLocalizacion());
-			selectBtnHotel.getItems().add(m);
-		}
+		selectBtnHotel.getItems().add(m);
 		
 	}
 	

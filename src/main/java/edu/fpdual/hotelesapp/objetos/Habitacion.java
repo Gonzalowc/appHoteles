@@ -2,6 +2,8 @@ package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,14 +11,14 @@ public class Habitacion implements Comparable<Habitacion> {
 	private int id;
 	private Hotel hotel;
 	private int num_personas;
-	private Date fecha_entrada;
-	private Date fecha_salida;
+	private LocalDate fecha_entrada;
+	private LocalDate fecha_salida;
 	private boolean ocupada;
 	private double precio;
 	private Usuario usuario;
 	private ArrayList<Servicio> serviciosHabitacion;
 	
-	public Habitacion( Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
+	public Habitacion( Hotel hotel, int num_personas, LocalDate fecha_entrada, LocalDate fecha_salida, boolean ocupada,
 			double precio, Usuario usuario) {
 		this.id = 0;
 		this.hotel = hotel;
@@ -28,7 +30,7 @@ public class Habitacion implements Comparable<Habitacion> {
 		this.usuario = usuario;
 		serviciosHabitacion = new ArrayList<>();
 	}
-	public Habitacion(int id, Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
+	public Habitacion(int id, Hotel hotel, int num_personas, LocalDate fecha_entrada, LocalDate fecha_salida, boolean ocupada,
 			double precio) {
 		this.id = id;
 		this.hotel = hotel;
@@ -46,8 +48,8 @@ public class Habitacion implements Comparable<Habitacion> {
 			this.id = result.getInt("id");
 			this.hotel = null;
 			this.num_personas = result.getInt("num_personas");
-			this.fecha_entrada = result.getDate("fecha_entrada");
-			this.fecha_salida = result.getDate("fecha_salida");
+			this.fecha_entrada = result.getDate("fecha_entrada").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			this.fecha_salida = result.getDate("fecha_salida").toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			this.ocupada = result.getBoolean("ocupada");
 			this.precio = result.getDouble("precio");
 			this.usuario = null;
@@ -78,16 +80,16 @@ public class Habitacion implements Comparable<Habitacion> {
 	public void setNum_personas(int num_personas) {
 		this.num_personas = num_personas;
 	}
-	public Date getFecha_entrada() {
+	public LocalDate getFecha_entrada() {
 		return fecha_entrada;
 	}
-	public void setFecha_entrada(Date fecha_entrada) {
+	public void setFecha_entrada(LocalDate fecha_entrada) {
 		this.fecha_entrada = fecha_entrada;
 	}
-	public Date getFecha_salida() {
+	public LocalDate getFecha_salida() {
 		return fecha_salida;
 	}
-	public void setFecha_salida(Date fecha_salida) {
+	public void setFecha_salida(LocalDate fecha_salida) {
 		this.fecha_salida = fecha_salida;
 	}
 	public boolean isOcupada() {
