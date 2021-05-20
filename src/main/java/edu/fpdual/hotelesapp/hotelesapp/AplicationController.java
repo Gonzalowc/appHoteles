@@ -8,22 +8,26 @@ import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Pane;
 
 public class AplicationController {
 
 	@FXML
 	private BorderPane myPanel;
-	
+
 	@FXML
-	public void toHotelesVista(ActionEvent event) throws IOException{
+	public void toHotelesVista(ActionEvent event) throws IOException {
 		myPanel.setCenter(listaHoteles());
+		
 	}
+
 	
 	@FXML
 	public void toNewRoomVista(ActionEvent event) throws IOException{
@@ -36,29 +40,65 @@ public class AplicationController {
 	}
 	
 	
-	public GridPane listaHoteles() {
+
+
+	public ScrollPane listaHoteles() {
+
 		ManejadorHotel mh = new ManejadorHotel();
 		List<Hotel> hoteles = mh.listaHoteles(new Conector());
 		int ANCHO = 3;
-		int alto = (hoteles.size()%3 != 0 ) ?(int)(hoteles.size()/3)+1 : (int)(hoteles.size()/3);	
+		int alto = (hoteles.size() % 3 != 0) ? (int) (hoteles.size() / 3) + 1 : (int) (hoteles.size() / 3);
+		ScrollPane scrollPane = new ScrollPane();
+		
 		GridPane grid = new GridPane();
-		grid.setHgap(100);
-		grid.setVgap(150);
+		
+		grid.setStyle("-fx-background-color: cornsilk;");
+		grid.getStylesheets().add("grid.css");
+		grid.getStyleClass().add("gridpane");
+		
+		//grid.setHgap(100);
+		//grid.setVgap(150);
 		grid.setAlignment(Pos.TOP_CENTER);
-		grid.setPadding(new Insets(10,20,10,10));
-		grid.borderProperty();
-		int count=0;
+		grid.setPadding(new Insets(20, 20, 10, 10));
+		//grid.setId("gridpane");
+		//grid.getStylesheets().add("gridpane");
+		int count = 0;
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ANCHO; j++) {
-				if(count<hoteles.size()) {
-					Label l = new Label(hoteles.get(count).getNombre()+" ");
-				grid.add(l, j, i, 1, 1);
+				if (count < hoteles.size()) {
+					try {
+						Hotel h = hoteles.get(count);
+						
+						//crear la clase que controla el archivo FXML
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("cardHotel.fxml"));
+						//creamos el panel a partir del loader
+						Pane aux = (Pane) loader.load();
+						//creamos el objeto controlador que queremos usar
+						CardHotelController chc = loader.<CardHotelController>getController();
+						//usamos sus metodos
+						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
+						
+						grid.add(aux, j, i, 1, 1);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}
 				count++;
 			}
 		}
-		System.out.println(grid);
-		return grid;
+		scrollPane.setContent(grid);
+		System.out.println(scrollPane);
+		return scrollPane;
+	}
+	
+	public Pane cardHotel() {
+		
+		
+		
+		return null;
+		
 	}
 	
 
