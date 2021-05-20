@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import edu.fpdual.hotelesapp.conector.Conector;
@@ -26,7 +28,7 @@ public class ManejadorHabitacion {
 		ManejadorHabitacion mh = new ManejadorHabitacion();
 		Conector con  = new Conector();
 		Hotel hotel = (Hotel)new ManejadorHotel().hotelesNombre(con, "Barceló").get(0);
-		Date d = new Date(2021,6,5);
+		LocalDate d = LocalDate.now(ZoneId.systemDefault());
 		
 		Habitacion h = new Habitacion(hotel, 5, d , d, false, 3, null);
 		mh.crearHabitacion(con, h);
@@ -126,8 +128,8 @@ public class ManejadorHabitacion {
 			try(PreparedStatement stmt = con2.prepareStatement(sql)){
 				stmt.setInt(1,habitacion.getHotel().getId());
 				stmt.setInt(2,habitacion.getNum_personas());
-				stmt.setDate(3,(Date) habitacion.getFecha_entrada());
-				stmt.setDate(4,(Date) habitacion.getFecha_salida());
+				stmt.setDate(3,java.sql.Date.valueOf(habitacion.getFecha_entrada()));
+				stmt.setDate(4,java.sql.Date.valueOf(habitacion.getFecha_salida()));
 				stmt.setBoolean(5,habitacion.isOcupada());
 				stmt.setDouble(6,habitacion.getPrecio());
 				stmt.setObject(7,habitacion.getUsuario());

@@ -2,16 +2,46 @@ package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * Clase Usuario
+ * @author angela.bonilla.gomez
+ *
+ */
 public class Usuario implements Comparable<Usuario>{
-	
+	/**
+	 * ID de usuario
+	 */
 	private int id;
+	/**
+	 * Nombre del usuario
+	 */
 	private String nombre;
+	/**
+	 * Constraseña del usuario
+	 */
 	private String pass;
+	/**
+	 * DNI del usuario
+	 */
 	private String dni;
+	/**
+	 * Telefono del usuario
+	 */
 	private String telefono;
+	/**
+	 * Email del usuario
+	 */
 	private String email;
 	
+	/**
+	 * Constructor de Usuario
+	 * @param id
+	 * @param nombre
+	 * @param pass
+	 * @param dni
+	 * @param telefono
+	 * @param email
+	 */
 	public Usuario(int id, String nombre, String pass, String dni, String telefono, String email) {
 		this.id = id;
 		this.nombre = nombre;
@@ -21,6 +51,10 @@ public class Usuario implements Comparable<Usuario>{
 		this.email = email;
 	}
 	
+	/**
+	 * Constructor de usuario a partir de la base de datos
+	 * @param result
+	 */
 	public Usuario(ResultSet result) {
 		try {
 			this.id = result.getInt("id");
@@ -37,7 +71,10 @@ public class Usuario implements Comparable<Usuario>{
 	
 	
 	
-	
+	/**
+	 * Getters y setters
+	 * @return
+	 */
 	
 	//GETTERS AND SETTERS
 
@@ -89,6 +126,9 @@ public class Usuario implements Comparable<Usuario>{
 		this.email = email;
 	}
 
+	/**
+	 * HashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,6 +137,9 @@ public class Usuario implements Comparable<Usuario>{
 		return result;
 	}
 
+	/**
+	 * Equals por id
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,12 +154,18 @@ public class Usuario implements Comparable<Usuario>{
 		return true;
 	}
 
+	/**
+	 * ToString para mostrar los datos de la clase
+	 */
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", pass=" + pass + ", dni=" + dni + ", telefono=" + telefono
 				+ ", email=" + email + "]";
 	}
 
+	/**
+	 * Comparador por id
+	 */
 	@Override
 	public int compareTo(Usuario u) {
 		return this.id - u.getId();
