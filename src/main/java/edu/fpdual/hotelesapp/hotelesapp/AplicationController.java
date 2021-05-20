@@ -25,6 +25,17 @@ public class AplicationController {
 		myPanel.setCenter(listaHoteles());
 	}
 	
+	@FXML
+	public void toNewRoomVista(ActionEvent event) throws IOException{
+		myPanel.setCenter(App.loadFXML("insertRoom"));
+	}
+	
+	@FXML
+	public void toNewHotelVista(ActionEvent event) throws IOException{
+		myPanel.setCenter(App.loadFXML("insertHotel"));
+	}
+	
+	
 	public GridPane listaHoteles() {
 		ManejadorHotel mh = new ManejadorHotel();
 		List<Hotel> hoteles = mh.listaHoteles(new Conector());
@@ -49,4 +60,7 @@ public class AplicationController {
 		System.out.println(grid);
 		return grid;
 	}
+	
+
+	
 }

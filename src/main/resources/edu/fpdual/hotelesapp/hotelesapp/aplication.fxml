@@ -12,14 +12,14 @@
           <Menu mnemonicParsing="false" text="Hoteles">
             <items>
               <MenuItem mnemonicParsing="false" text="Modificar" />
-                  <MenuItem mnemonicParsing="false" text="Nuevo" />
+                  <MenuItem mnemonicParsing="false" text="Nuevo" onAction="#toNewHotelVista"/>
                   <MenuItem mnemonicParsing="false" onAction="#toHotelesVista" text="Listado" />
                   <MenuItem mnemonicParsing="false" text="Buscar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Habitaciones">
             <items>
-              <MenuItem mnemonicParsing="false" text="Nueva" />
+             	 <MenuItem mnemonicParsing="false" text="Nueva" onAction="#toNewRoomVista"  />
                   <MenuItem mnemonicParsing="false" text="Modificar" />
                   <MenuItem mnemonicParsing="false" text="Listado" />
                   <MenuItem mnemonicParsing="false" text="Buscar" />
