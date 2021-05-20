@@ -24,33 +24,30 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblHotelLocation" layoutX="55.0" layoutY="229.0" text="Localización:">
+      <Label fx:id="lblHotelLocation" layoutX="56.0" layoutY="248.0" text="Localización:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelLocation" layoutX="191.0" layoutY="229.0" />
-      <Label fx:id="lblHotelStars" layoutX="509.0" layoutY="149.0" text="Estrellas:">
+      <TextField fx:id="txtHotelLocation" layoutX="192.0" layoutY="248.0" />
+      <Label fx:id="lblHotelStars" layoutX="88.0" layoutY="355.0" text="Estrellas:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelStars" layoutX="610.0" layoutY="148.0" />
-      <Label fx:id="lblHotelDescription" layoutX="477.0" layoutY="230.0" text="Descripción:">
+      <TextField fx:id="txtHotelStars" layoutX="189.0" layoutY="354.0" prefHeight="39.0" prefWidth="55.0" />
+      <Label fx:id="lblHotelDescription" layoutX="472.0" layoutY="149.0" text="Descripción:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelDescription" layoutX="610.0" layoutY="229.0" />
-      <Button fx:id="btnInsertHotel" layoutX="378.0" layoutY="332.0" mnemonicParsing="false" onAction="#insertHotel" prefHeight="59.0" prefWidth="147.0" text="Insertar" />
-      <Label fx:id="btnBack" layoutX="14.0" layoutY="14.0" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="64.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="882.0" AnchorPane.topAnchor="14.0">
-         <graphic>
-            <ImageView fx:id="imgBack" fitHeight="48.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/flecha-atrasAzul.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
+      <TextField fx:id="txtHotelDescription" layoutX="472.0" layoutY="180.0" prefHeight="213.0" prefWidth="459.0" />
+      <Button fx:id="btnInsertHotel" layoutX="373.0" layoutY="407.0" mnemonicParsing="false" onAction="#insertHotel" prefHeight="59.0" prefWidth="147.0" text="Insertar" />
+      <Label fx:id="btnBack" layoutX="14.0" layoutY="14.0" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="64.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="882.0" AnchorPane.topAnchor="14.0" />
+      <ImageView fx:id="imgBack" fitHeight="48.0" fitWidth="53.0" layoutX="17.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/flecha-atrasAzul.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

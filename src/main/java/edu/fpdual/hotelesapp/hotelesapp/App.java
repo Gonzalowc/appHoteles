@@ -25,7 +25,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("logIn"));
         stage.setScene(scene);
         //stage.setMaximized(true);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

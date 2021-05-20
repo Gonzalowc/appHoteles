@@ -41,8 +41,7 @@ public class LoginController {
 		Stage stage = App.getStage();
 		Scene scene = new Scene(App.loadFXML("insertHotel"));
 		stage.setScene(scene);
-		stage.setWidth(scene.getWidth());
-		stage.setHeight(scene.getHeight());
+		stage.sizeToScene();
 		App.setStage(stage);
 	}
 
@@ -54,7 +53,16 @@ public class LoginController {
 			msgError.setVisible(false);
 			txtUsuario.setText("");
 			txtPassword.setText("");
-			App.cambiarVentana("aplication",StageStyle.DECORATED,true);
+//			App.cambiarVentana("aplication",StageStyle.DECORATED,true);
+			Stage stage = App.getStage();
+			Scene scene = new Scene(App.loadFXML("aplication"));
+			stage.hide();
+			//stage.initStyle(StageStyle.DECORATED);
+			stage.setMaximized(true);
+			stage.setScene(scene);
+			stage.show();
+			App.setStage(stage);
+			
 		} else {
 			msgError.setVisible(true);
 			txtPassword.setText("");
