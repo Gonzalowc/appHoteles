@@ -19,7 +19,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.StageStyle;
-
+/**
+ * Clase Card Hotel Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class CardHotelController {
 	@FXML
 	private Label lblCodeHotel;
@@ -36,10 +40,21 @@ public class CardHotelController {
 
 	private BorderPane parentPane;
 
+	/**
+	 * Metodo para asignar la ventana padre
+	 * @param borderPane Ventana padre
+	 */
 	public void setParentPane(BorderPane borderPane) {
 		this.parentPane = borderPane;
 	}
 
+	/**
+	 * Metodo para introducir datos del hotel en el FXML
+	 * @param codeHotel Codigo del hotel
+	 * @param nombreHotel Nombre del hotel
+	 * @param localizacion Localizacion del hotel
+	 * @param numEstrellas Numero de estrellas del hotel
+	 */
 	public void setDataHotel(int codeHotel, String nombreHotel, String localizacion, int numEstrellas) {
 		lblCodeHotel.setText(Integer.toString(codeHotel));
 		lblNombreHotel.setText(nombreHotel);
@@ -47,6 +62,12 @@ public class CardHotelController {
 		lblNumEstrella.setText(Integer.toString(numEstrellas));
 	}
 
+	/**
+	 * Metodo que devuelve el hotel con un codigo
+	 * @param con Para conseguir la conexion MySQ
+	 * @param codeHotel ID/Codigo del hotel
+	 * @return
+	 */
 	public Hotel getIntoHotel(Conector con, int codeHotel) {
 		Connection con2 = con.getMySQLConnection();
 		ManejadorHotel mHotel = new ManejadorHotel();
@@ -57,17 +78,10 @@ public class CardHotelController {
 		return Integer.parseInt(lblCodeHotel.getText());
 	}
 
-	public void toListRoom() throws IOException {
-
-		// App.cambiarVentana("aplication", StageStyle.DECORATED, true);
-		// crear la clase que controla el archivo FXML
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("aplication.fxml"));
-		// creamos el panel a partir del loader
-		AnchorPane aux = (AnchorPane) loader.load();
-		// creamos el objeto controlador que queremos usar
-		AplicationController ac = loader.<AplicationController>getController();
-
-	}
+	
+	/**
+	 * Metodo para crear la lista de habitaciones de un hotel y cambiar la vista 
+	 */
 	@FXML
 	public void listaHabitaciones() {
 		int idHotel = Integer.parseInt(lblCodeHotel.getText());

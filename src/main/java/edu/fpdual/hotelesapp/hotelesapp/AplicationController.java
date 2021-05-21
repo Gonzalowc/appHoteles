@@ -16,22 +16,34 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+/**
+ * Clase Aplication Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class AplicationController {
-
+	/**
+	 * Panel principal
+	 */
 	@FXML
 	private BorderPane myPanel;
 
+	/**
+	 * Metodo para cambiar a la vista de Hoteles
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void toHotelesVista(ActionEvent event) throws IOException {
 		myPanel.setCenter(listaHoteles());
 		
 	}
-	@FXML
-	public void toHabitacionesHotelVista(ActionEvent event) throws IOException{
-		
-		//myPanel.setCenter();
-	}
+	
 
+	/**
+	 * Metodo para general la vista de lista de hoteles
+	 * @return scrollPane El panel completo
+	 */
 	public ScrollPane listaHoteles() {
 		ManejadorHotel mh = new ManejadorHotel();
 		List<Hotel> hoteles = mh.listaHoteles(new Conector());

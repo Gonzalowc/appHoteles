@@ -4,7 +4,11 @@ import edu.fpdual.hotelesapp.objetos.Habitacion;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-
+/**
+ * Clase Card Room Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class CardRoomController {
 	
 	@FXML
@@ -22,7 +26,10 @@ public class CardRoomController {
 	@FXML
 	private Label lblCodeHabitacion;
 	
-	
+	/**
+	 * Metodo para rellenar las cartas de habitacion con los datos
+	 * @param hab Habitacion que se agrega
+	 */
 	public void rellenarCard(Habitacion hab) {
 		lblNumPersonas.setText(Integer.toString(hab.getNum_personas()));
 		lblPrecio.setText(Double.toString(hab.getPrecio()));

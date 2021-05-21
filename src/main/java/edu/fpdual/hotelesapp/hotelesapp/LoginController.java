@@ -11,7 +11,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+/**
+ * Clase Login Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class LoginController {
 	@FXML
 	private TextField txtUsuario;
@@ -20,10 +24,17 @@ public class LoginController {
 	@FXML
 	private Label msgError;
 
+	/**
+	 * Metodo para salir de la app
+	 */
 	public void exit() {
 		System.exit(0);
 	}
 
+	/**
+	 * Metodo para cambiar de escena al registro
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToRegister() throws IOException {
 		App.setRoot("register");
@@ -35,6 +46,10 @@ public class LoginController {
 		App.setStage(stage);
 	}
 	
+	/**
+	 * Metodo para cambiar de escena al hotel
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToNewHotel() throws IOException {
 		App.setRoot("insertHotel");
@@ -46,6 +61,10 @@ public class LoginController {
 	}
 
 
+	/**
+	 * Metodo para validar que el usuario esta registrado
+	 * @throws IOException
+	 */
 	public void validar() throws IOException {
 		Conector con = new Conector();
 		ManejadorUsuario mu = new ManejadorUsuario();

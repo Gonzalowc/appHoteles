@@ -10,7 +10,11 @@ import java.io.IOException;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 
-
+/**
+ * Clase Insert Hotel Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class InsertHotelController {
 
 	@FXML
@@ -24,11 +28,17 @@ public class InsertHotelController {
 	
 	@FXML
 	private TextField txtHotelDescription;
-	
+	/**
+	 * Metodo para salir de la app
+	 */
 	public void exit() {
 		System.exit(0);
 	}
 	
+	/**
+	 * Metodo para insertar hotel
+	 * @throws IOException
+	 */
 	public void insertHotel() throws IOException {
 		Conector con = new Conector();
 		ManejadorHotel mh = new ManejadorHotel();
@@ -38,6 +48,10 @@ public class InsertHotelController {
 		mh.crearHotel(con, h);
 	}
 	
+	/**
+	 * Metodo para volver atras
+	 * @throws IOException
+	 */
 	public void goBack() throws IOException {
 		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
 	}

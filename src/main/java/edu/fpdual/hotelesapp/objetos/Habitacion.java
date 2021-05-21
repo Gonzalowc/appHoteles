@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import lombok.experimental.PackagePrivate;
+
 /**
  * Clase Habitacion
  * @author angela.bonilla.gomez

@@ -15,7 +15,13 @@ import javafx.stage.StageStyle;
  */
 public class App extends Application {
 
+	/**
+	 * Escena
+	 */
     private static Scene scene;
+    /**
+     * Escenario
+     */
     private static Stage stage2;
 
     @SuppressWarnings("exports")
@@ -29,25 +35,50 @@ public class App extends Application {
         stage.show();
     }
 
+    /**
+     * Metodo para cargar el FXML en la escena
+     * @param fxml Parametro que corresponde al archivo fxml
+     * @return Scene la escena
+     * @throws IOException
+     */
     public static Scene setRoot(String fxml) throws IOException {
        scene.setRoot(loadFXML(fxml));
         return scene;
     }
-    
+    /**
+     * Metodo para cargar el FXML
+     * @param fxml Parametro que corresponde al archivo fxml
+     * @return fxmlLoader 
+     * @throws IOException
+     */
     public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
+    /**
+     * Metodo para lanzar la aplicacion
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
+    
     public static Stage getStage() {
     	return stage2;
     }
+    
     public static void setStage(Stage stage) {
     	stage2 = stage;
     }
+    
+    /**
+     * Metodo para cambiar de ventana
+     * @param FXML Parametro que corresponde al archivo fxml
+     * @param style Parametro que corresponde al estilo del escenario
+     * @param maximized Parametro que te permite maximizar el escenario
+     * @throws IOException
+     */
     public static void cambiarVentana(String FXML,StageStyle style,boolean maximized) throws IOException {
 		App.getStage().close();
 		Stage stage = new Stage();
@@ -58,6 +89,7 @@ public class App extends Application {
 		App.setStage(stage);
 		stage.show();
 	}    
+    
     
     public static Scene getScene() {
     	return scene;

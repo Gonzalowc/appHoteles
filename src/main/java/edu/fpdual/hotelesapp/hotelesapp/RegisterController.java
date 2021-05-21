@@ -8,6 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.StageStyle;
 
+/**
+ * Clase Register Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class RegisterController {
 	@FXML
 	private TextField txtUsuario;
@@ -25,6 +30,9 @@ public class RegisterController {
 	private TextField txtEmail;
 	
 
+	/**
+	 * Metodo para salir de la app
+	 */
 	public void exit() {
 		System.exit(0);
 	}
@@ -35,6 +43,10 @@ public class RegisterController {
 	@FXML
 	private Label msgValid;
 
+	/**
+	 * Metodo para registrar un usuario
+	 * @throws IOException
+	 */
 	public void registrar() throws IOException {
 		Conector con = new Conector();
 		ManejadorUsuario mu = new ManejadorUsuario();
@@ -55,6 +67,10 @@ public class RegisterController {
 
 	}
 	
+	/**
+	 * Metodo para volver atras
+	 * @throws IOException
+	 */
 	public void goBack() throws IOException {
 		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
 	}
