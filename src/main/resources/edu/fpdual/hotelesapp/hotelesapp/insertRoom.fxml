@@ -35,7 +35,14 @@
             <Font size="16.0" />
          </font>
       </MenuButton>
-      <Label fx:id="lblCorrectInsert" layoutX="397.0" layoutY="453.0" text="¡Habitación innsertada!" textFill="#24a10a" />
-       <Label fx:id="lblErrorInsert" layoutX="380.0" layoutY="453.0" text="¡Error en insertar habitación!" textFill="FF0000" visible="false" />
+      <Label fx:id="lblCorrectInsert" layoutX="374.0" layoutY="357.0" text="¡Habitación innsertada!" textFill="#24a10a" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="lblErrorInsert" layoutX="352.0" layoutY="357.0" text="¡Error en insertar habitación!" textFill="#8a1818" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

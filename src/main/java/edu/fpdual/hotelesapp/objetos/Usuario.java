@@ -2,11 +2,17 @@ package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import lombok.Getter;
+import lombok.Setter;
 /**
  * Clase Usuario
  * @author angela.bonilla.gomez
  *
  */
+
+@Getter
+@Setter
 public class Usuario implements Comparable<Usuario>{
 	/**
 	 * ID de usuario
@@ -68,64 +74,6 @@ public class Usuario implements Comparable<Usuario>{
 		}
 	}
 	
-	
-	
-	
-	/**
-	 * Getters y setters
-	 * @return
-	 */
-	
-	//GETTERS AND SETTERS
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	/**
 	 * HashCode
 	 */

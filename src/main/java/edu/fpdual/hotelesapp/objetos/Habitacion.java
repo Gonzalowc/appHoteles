@@ -8,6 +8,9 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Clase Habitacion
  * @author angela.bonilla.gomez
@@ -121,17 +124,6 @@ public class Habitacion implements Comparable<Habitacion> {
 		}
 		
 	}
-	
-	
-	
-	
-	public ArrayList<Servicio> getServicios() {
-		return serviciosHabitacion;
-	}
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.serviciosHabitacion = servicios;
-	}
-	
 	
 	
 	/**

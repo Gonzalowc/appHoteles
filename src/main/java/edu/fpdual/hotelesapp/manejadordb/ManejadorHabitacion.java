@@ -1,7 +1,6 @@
 package edu.fpdual.hotelesapp.manejadordb;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +10,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
