@@ -1,4 +1,4 @@
-package edu.fpdual.hotelesapp.hotelesapp;
+package edu.fpdual.hotelesapp.interfaz;
 
 import java.time.Instant;
 import java.time.LocalDate;

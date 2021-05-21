@@ -1,4 +1,4 @@
-package edu.fpdual.hotelesapp.hotelesapp;
+package edu.fpdual.hotelesapp.interfaz;
 
 import edu.fpdual.hotelesapp.objetos.Habitacion;
 import javafx.fxml.FXML;
