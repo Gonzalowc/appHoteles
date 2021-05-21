@@ -166,6 +166,12 @@ public class ManejadorHabitacion {
 		return null;
 	}
 	
+	/**
+	 * Metodo Lista Habitaciones Hotel para sacar la lista de todas las habitaciones que pertenecen a un hotel
+	 * @param con para conseguir la conexion
+	 * @param codeHotel ID del hotel que contiene las habitaciones
+	 * @return ArrayList<Habitacion> Lista de habitaciones de un hotel
+	 */
 	public ArrayList<Habitacion> listaHabitacionesHotel(Conector con, int codeHotel){
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT * FROM Habitacion where id_hotel=?";
