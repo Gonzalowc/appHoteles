@@ -9,33 +9,24 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.InsertHotelController">
    <children>
-   
-   <Button id="btnLeave" fx:id="btnLeave" layoutX="877.0" layoutY="45.0" mnemonicParsing="false" onAction="#exit" prefHeight="6.0" prefWidth="38.0">
-         <graphic>
-            <ImageView fitHeight="85.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                  <Image url="@img/x-quitar2%20-%20copia.jpg" />
-               </image>
-             </ImageView>
-         </graphic></Button>
-      <TextField fx:id="txtHotelName" layoutX="191.0" layoutY="148.0" />
-      <Label fx:id="lblHotelName" layoutX="88.0" layoutY="148.0" text="Nombre:">
+      <TextField fx:id="txtHotelName" layoutX="192.0" layoutY="180.0" prefHeight="39.0" prefWidth="224.0" />
+      <Label fx:id="lblHotelName" layoutX="191.0" layoutY="149.0" text="Nombre:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblHotelLocation" layoutX="56.0" layoutY="248.0" text="Localización:">
+      <Label fx:id="lblHotelLocation" layoutX="192.0" layoutY="232.0" text="Localización:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelLocation" layoutX="192.0" layoutY="248.0" />
-      <Label fx:id="lblHotelStars" layoutX="88.0" layoutY="355.0" text="Estrellas:">
+      <TextField fx:id="txtHotelLocation" layoutX="193.0" layoutY="262.0" prefHeight="39.0" prefWidth="224.0" />
+      <Label fx:id="lblHotelStars" layoutX="192.0" layoutY="314.0" text="Estrellas:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelStars" layoutX="189.0" layoutY="354.0" prefHeight="39.0" prefWidth="55.0" />
+      <TextField fx:id="txtHotelStars" layoutX="192.0" layoutY="354.0" prefHeight="39.0" prefWidth="55.0" />
       <Label fx:id="lblHotelDescription" layoutX="472.0" layoutY="149.0" text="Descripción:">
          <font>
             <Font size="20.0" />
@@ -44,9 +35,9 @@
       <TextField fx:id="txtHotelDescription" layoutX="472.0" layoutY="180.0" prefHeight="213.0" prefWidth="459.0" />
       <Button fx:id="btnInsertHotel" layoutX="373.0" layoutY="407.0" mnemonicParsing="false" onAction="#insertHotel" prefHeight="59.0" prefWidth="147.0" text="Insertar" />
       <Label fx:id="btnBack" layoutX="14.0" layoutY="14.0" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="64.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="882.0" AnchorPane.topAnchor="14.0" />
-      <ImageView fx:id="imgBack" fitHeight="48.0" fitWidth="53.0" layoutX="17.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="59.0" fitWidth="55.0" layoutX="257.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/flecha-atrasAzul.png" />
+            <Image url="@img/stat.png" />
          </image>
       </ImageView>
    </children>

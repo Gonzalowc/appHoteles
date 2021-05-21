@@ -196,11 +196,9 @@ public class ManejadorHotel {
 				hoteles.add(h);
 			}
 			return hoteles;
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 	
@@ -218,6 +216,23 @@ public class ManejadorHotel {
 		ArrayList<Hotel> hotelesAgrup = new ArrayList<>(hoteles);
 		return hotelesAgrup;
 	}
+	
+	public Hotel getHotelId(Conector con, int id) {
+		Connection con2 = con.getMySQLConnection();
+		String sql = "SELECT *  FROM hotel WHERE id=?";
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			stmt.setInt(1,id);
+			ResultSet result = stmt.executeQuery();
+			if(result.next()) {
+				return new Hotel(result);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 
 	/**
 	 * Metodo Format Int para dar formato 
