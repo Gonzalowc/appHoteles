@@ -36,6 +36,11 @@ public class InsertRoomController {
 	@FXML
 	private MenuButton selectBtnHotel;
 	
+	@FXML
+	private Label lblCorrectInsert;
+	@FXML
+	private Label lblErrorInsert;
+	
 	private Hotel hotel = null;
 	
 	public void exit() {
@@ -48,9 +53,14 @@ public class InsertRoomController {
 
 		
 		
-		Habitacion h = new Habitacion(hotel, Integer.parseInt(txtNumPers.getText()),dateEntry.getValue(), dateLeft.getValue(), chkBusy.isSelected(),Double.parseDouble(txtPrice.getText()), null);
+		Habitacion h = new Habitacion(hotel, Integer.parseInt(txtNumPers.getText()),null,null,false,Double.parseDouble(txtPrice.getText()), null);
 		
-		mh.crearHabitacion(con, h);
+		
+		if(mh.crearHabitacion(con, h)) {
+			lblCorrectInsert.setVisible(true);
+		}else {
+			lblErrorInsert.setVisible(true);
+		}
 	}
 	
 	public void setListHotel(Hotel h2){

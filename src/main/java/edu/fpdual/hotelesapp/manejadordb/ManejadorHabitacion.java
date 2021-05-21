@@ -124,15 +124,13 @@ public class ManejadorHabitacion {
 	public boolean crearHabitacion(Conector con, Habitacion habitacion) {
 		if(habitacion.getHotel().getId()!=0) {
 			Connection con2 = con.getMySQLConnection();
-			String sql = "INSERT INTO Habitacion(`id_hotel`,`num_personas`,`fecha_entrada`,`fecha_salida`,`ocupada`,`precio`,`id_usuario`) VALUES(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO Habitacion(`id_hotel`,`num_personas`,`ocupada`,`precio`,`id_usuario`) VALUES(?,?,?,?,?)";
 			try(PreparedStatement stmt = con2.prepareStatement(sql)){
 				stmt.setInt(1,habitacion.getHotel().getId());
 				stmt.setInt(2,habitacion.getNum_personas());
-				stmt.setDate(3,java.sql.Date.valueOf(habitacion.getFecha_entrada()));
-				stmt.setDate(4,java.sql.Date.valueOf(habitacion.getFecha_salida()));
-				stmt.setBoolean(5,habitacion.isOcupada());
-				stmt.setDouble(6,habitacion.getPrecio());
-				stmt.setObject(7,habitacion.getUsuario());
+				stmt.setBoolean(3,false);
+				stmt.setDouble(4,habitacion.getPrecio());
+				stmt.setObject(5,habitacion.getUsuario());
 				stmt.execute();
 				return true;
 			} catch (SQLException e) {
