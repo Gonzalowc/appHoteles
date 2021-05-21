@@ -4,14 +4,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-
 import lombok.experimental.PackagePrivate;
+import lombok.Getter;
+import lombok.Setter;
+
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * Clase Habitacion
  * @author angela.bonilla.gomez
  *
  */
+@Getter
+@Setter
 public class Habitacion implements Comparable<Habitacion> {
 	/**
 	 * ID de la habitacion
@@ -25,10 +32,12 @@ public class Habitacion implements Comparable<Habitacion> {
 	 * Numero de personas de la habitacion
 	 */
 	private int num_personas;
+	
 	/**
 	 * Fecha de entrada a la habitacion
 	 */
 	private Date fecha_entrada;
+
 	/**
 	 * Fecha de salida de la habitacion
 	 */
@@ -50,16 +59,17 @@ public class Habitacion implements Comparable<Habitacion> {
 	 */
 	private ArrayList<Servicio> serviciosHabitacion;
 	
-	/**
-	 * Constructor de Habitacion
-	 * @param hotel
-	 * @param num_personas
-	 * @param fecha_entrada 
-	 * @param fecha_salida
-	 * @param ocupada 
-	 * @param precio
-	 * @param usuario
-	 */
+
+		/**
+		 * Constructor de Habitacion
+		 * @param hotel
+		 * @param num_personas
+		 * @param fecha_entrada 
+		 * @param fecha_salida
+		 * @param ocupada 
+		 * @param precio
+		 * @param usuario
+		 */
 	public Habitacion( Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
 			double precio, Usuario usuario) {
 		this.id = 0;
@@ -72,7 +82,7 @@ public class Habitacion implements Comparable<Habitacion> {
 		this.usuario = usuario;
 		serviciosHabitacion = new ArrayList<>();
 	}
-	
+
 	/**
 	 * Constructor de habitacion que no tenga un usuario relacionado
 	 * @param id
@@ -104,8 +114,8 @@ public class Habitacion implements Comparable<Habitacion> {
 			this.id = result.getInt("id");
 			this.hotel = null;
 			this.num_personas = result.getInt("num_personas");
-			this.fecha_entrada = result.getDate("fecha_entrada");
-			this.fecha_salida = result.getDate("fecha_salida");
+			this.fecha_entrada = result.getDate("fecha_entrada");//.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			this.fecha_salida = result.getDate("fecha_salida");//.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			this.ocupada = result.getBoolean("ocupada");
 			this.precio = result.getDouble("precio");
 			this.usuario = null;
@@ -115,69 +125,6 @@ public class Habitacion implements Comparable<Habitacion> {
 		}
 		
 	}
-	
-	/**
-	 * Getters y setters 
-	 * @return
-	 */
-	//GETTERS AND SETTERS
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public Hotel getHotel() {
-		return hotel;
-	}
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-	public int getNum_personas() {
-		return num_personas;
-	}
-	public void setNum_personas(int num_personas) {
-		this.num_personas = num_personas;
-	}
-	public Date getFecha_entrada() {
-		return fecha_entrada;
-	}
-	public void setFecha_entrada(Date fecha_entrada) {
-		this.fecha_entrada = fecha_entrada;
-	}
-	public Date getFecha_salida() {
-		return fecha_salida;
-	}
-	public void setFecha_salida(Date fecha_salida) {
-		this.fecha_salida = fecha_salida;
-	}
-	public boolean isOcupada() {
-		return ocupada;
-	}
-	public void setOcupada(boolean ocupada) {
-		this.ocupada = ocupada;
-	}
-	public double getPrecio() {
-		return precio;
-	}
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	
-	public ArrayList<Servicio> getServicios() {
-		return serviciosHabitacion;
-	}
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.serviciosHabitacion = servicios;
-	}
-	
 	
 	
 	/**

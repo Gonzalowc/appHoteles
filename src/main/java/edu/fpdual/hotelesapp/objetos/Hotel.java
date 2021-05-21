@@ -3,11 +3,17 @@ package edu.fpdual.hotelesapp.objetos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import lombok.Getter;
+import lombok.Setter;
 /**
  * Clase Hotel
  * @author angela.bonilla.gomez
  *
  */
+
+@Getter
+@Setter
 public class Hotel implements Comparable<Hotel> {
 	/**
 	 * ID del hotel
@@ -74,71 +80,6 @@ public class Hotel implements Comparable<Hotel> {
 		}
 		
 	}
-
-	/**
-	 * Getters y setters
-	 * @return
-	 */
-	//GETTERS AND SETTERS
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getLocalizacion() {
-		return localizacion;
-	}
-
-	public void setLocalizacion(String localizacion) {
-		this.localizacion = localizacion;
-	}
-
-	public int getEstrellas() {
-		return estrellas;
-	}
-
-	public void setEstrellas(int estrellas) {
-		this.estrellas = estrellas;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	
-
-	public ArrayList<Habitacion> getHabitaciones() {
-		return habitaciones;
-	}
-
-	public void setHabitaciones(ArrayList<Habitacion> habitaciones) {
-		this.habitaciones = habitaciones;
-	}
-
-	
-	
-	public ArrayList<Servicio> getServiciosHotel() {
-		return serviciosHotel;
-	}
-
-	public void setServiciosHotel(ArrayList<Servicio> serviciosHotel) {
-		this.serviciosHotel = serviciosHotel;
-	}
-	
 
 	/**
 	 * HashCode

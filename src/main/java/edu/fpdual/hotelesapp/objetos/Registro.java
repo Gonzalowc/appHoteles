@@ -1,13 +1,20 @@
 package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.Date;
+
+import lombok.Getter;
+import lombok.Setter;
 /**
  * Clase Registro
  * @author angela.bonilla.gomez
  *
  */
+
+@Getter
+@Setter
 public class Registro implements Comparable<Registro>{
 	/**
 	 * ID del registro
@@ -63,51 +70,6 @@ public class Registro implements Comparable<Registro>{
 		
 	}
 
-	/**
-	 * Getters y setters
-	 * @return
-	 */
-	
-	//GETTERS AND SETTERS
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Habitacion getHabitacion() {
-		return habitacion;
-	}
-
-	public void setHabitacion(Habitacion habitacion) {
-		this.habitacion = habitacion;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
 	
 	/**
 	 * ToString para mostrar los datos de la clase

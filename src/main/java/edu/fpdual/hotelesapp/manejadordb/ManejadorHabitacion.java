@@ -1,16 +1,19 @@
 package edu.fpdual.hotelesapp.manejadordb;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
-import edu.fpdual.hotelesapp.objetos.Hotel;
 
 /**
  * Clase Manejador Habitacion para realizar todas las consultas en cuanto a habitaciones
@@ -18,20 +21,14 @@ import edu.fpdual.hotelesapp.objetos.Hotel;
  *
  */
 public class ManejadorHabitacion {
-	/**
-	 * Clase main para ejecutar los métodos
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		ManejadorHabitacion mh = new ManejadorHabitacion();
-		Conector con  = new Conector();
-		Hotel hotel = (Hotel)new ManejadorHotel().hotelesNombre(con, "Barceló").get(0);
-		Date d = new Date(2021,6,5);
-		
-		Habitacion h = new Habitacion(hotel, 5, d , d, false, 3, null);
-		mh.crearHabitacion(con, h);
-	}
 	
+	public Date convertToDate(LocalDate localDate) {
+		
+		ZonedDateTime zdt = localDate.atStartOfDay(ZoneId.systemDefault());
+		Instant instant = zdt.toInstant();
+		Date date = Date.from(instant);
+		return date;
+	}
 	/**
 	 * Metodo Buscar Habitacion para consultar habitacion por precio
 	 * @param con para conseguir la conexion
@@ -122,15 +119,13 @@ public class ManejadorHabitacion {
 	public boolean crearHabitacion(Conector con, Habitacion habitacion) {
 		if(habitacion.getHotel().getId()!=0) {
 			Connection con2 = con.getMySQLConnection();
-			String sql = "INSERT INTO Habitacion(`id_hotel`,`num_personas`,`fecha_entrada`,`fecha_salida`,`ocupada`,`precio`,`id_usuario`) VALUES(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO Habitacion(`id_hotel`,`num_personas`,`ocupada`,`precio`,`id_usuario`) VALUES(?,?,?,?,?)";
 			try(PreparedStatement stmt = con2.prepareStatement(sql)){
 				stmt.setInt(1,habitacion.getHotel().getId());
 				stmt.setInt(2,habitacion.getNum_personas());
-				stmt.setDate(3,(Date) habitacion.getFecha_entrada());
-				stmt.setDate(4,(Date) habitacion.getFecha_salida());
-				stmt.setBoolean(5,habitacion.isOcupada());
-				stmt.setDouble(6,habitacion.getPrecio());
-				stmt.setObject(7,habitacion.getUsuario());
+				stmt.setBoolean(3,false);
+				stmt.setDouble(4,habitacion.getPrecio());
+				stmt.setObject(5,habitacion.getUsuario());
 				stmt.execute();
 				return true;
 			} catch (SQLException e) {

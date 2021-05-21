@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.InsertRoomController">
+   <children>
+      <Label fx:id="lblIdHotel" layoutX="119.0" layoutY="128.0" text=" Hotel:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNumPers" layoutX="43.0" layoutY="186.0" text="Num Personas:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNumPers" layoutX="190.0" layoutY="185.0" />
+      <Label fx:id="lblEntry" layoutX="101.0" layoutY="245.0" text="Entrada:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateEntry" layoutX="190.0" layoutY="244.0" />
+      <Label fx:id="lblLeft" layoutX="119.0" layoutY="304.0" text="Salida:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dateLeft" layoutX="190.0" layoutY="304.0" />
+      <Label fx:id="lblPrice" layoutX="526.0" layoutY="128.0" text="Precio:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPrice" layoutX="600.0" layoutY="127.0" />
+      <Label fx:id="lblUser" layoutX="519.0" layoutY="186.0" text="Usuario:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUser" layoutX="600.0" layoutY="185.0" />
+      <CheckBox fx:id="chkBusy" layoutX="577.0" layoutY="275.0" mnemonicParsing="false" text="Ocupada">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </CheckBox>
+      <Button fx:id="btnInsertRoom" layoutX="376.0" layoutY="400.0" mnemonicParsing="false" text="Insertar Habitación">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <MenuButton fx:id="selectBtnHotel" layoutX="196.0" layoutY="124.0" mnemonicParsing="false" text="Selecciona el Hotel">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </MenuButton>
+   </children>
+</AnchorPane>
