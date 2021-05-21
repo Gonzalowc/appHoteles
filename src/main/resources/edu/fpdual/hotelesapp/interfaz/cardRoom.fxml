@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.CardRoomController">
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.CardRoomController">
    <children>
       <AnchorPane prefHeight="199.0" prefWidth="668.0" style="-fx-background-color: #E2FDFF;">
          <children>

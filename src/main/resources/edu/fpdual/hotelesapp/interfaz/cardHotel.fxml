@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="paneCardHotel" prefHeight="340.0" prefWidth="360.0" style="-fx-border-color: #094293; -fx-border-width: 4px; -fx-border-radius: 50px; -fx-background-radius: 50; -fx-background-color: #A2DCFD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.CardHotelController">
+<AnchorPane fx:id="paneCardHotel" prefHeight="340.0" prefWidth="360.0" style="-fx-border-color: #094293; -fx-border-width: 4px; -fx-border-radius: 50px; -fx-background-radius: 50; -fx-background-color: #A2DCFD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.CardHotelController">
    <children>
       <Label fx:id="lblNombreHotel" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="20.0" prefHeight="45.0" prefWidth="343.0" text="Titulo" textFill="#284ea1">
          <font>
