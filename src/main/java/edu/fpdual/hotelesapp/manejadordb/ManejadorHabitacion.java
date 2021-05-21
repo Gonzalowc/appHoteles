@@ -6,13 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
-import edu.fpdual.hotelesapp.objetos.Hotel;
 
 /**
  * Clase Manejador Habitacion para realizar todas las consultas en cuanto a habitaciones
@@ -20,20 +21,14 @@ import edu.fpdual.hotelesapp.objetos.Hotel;
  *
  */
 public class ManejadorHabitacion {
-	/**
-	 * Clase main para ejecutar los métodos
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		ManejadorHabitacion mh = new ManejadorHabitacion();
-		Conector con  = new Conector();
-		Hotel hotel = (Hotel)new ManejadorHotel().hotelesNombre(con, "Barceló").get(0);
-		LocalDate d = LocalDate.now(ZoneId.systemDefault());
-		
-		Habitacion h = new Habitacion(hotel, 5, d , d, false, 3, null);
-		mh.crearHabitacion(con, h);
-	}
 	
+	public Date convertToDate(LocalDate localDate) {
+		
+		ZonedDateTime zdt = localDate.atStartOfDay(ZoneId.systemDefault());
+		Instant instant = zdt.toInstant();
+		Date date = Date.from(instant);
+		return date;
+	}
 	/**
 	 * Metodo Buscar Habitacion para consultar habitacion por precio
 	 * @param con para conseguir la conexion

@@ -58,8 +58,10 @@ public class InsertRoomController {
 		
 		if(mh.crearHabitacion(con, h)) {
 			lblCorrectInsert.setVisible(true);
+			lblErrorInsert.setVisible(false);
 		}else {
 			lblErrorInsert.setVisible(true);
+			lblCorrectInsert.setVisible(false);
 		}
 	}
 	

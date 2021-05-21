@@ -12,11 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-<<<<<<< HEAD
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-=======
->>>>>>> fecafa15cb8d7d7c88f277dc2d62b045e6037cd9
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -33,12 +28,6 @@ public class AplicationController {
 		myPanel.setCenter(listaHoteles());
 		
 	}
-	@FXML
-	public void toHabitacionesHotelVista(ActionEvent event) throws IOException{
-		
-		//myPanel.setCenter();
-	}
-
 	
 	@FXML
 	public void toReservaRoomVista(ActionEvent event) throws IOException{
@@ -107,7 +96,6 @@ public class AplicationController {
 	
 
 	public AnchorPane rellenarMenuReservaRoom()  {
-		
 		Conector con = new Conector();
 		ManejadorHotel mho = new ManejadorHotel();
 		ArrayList<Hotel> hoteles = mho.listaHoteles(con);
@@ -134,10 +122,7 @@ public class AplicationController {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-		
-		
 	}
 	
 	public AnchorPane rellenarMenuNewRoom()  {
@@ -145,22 +130,16 @@ public class AplicationController {
 			Conector con = new Conector();
 			ManejadorHotel mho = new ManejadorHotel();
 			ArrayList<Hotel> hoteles = mho.listaHoteles(con);
-			
 			try {
 				//crear la clase que controla el archivo FXML
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("insertRoom.fxml"));
 				//creamos el panel a partir del loader
 				AnchorPane aux = (AnchorPane) loader.load();
-				
-			
 				for(Hotel h1 : hoteles) {
-					
 						//creamos el objeto controlador que queremos usar
 						InsertRoomController irc = loader.<InsertRoomController>getController();
 						//usamos sus metodos
 						irc.setListHotel(h1);
-					
-					
 				}
 				
 				return aux;
