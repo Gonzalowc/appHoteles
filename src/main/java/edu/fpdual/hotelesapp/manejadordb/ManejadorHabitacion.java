@@ -166,4 +166,22 @@ public class ManejadorHabitacion {
 		return null;
 	}
 	
+	public ArrayList<Habitacion> listaHabitacionesHotel(Conector con, int codeHotel){
+		Connection con2 = con.getMySQLConnection();
+		String sql = "SELECT * FROM Habitacion where id_hotel=?";
+		ArrayList<Habitacion> habitaciones= new ArrayList<Habitacion>();
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			stmt.setInt(1, codeHotel);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				habitaciones.add(new Habitacion(result));
+			}
+			return habitaciones;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return null;
+	}
+	
 }

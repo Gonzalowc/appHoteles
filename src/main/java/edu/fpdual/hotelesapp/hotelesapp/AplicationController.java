@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,22 +26,23 @@ public class AplicationController {
 		myPanel.setCenter(listaHoteles());
 		
 	}
+	@FXML
+	public void toHabitacionesHotelVista(ActionEvent event) throws IOException{
+		
+		//myPanel.setCenter();
+	}
 
 	public ScrollPane listaHoteles() {
 		ManejadorHotel mh = new ManejadorHotel();
 		List<Hotel> hoteles = mh.listaHoteles(new Conector());
-		int ANCHO = 3;
+		final int ANCHO = 3;
 		int alto = (hoteles.size() % 3 != 0) ? (int) (hoteles.size() / 3) + 1 : (int) (hoteles.size() / 3);
 		ScrollPane scrollPane = new ScrollPane();
 		
 		GridPane grid = new GridPane();
 		
-		grid.setStyle("-fx-background-color: cornsilk;");
-		grid.getStylesheets().add("grid.css");
-		grid.getStyleClass().add("gridpane");
-		
-		//grid.setHgap(100);
-		//grid.setVgap(150);
+		grid.setHgap(100);
+		grid.setVgap(150);
 		grid.setAlignment(Pos.TOP_CENTER);
 		grid.setPadding(new Insets(20, 20, 10, 10));
 		//grid.setId("gridpane");
@@ -62,13 +62,12 @@ public class AplicationController {
 						CardHotelController chc = loader.<CardHotelController>getController();
 						//usamos sus metodos
 						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
-						
+						chc.setParentPane(myPanel);
 						grid.add(aux, j, i, 1, 1);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}
 				count++;
 			}
@@ -78,11 +77,7 @@ public class AplicationController {
 		return scrollPane;
 	}
 	
-	public Pane cardHotel() {
-		
-		
-		
-		return null;
-		
-	}
+	
+	
+	
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.CardRoomController">
+   <children>
+      <AnchorPane prefHeight="199.0" prefWidth="668.0" style="-fx-background-color: #E2FDFF;">
+         <children>
+            <Label fx:id="lblBtnReservar" alignment="CENTER" layoutX="528.0" layoutY="145.0" prefHeight="40.0" prefWidth="126.0" style="-fx-background-color: #094293; -fx-background-radius: 50px; -fx-border-color: #009900; -fx-border-width: 3px; -fx-border-radius: 50px;" text="RESERVAR" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="145.0" prefHeight="27.0" prefWidth="109.0" text="Capacidad:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNumPersonas" layoutX="381.0" layoutY="145.0" prefHeight="27.0" prefWidth="147.0" text="6 personas" textFill="#7d9626" />
+            <ImageView fitHeight="173.0" fitWidth="231.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/hotelDefecto.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblPrecio" layoutX="558.0" layoutY="58.0" text="350.75€" textFill="#205b20">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDisponible" layoutX="265.0" layoutY="11.0" prefHeight="33.0" prefWidth="147.0" text="¡DISPONIBLE!" textFill="#027209" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOcupada" layoutX="271.0" layoutY="11.0" prefHeight="33.0" prefWidth="147.0" text="OCUPADA" textFill="#860404" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="268.0" layoutY="44.0" prefHeight="100.0" prefWidth="273.0" text="Featuring a restaurant and bar, Exe Sevilla Palmera is in Seville’s Nuevo Porvenir district, 1640 feet from Avenida de la Palmera. This elegant hotel offers free WiFi and a gym." wrapText="true" />
+            <Label layoutX="556.0" layoutY="31.0" text="DESDE" textFill="#205b20">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCodeHabitacion" layoutY="1.0" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
