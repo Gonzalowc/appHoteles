@@ -9,6 +9,6 @@ module edu.fpdual.hotelesapp.hotelesapp {
 	requires activation;
 	requires lombok;
 
-    opens edu.fpdual.hotelesapp.hotelesapp to javafx.fxml;
-    exports edu.fpdual.hotelesapp.hotelesapp;
+    opens edu.fpdual.hotelesapp.interfaz to javafx.fxml;
+    exports edu.fpdual.hotelesapp.interfaz;
 }

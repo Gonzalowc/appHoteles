@@ -1,4 +1,4 @@
-package edu.fpdual.hotelesapp.hotelesapp;
+package edu.fpdual.hotelesapp.interfaz;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

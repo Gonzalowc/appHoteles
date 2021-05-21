@@ -123,6 +123,10 @@
 					<sourceFileExcludes>
       					<sourceFileExclude>**/module-info.java</sourceFileExclude>
     				</sourceFileExcludes>
+    				<doctitle>My API for ${project.name} ${project.version}</doctitle>
+	          		<windowtitle>My API for ${project.name} ${project.version}</windowtitle>
+					<testDoctitle>My Test API for ${project.name} ${project.version}</testDoctitle> 
+	          		<testWindowtitle>My Test API for ${project.name} ${project.version}</testWindowtitle> 	
 				</configuration>
 				<executions>
 					<execution>
