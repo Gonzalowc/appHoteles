@@ -12,11 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-<<<<<<< HEAD
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-=======
->>>>>>> fecafa15cb8d7d7c88f277dc2d62b045e6037cd9
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;

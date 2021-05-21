@@ -2,11 +2,17 @@ package edu.fpdual.hotelesapp.objetos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import lombok.Getter;
+import lombok.Setter;
 /**
  * Clase Servicio
  * @author angela.bonilla.gomez
  *
  */
+
+@Getter
+@Setter
 public class Servicio implements Comparable<Servicio> {
 	/**
 	 * ID del servicio
@@ -54,36 +60,6 @@ public class Servicio implements Comparable<Servicio> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Getters y setters
-	 * @return
-	 */
-	//GETTERS AND SETTERS
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getNombre_servicio() {
-		return nombre_servicio;
-	}
-	public void setNombre_servicio(String nombre_servicio) {
-		this.nombre_servicio = nombre_servicio;
-	}
-	public double getPrecio() {
-		return precio;
-	}
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-	public TipoServicio getTipo() {
-		return tipo;
-	}
-	public void setTipo(TipoServicio tipo) {
-		this.tipo = tipo;
 	}
 	
 	

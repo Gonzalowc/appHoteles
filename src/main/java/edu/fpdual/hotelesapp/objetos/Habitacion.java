@@ -5,13 +5,18 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Clase Habitacion
  * @author angela.bonilla.gomez
  *
  */
+
+@Getter
+@Setter
 public class Habitacion implements Comparable<Habitacion> {
 	/**
 	 * ID de la habitacion
@@ -117,68 +122,6 @@ public class Habitacion implements Comparable<Habitacion> {
 			e.printStackTrace();
 		}
 		
-	}
-	
-	/**
-	 * Getters y setters 
-	 * @return
-	 */
-	//GETTERS AND SETTERS
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public Hotel getHotel() {
-		return hotel;
-	}
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-	public int getNum_personas() {
-		return num_personas;
-	}
-	public void setNum_personas(int num_personas) {
-		this.num_personas = num_personas;
-	}
-	public LocalDate getFecha_entrada() {
-		return fecha_entrada;
-	}
-	public void setFecha_entrada(LocalDate fecha_entrada) {
-		this.fecha_entrada = fecha_entrada;
-	}
-	public LocalDate getFecha_salida() {
-		return fecha_salida;
-	}
-	public void setFecha_salida(LocalDate fecha_salida) {
-		this.fecha_salida = fecha_salida;
-	}
-	public boolean isOcupada() {
-		return ocupada;
-	}
-	public void setOcupada(boolean ocupada) {
-		this.ocupada = ocupada;
-	}
-	public double getPrecio() {
-		return precio;
-	}
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	
-	public ArrayList<Servicio> getServicios() {
-		return serviciosHabitacion;
-	}
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.serviciosHabitacion = servicios;
 	}
 	
 	
