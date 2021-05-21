@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="739.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.hotelesapp.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="739.0" style="-fx-background-color: #b2b2b2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.LoginController">
    <children>
       <Button id="btnLogin" layoutX="357.0" layoutY="307.0" mnemonicParsing="false" onAction="#validar" prefHeight="30.0" prefWidth="95.0" text="Entrar" />
       <Button id="btnLeave" fx:id="btnLeave" layoutX="678.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="6.0" prefWidth="38.0">
