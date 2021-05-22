@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.CardRoomController">
    <children>
       <AnchorPane prefHeight="199.0" prefWidth="668.0" style="-fx-background-color: #E2FDFF;">
          <children>
-            <Label fx:id="lblBtnReservar" alignment="CENTER" layoutX="528.0" layoutY="145.0" prefHeight="40.0" prefWidth="126.0" style="-fx-background-color: #094293; -fx-background-radius: 50px; -fx-border-color: #009900; -fx-border-width: 3px; -fx-border-radius: 50px;" text="RESERVAR" textFill="WHITE">
+            <Label fx:id="lblBtnReservar" alignment="CENTER" layoutX="528.0" layoutY="145.0" onMouseClicked="#rellenarReserva" prefHeight="40.0" prefWidth="126.0" style="-fx-background-color: #094293; -fx-background-radius: 50px; -fx-border-color: #009900; -fx-border-width: 3px; -fx-border-radius: 50px;" text="RESERVAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

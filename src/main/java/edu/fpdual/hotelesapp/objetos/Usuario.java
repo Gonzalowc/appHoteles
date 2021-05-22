@@ -64,8 +64,8 @@ public class Usuario implements Comparable<Usuario>{
 	public Usuario(ResultSet result) {
 		try {
 			this.id = result.getInt("id");
-			this.nombre = result.getString("nombre");
-			this.pass = result.getString("pass");
+			this.nombre = result.getString("nombre_usuario");
+			this.pass = null;
 			this.dni = result.getString("dni");
 			this.telefono = result.getString("telefono");
 			this.email = result.getString("email");
