@@ -33,10 +33,10 @@ public class Servicio implements Comparable<Servicio> {
 	
 	/**
 	 * Constructor de Servicio
-	 * @param id
-	 * @param nombre_servicio
-	 * @param precio
-	 * @param tipo
+	 * @param id del servicio
+	 * @param nombre_servicio nombre del servicio
+	 * @param precio del servicio que contraten
+	 * @param tipo de servicio
 	 */
 	public Servicio(int id, String nombre_servicio, double precio, TipoServicio tipo) {
 		super();

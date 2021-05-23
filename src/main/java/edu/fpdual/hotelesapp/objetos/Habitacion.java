@@ -62,13 +62,13 @@ public class Habitacion implements Comparable<Habitacion> {
 
 		/**
 		 * Constructor de Habitacion
-		 * @param hotel
-		 * @param num_personas
-		 * @param fecha_entrada 
-		 * @param fecha_salida
-		 * @param ocupada 
-		 * @param precio
-		 * @param usuario
+		 * @param hotel relacionado con la habitacion
+		 * @param num_personas de la habitacion
+		 * @param fecha_entrada a la habitacion
+		 * @param fecha_salida de la habitacion
+		 * @param ocupada esta ocupada o no
+		 * @param precio de la habitacion
+		 * @param usuario relacionado con la habitacion
 		 */
 	public Habitacion( Hotel hotel, int num_personas, Date fecha_entrada, Date fecha_salida, boolean ocupada,
 			double precio, Usuario usuario) {

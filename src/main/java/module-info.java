@@ -8,6 +8,8 @@ module edu.fpdual.hotelesapp.hotelesapp {
 	requires java.mail;
 	requires activation;
 	requires lombok;
+	requires itextpdf;
+	requires java.desktop;
 
     opens edu.fpdual.hotelesapp.interfaz to javafx.fxml;
     exports edu.fpdual.hotelesapp.interfaz;

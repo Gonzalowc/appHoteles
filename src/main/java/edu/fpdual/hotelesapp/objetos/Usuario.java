@@ -41,12 +41,12 @@ public class Usuario implements Comparable<Usuario>{
 	
 	/**
 	 * Constructor de Usuario
-	 * @param id
-	 * @param nombre
-	 * @param pass
-	 * @param dni
-	 * @param telefono
-	 * @param email
+	 * @param id de usuario
+	 * @param nombre de usuario
+	 * @param pass contraseña de usuario
+	 * @param dni del usuario
+	 * @param telefono del usuario
+	 * @param email del usuario
 	 */
 	public Usuario(int id, String nombre, String pass, String dni, String telefono, String email) {
 		this.id = id;
