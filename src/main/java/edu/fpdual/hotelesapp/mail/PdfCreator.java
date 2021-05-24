@@ -1,12 +1,10 @@
 package edu.fpdual.hotelesapp.mail;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +19,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import edu.fpdual.hotelesapp.conector.Conector;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -40,147 +42,133 @@ public class PdfCreator {
 	 * @throws MalformedURLException 
 	 */
 	@SuppressWarnings("unused")
-	private void generarPDF() throws URISyntaxException, MalformedURLException, IOException {
+	private void generarPDF(Conector con, int id_registro) throws URISyntaxException, MalformedURLException, IOException {
 		//java.awt.event.ActionEvent event deberia ir entre los parentesis para que se ejecute al pulsar el boton
 		Document documento = new Document();
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://79.146.64.10/Hoteles","proyecto","proyecto");
+			Connection con2 = con.getMySQLConnection();
 			
 			/**
 			 * Ruta donde se va a guardar el pdf
 			 */
 			String ruta = System.getProperty("user.home");
-			PdfWriter.getInstance(documento, new FileOutputStream(ruta+" /Desktop/reserva.pdf"));
+			PdfWriter.getInstance(documento, new FileOutputStream(ruta+"/Documents/reserva"+id_registro+".pdf"));
 			documento.open();
+			
+			/**
+			 * Imagen que vamos a usar de header
+			 */
+			Path pathHeader = Paths.get(getClass().getResource("/img/header.jpg").toURI());
+			Image header = Image.getInstance(pathHeader.toAbsolutePath().toString());
+			header.scalePercent(10);
+			header.setScaleToFitHeight(true);
+			header.setAlignment(Chunk.HEADER);
+			
+			documento.add(header);
 			
 			/**
 			 * Agregamos el texto que queremos que aparezca
 			 */
-			Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 18, BaseColor.BLACK);
-			Chunk chunk = new Chunk("¡GRACIAS POR RESERVAR CON NOSOTROS! SU RESERVA SE HA REALIZADO CON ÉXITO.", font);
+			Paragraph parrafo = new Paragraph();
+			parrafo.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+			parrafo.add("¡GRACIAS por confiar en nosotros! Su reserva se ha realizado con ÉXITO, a continuación tiene todos los datos.");
+			parrafo.setFont(FontFactory.getFont("Arial", 18, Font.BOLD, BaseColor.DARK_GRAY));
 			
-			documento.add(chunk);
+			documento.add(parrafo);
 			
 			/**
 			 * Añadimos la imagen que queremos que aparezca
 			 */
 			Path path = Paths.get(getClass().getResource("/img/hotel.png").toURI());
 			Image img = Image.getInstance(path.toAbsolutePath().toString());
-			img.setWidthPercentage((float) 0.2);
+			img.scalePercent(20);
 			img.setScaleToFitHeight(true);
+			img.setAlignment(Chunk.ALIGN_CENTER);
+			
 			documento.add(img);
 			
 			/**
-			 * Creamos la tabla que veremos en el pdf de usuario
+			 * Creamos la tabla que veremos en el pdf
 			 */
-			PdfPTable tablaUsuario = new PdfPTable(4);
-			tablaUsuario.addCell("NOMBRE");
-			tablaUsuario.addCell("DNI");
-			tablaUsuario.addCell("EMAIl");
-			tablaUsuario.addCell("TELEFONO");
+			PdfPTable tabla = new PdfPTable(13);
+			tabla.addCell("ID de registro");
+			tabla.addCell("Hotel");
+			tabla.addCell("Localizacion");
+			tabla.addCell("Estrellas");
+			tabla.addCell("Habitacion");
+			tabla.addCell("Personas");
+			tabla.addCell("Entrada");
+			tabla.addCell("Salida");
+			tabla.addCell("Precio");
+			tabla.addCell("Usuario");
+			tabla.addCell("DNI");
+			tabla.addCell("tlf");
+			tabla.addCell("email");
 			
-			/**
-			 * Creamos la tabla que veremos en el pdf de hotel
-			 */
-			PdfPTable tablaHotel = new PdfPTable(3);
-			tablaHotel.addCell("NOMBRE DEL HOTEL");
-			tablaHotel.addCell("LOCALIZACION");
-			tablaHotel.addCell("ESTRELLAS");
-			
-			/**
-			 * Creamos la tabla que veremos en el pdf de habitacion
-			 */
-			PdfPTable tablaHabitacion = new PdfPTable(5);
-			tablaHabitacion.addCell("NOMBRE DE LA HABITACION");
-			tablaHabitacion.addCell("NUMERO DE PERSONAS");
-			tablaHabitacion.addCell("FECHA DE ENTRADA");
-			tablaHabitacion.addCell("FECHA DE SALIDA");
-			tablaHabitacion.addCell("PRECIO");
-			
-			/**
-			 * Creamos la tabla que veremos en el pdf de servicio
-			 */
-			PdfPTable tablaServicio = new PdfPTable(3);
-			tablaServicio.addCell("NOMBRE DEL SERVICIO ADICIONAL CONTRATADO");
-			tablaServicio.addCell("PRECIO");
-			tablaServicio.addCell("TIPO");
-
 			/**
 			 * Realizamos las consultas de las cuatro tablas
 			 */
-			PreparedStatement statementUsuario = con.prepareStatement("SELECT nombre_usuario,dni,telefono,email FROM Usuario");
-			PreparedStatement statementHotel = con.prepareStatement("SELECT nombre,localizacion,estrellas FROM Hotel");
-			PreparedStatement statementHabitacion = con.prepareStatement("SELECT num_personas,fecha_entrada,fecha_salida,precio FROM Habitacion");
-			PreparedStatement statementServicio = con.prepareStatement("SELECT nombre_servicio,precio,tipo FROM Servicio");
+			PreparedStatement statement = con2.prepareStatement("SELECT * FROM Registro WHERE id = "+id_registro);
 			
 			/**
 			 * Ejecutamos las consultas
 			 */
-			ResultSet rsUsuario = statementUsuario.executeQuery();
-			ResultSet rsHotel = statementHotel.executeQuery();
-			ResultSet rsHabitacion = statementHabitacion.executeQuery();
-			ResultSet rsServicio = statementServicio.executeQuery();
+			ResultSet rs = statement.executeQuery();
 			
 			/**
 			 * Indicamos las filas que corresponden a cada columna de usuario y añadimos al documento
 			 */
-			if (rsUsuario.next()) {
+			if (rs.next()) {
 				do {
-					tablaUsuario.addCell(rsUsuario.getString(1));
-					tablaUsuario.addCell(rsUsuario.getString(2));
-					tablaUsuario.addCell(rsUsuario.getString(3));
-					tablaUsuario.addCell(rsUsuario.getString(4));
-				} while(rsUsuario.next());
-				documento.add(tablaUsuario);
+					tabla.addCell(rs.getString(1));
+					tabla.addCell(rs.getString(2));
+					tabla.addCell(rs.getString(3));
+					tabla.addCell(rs.getString(4));
+					tabla.addCell(rs.getString(5));
+					tabla.addCell(rs.getString(6));
+					tabla.addCell(rs.getString(7));
+					tabla.addCell(rs.getString(8));
+					tabla.addCell(rs.getString(9));
+					tabla.addCell(rs.getString(10));
+					tabla.addCell(rs.getString(11));
+					tabla.addCell(rs.getString(12));
+					tabla.addCell(rs.getString(13));
+				} while(rs.next());
+				documento.add(tabla);
 			}
 			
 			/**
-			 * Indicamos las filas que corresponden a cada columna de hotel y añadimos al documento
+			 * Agregamos mas texto que queremos que aparezca
 			 */
-			if (rsHotel.next()) {
-				do {
-					tablaHotel.addCell(rsHotel.getString(1));
-					tablaHotel.addCell(rsHotel.getString(2));
-					tablaHotel.addCell(rsHotel.getString(3));
-				} while(rsHotel.next());
-				documento.add(tablaHotel);
-			}
+			Paragraph parrafo2 = new Paragraph();
+			parrafo2.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+			parrafo2.add("Esperamos que tenga una experiencia gratificante. Para cualquier duda o problema contacte con este email.");
+			parrafo2.setFont(FontFactory.getFont("Arial", 18, Font.BOLDITALIC, BaseColor.DARK_GRAY));
 			
-			/**
-			 * Indicamos las filas que corresponden a cada columna de habitacion y añadimos al documento
-			 */
-			if (rsHabitacion.next()) {
-				do {
-					tablaHabitacion.addCell(rsHabitacion.getString(1));
-					tablaHabitacion.addCell(rsHabitacion.getString(2));
-					tablaHabitacion.addCell(rsHabitacion.getString(3));
-					tablaHabitacion.addCell(rsHabitacion.getString(4));
-					tablaHabitacion.addCell(rsHabitacion.getString(5));
-				} while(rsHabitacion.next());
-				documento.add(tablaHabitacion);
-			}
 			
-			/**
-			 * Indicamos las filas que corresponden a cada columna de servicio y añadimos al documento
-			 */
-			if (rsServicio.next()) {
-				do {
-					tablaServicio.addCell(rsServicio.getString(1));
-					tablaServicio.addCell(rsServicio.getString(2));
-					tablaServicio.addCell(rsServicio.getString(3));
-				} while(rsServicio.next());
-				documento.add(tablaServicio);
-			}
+			documento.add(parrafo2);
+			
 			
 			/**
 			 * Cerramos el documento
 			 */
 			documento.close();
-			//JOptionPane.showMessageDialog(null,"PDF creado");
-		} catch (DocumentException | SQLException | FileNotFoundException e) {
+			//JOptionPane.showMessageDialog(null,"PDF creado"); 
+		} catch (IOException| DocumentException | SQLException | URISyntaxException e) {
 			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	public static void main(String[] args) {
+		try {
+			PdfCreator pdf = new PdfCreator();
+			Conector con = new Conector();
+			pdf.generarPDF(con,1);
+		} catch (URISyntaxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 
