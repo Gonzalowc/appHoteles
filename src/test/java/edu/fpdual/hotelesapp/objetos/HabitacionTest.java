@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 //import java.sql.ResultSet;
@@ -111,6 +112,62 @@ class HabitacionTest {
 		  assertEquals(servicios,h.getServiciosHabitacion());
 	  }
 	  
+	  @Test
+	  public void testSetters() {
+		  Habitacion h = new Habitacion(0, null, 0, null, null, false, 0);
+		  Hotel h1 = new Hotel("Las palomas", "Sevilla", 4, "");
+		  Date d =  new Date();
+		  Servicio s = new Servicio(13, "Premium", 43.3, null);
+		  ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+		  servicios.add(s);
+		  Usuario u = new Usuario(32, "Pedro", "1234", "63344244R", "xxxxxxxxx", "pedro34@gmail.com");
+		  
+		  h.setId(61);
+		  assertNotNull(h.getId());
+		  assertEquals(61, h.getId());
+		  
+		  h.setHotel(h1);
+		  assertNotNull(h.getHotel());
+		  assertEquals(h1,h.getHotel());
+		  
+		  h.setFecha_entrada(d);
+		  assertNotNull(h.getFecha_entrada());
+		  assertEquals(d,h.getFecha_entrada());
+		  
+		  h.setFecha_salida(d);
+		  assertNotNull(h.getFecha_salida());
+		  assertEquals(d,h.getFecha_salida());
+		  
+		  h.setNum_personas(4);
+		  assertNotNull(h.getNum_personas());
+		  assertEquals(4,h.getNum_personas());
+		  
+		  h.setOcupada(false);
+		  assertNotNull(h.isOcupada());
+		  assertFalse(h.isOcupada());
+		  
+		  h.setPrecio(42.3);
+		  assertNotNull(h.getPrecio());
+		  assertEquals(42.3, h.getPrecio());
+		  
+		  h.setServiciosHabitacion(servicios);
+		  assertNotNull(h.getServiciosHabitacion());
+		  assertEquals(servicios,h.getServiciosHabitacion());
+		  
+		  h.setUsuario(u);
+		  assertNotNull(h.getUsuario());
+		  assertEquals(u,h.getUsuario());
+		  
+		  
+
+	  }
+	  
+	  @Test
+	  public void testHashCode() {
+		  Habitacion h = new Habitacion(51, null, 1, null, null, false, 52.3);
+		  
+		  assertEquals(h.getId()+1*31,h.hashCode());
+	  }
 	  
 	
 	
