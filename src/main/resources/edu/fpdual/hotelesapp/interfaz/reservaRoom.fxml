@@ -1,62 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.media.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.InsertRoomController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="600.0" style="-fx-border-color: #000000; -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.ReservaRoomController">
    <children>
-      <Label fx:id="lblIdHotel" layoutX="119.0" layoutY="128.0" text=" Hotel:">
+      <Label layoutX="60.0" layoutY="101.0" text="Num Personas:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblNumPers" layoutX="43.0" layoutY="186.0" text="Num Personas:">
+      <TextField fx:id="txtNumPers" disable="true" layoutX="207.0" layoutY="100.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></TextField>
+      <Label fx:id="lblEntry" layoutX="60.0" layoutY="146.0" text="Entrada:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNumPers" layoutX="190.0" layoutY="185.0" />
-      <Label fx:id="lblEntry" layoutX="101.0" layoutY="245.0" text="Entrada:">
+      <DatePicker fx:id="dateEntry" layoutX="138.0" layoutY="146.0" onAction="#disabledateBeforeEntry" prefHeight="39.0" prefWidth="118.0" />
+      <Label fx:id="lblLeft" layoutX="267.0" layoutY="146.0" text="Salida:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dateEntry" layoutX="190.0" layoutY="244.0" />
-      <Label fx:id="lblLeft" layoutX="119.0" layoutY="304.0" text="Salida:">
+      <DatePicker fx:id="dateLeft" layoutX="328.0" layoutY="146.0" prefHeight="39.0" prefWidth="118.0" />
+      <Label layoutX="60.0" layoutY="197.0" text="Precio:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dateLeft" layoutX="190.0" layoutY="304.0" />
-      <Label fx:id="lblPrice" layoutX="526.0" layoutY="128.0" text="Precio:">
+      <TextField fx:id="txtPrice" disable="true" layoutX="134.0" layoutY="196.0" prefHeight="39.0" prefWidth="111.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="60.0" layoutY="245.0" text="Usuario:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPrice" layoutX="600.0" layoutY="127.0" />
-      <Label fx:id="lblUser" layoutX="519.0" layoutY="186.0" text="Usuario:">
+      <TextField fx:id="txtUser" disable="true" layoutX="141.0" layoutY="244.0">
          <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtUser" layoutX="600.0" layoutY="185.0" />
-      <CheckBox fx:id="chkBusy" layoutX="577.0" layoutY="275.0" mnemonicParsing="false" text="Ocupada">
+            <Font name="System Bold" size="18.0" />
+         </font></TextField>
+      <Button layoutX="211.0" layoutY="598.0" mnemonicParsing="false" onAction="#reserva" style="-fx-background-color: #0B38A1; -fx-border-radius: 50px;" text="RESERVAR" textFill="WHITE">
          <font>
-            <Font size="20.0" />
-         </font>
-      </CheckBox>
-      <Button fx:id="btnInsertRoom" layoutX="376.0" layoutY="400.0" mnemonicParsing="false" text="Insertar Habitación">
-         <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <MenuButton fx:id="selectBtnHotel" layoutX="196.0" layoutY="124.0" mnemonicParsing="false" text="Selecciona el Hotel">
+      <Label fx:id="lblIdHotel" layoutX="14.0" layoutY="538.0" prefHeight="27.0" prefWidth="21.0" visible="false" />
+      <Label fx:id="infoHotel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="14.0" prefHeight="76.0" prefWidth="304.0" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
-      </MenuButton>
+      </Label>
+      <Label disable="true" layoutX="248.0" layoutY="194.0" prefHeight="44.0" prefWidth="27.0" text="€">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Accordion layoutX="19.0" layoutY="332.0" prefHeight="250.0">
+        <panes>
+          <TitledPane animated="false" prefHeight="250.0" prefWidth="200.0" text="Servicios Seleccionados">
+               <content>
+                  <ListView fx:id="listSelectHotel" onMouseClicked="#changeServiceToDispoHotel" prefHeight="250.0" prefWidth="200.0" />
+               </content>
+          </TitledPane>
+          <TitledPane animated="false" prefHeight="250.0" prefWidth="200.0" text="Servicios disponibles">
+               <content>
+                  <ListView fx:id="listDispoHotel" onMouseClicked="#changeServiceToSelectHotel" prefHeight="250.0" prefWidth="200.0" />
+               </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+      <Accordion layoutX="295.0" layoutY="332.0" prefHeight="250.0">
+         <panes>
+            <TitledPane animated="false" prefHeight="250.0" prefWidth="200.0" text="Servicios Seleccionados">
+               <content>
+                  <ListView fx:id="listSelectHab" onMouseClicked="#changeServiceToDispoHab" prefHeight="250.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" prefHeight="250.0" prefWidth="200.0" text="Servicios disponibles">
+               <content>
+                  <ListView fx:id="listDispoHab" onMouseClicked="#changeServicetoSelectHabitacion" prefHeight="250.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+         </panes>
+      </Accordion>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="296.0" prefHeight="27.0" prefWidth="238.0" text="Hotel">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="296.0" layoutY="296.0" prefHeight="27.0" prefWidth="238.0" text="Habitación">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="msgExito" layoutX="176.0" layoutY="526.0" prefHeight="63.0" prefWidth="198.0" text="Reserva Realizada compruebe el correo" textAlignment="CENTER" textFill="#296116" visible="false" wrapText="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" layoutX="455.0" layoutY="148.0" onMouseClicked="#setInfoDates" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #0000DB; -fx-background-radius: 50px;" text="i" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
    </children>
+
 </AnchorPane>

@@ -39,11 +39,11 @@ public class Registro implements Comparable<Registro>{
 	
 	/**
 	 * Constructor de registro
-	 * @param id
-	 * @param habitacion
-	 * @param usuario
-	 * @param precio
-	 * @param fecha
+	 * @param id del registro
+	 * @param habitacion relacionada con el registro
+	 * @param usuario relacionado con el registro
+	 * @param precio de la reserva
+	 * @param fecha del registro
 	 */
 	public Registro(int id, Habitacion habitacion, Usuario usuario, double precio, Date fecha) {
 		this.id = id;

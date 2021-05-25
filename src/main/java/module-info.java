@@ -9,7 +9,8 @@ module edu.fpdual.hotelesapp.hotelesapp {
 	requires activation;
 	requires lombok;
 	//requires org.mockito;
-
+	requires itextpdf;
+	requires java.desktop;
     opens edu.fpdual.hotelesapp.interfaz to javafx.fxml;
     exports edu.fpdual.hotelesapp.interfaz;
 }

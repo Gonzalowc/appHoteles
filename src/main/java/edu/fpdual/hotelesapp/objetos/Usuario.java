@@ -41,12 +41,12 @@ public class Usuario implements Comparable<Usuario>{
 	
 	/**
 	 * Constructor de Usuario
-	 * @param id
-	 * @param nombre
-	 * @param pass
-	 * @param dni
-	 * @param telefono
-	 * @param email
+	 * @param id de usuario
+	 * @param nombre de usuario
+	 * @param pass contraseña de usuario
+	 * @param dni del usuario
+	 * @param telefono del usuario
+	 * @param email del usuario
 	 */
 	public Usuario(int id, String nombre, String pass, String dni, String telefono, String email) {
 		this.id = id;
@@ -64,8 +64,8 @@ public class Usuario implements Comparable<Usuario>{
 	public Usuario(ResultSet result) {
 		try {
 			this.id = result.getInt("id");
-			this.nombre = result.getString("nombre");
-			this.pass = result.getString("pass");
+			this.nombre = result.getString("nombre_usuario");
+			this.pass = null;
 			this.dni = result.getString("dni");
 			this.telefono = result.getString("telefono");
 			this.email = result.getString("email");

@@ -26,6 +26,7 @@ public class ManejadorUsuario {
 		ManejadorUsuario mu = new ManejadorUsuario();
 
 		System.out.println(mu.existeUsuario(con, "pepe"));
+		System.out.println(mu.logging(con,"Gonzalo", "1234"));
 	}
 
 	/**
@@ -43,9 +44,8 @@ public class ManejadorUsuario {
 			String sql = "SELECT * FROM Usuario WHERE nombre_usuario='" + usuario + "' AND password='" + passwd
 					+ "' AND activo=1";
 			ResultSet result = stmt.executeQuery(sql);
-			result.beforeFirst();
 			result.next();
-
+			System.out.println("NombreUser"+result.getString("nombre_usuario"));
 			String user = result.getString("nombre_usuario");
 			String pass = result.getString("password");
 			if (user.equals(usuario) && pass.equals(passwd)) {
@@ -69,7 +69,7 @@ public class ManejadorUsuario {
 	public Usuario logging(Conector con, String usuario, String passwd) {
 		Connection con2 = con.getMySQLConnection();
 		if (validarUsuario(con, usuario, passwd)) {
-			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND password=?";
+			String sql = "SELECT id,nombre_usuario,dni,telefono,email FROM Usuario WHERE nombre_usuario =? AND password=?";
 
 			try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 

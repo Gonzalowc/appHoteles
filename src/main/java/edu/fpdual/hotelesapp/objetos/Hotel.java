@@ -46,10 +46,10 @@ public class Hotel implements Comparable<Hotel> {
 	
 	/**
 	 * Constructor de Hotel
-	 * @param nombre
-	 * @param localizacion
-	 * @param estrellas
-	 * @param descripcion
+	 * @param nombre del hotel
+	 * @param localizacion del hotel
+	 * @param estrellas del hotel
+	 * @param descripcion del hotel
 	 */
 	public Hotel(String nombre, String localizacion, int estrellas, String descripcion) {
 		this.id = 0;

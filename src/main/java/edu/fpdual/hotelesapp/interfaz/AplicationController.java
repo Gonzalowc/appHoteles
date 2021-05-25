@@ -7,6 +7,7 @@ import java.util.List;
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.objetos.Hotel;
+import edu.fpdual.hotelesapp.objetos.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +30,20 @@ public class AplicationController {
 	 */
 	@FXML
 	private BorderPane myPanel;
-
+	private FXMLLoader aplicationLoader;
+	
+	private Usuario user;
+	
+	public void setUsuario(Usuario usuario) {
+		this.user = usuario;
+	}
+	public Usuario getUsuario() {
+		return user;
+	}
+	public void setAplicationLoader(FXMLLoader loader) {
+		aplicationLoader = loader;
+	}
+	
 	/**
 	 * Metodo para cambiar a la vista de Hoteles
 	 * @param event Evento de click
@@ -38,23 +52,27 @@ public class AplicationController {
 	@FXML
 	public void toHotelesVista(ActionEvent event) throws IOException {
 		myPanel.setCenter(listaHoteles());
+		myPanel.setRight(null);
 		
 	}
 
 	@FXML
 	public void toReservaRoomVista(ActionEvent event) throws IOException{
 		myPanel.setCenter(rellenarMenuReservaRoom());
+		myPanel.setRight(null);
 		
 	}
 	
 	@FXML
 	public void toNewRoomVista(ActionEvent event) throws IOException{
 		myPanel.setCenter(rellenarMenuNewRoom());
+		myPanel.setRight(null);
 	}
 	
 	@FXML
 	public void toNewHotelVista(ActionEvent event) throws IOException{
 		myPanel.setCenter(App.loadFXML("insertHotel"));	
+		myPanel.setRight(null);
 	}
 	
 	
@@ -94,6 +112,8 @@ public class AplicationController {
 						CardHotelController chc = loader.<CardHotelController>getController();
 						//usamos sus metodos
 						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
+						System.out.println(user);
+						chc.setUser(user);
 						chc.setParentPane(myPanel);
 						grid.add(aux, j, i, 1, 1);
 					} catch (IOException e) {
@@ -156,7 +176,6 @@ public class AplicationController {
 						//usamos sus metodos
 						irc.setListHotel(h1);
 				}
-				
 				return aux;
 				
 			}catch(IOException e) {

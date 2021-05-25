@@ -9,6 +9,7 @@ import edu.fpdual.hotelesapp.manejadordb.ManejadorHabitacion;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
 import edu.fpdual.hotelesapp.objetos.Hotel;
+import edu.fpdual.hotelesapp.objetos.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -18,7 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.StageStyle;
 /**
  * Clase Card Hotel Controller
  * @author angela.bonilla.gomez
@@ -39,6 +39,16 @@ public class CardHotelController {
 	private AnchorPane paneCardHotel;
 
 	private BorderPane parentPane;
+	
+	private AnchorPane reservaPane;
+	
+	private Usuario user;
+	
+	private Habitacion habitacion;
+	
+	public void setUser(Usuario usuario) {
+		this.user = usuario;
+	}
 
 	/**
 	 * Metodo para asignar la ventana padre
@@ -46,6 +56,16 @@ public class CardHotelController {
 	 */
 	public void setParentPane(BorderPane borderPane) {
 		this.parentPane = borderPane;
+	}
+	/**
+	 * Metodo para asignar la ventana de reserva.
+	 * @param borderPane Ventana Reserva.
+	 * @throws IOException 
+	 */
+	public void setReservaPane() throws IOException {
+			AnchorPane panelLateral;
+			panelLateral = (AnchorPane) App.loadFXML("reservaRoom");
+			this.reservaPane = panelLateral;
 	}
 
 	/**
@@ -81,9 +101,11 @@ public class CardHotelController {
 	
 	/**
 	 * Metodo para crear la lista de habitaciones de un hotel y cambiar la vista 
+	 * @throws IOException 
 	 */
 	@FXML
-	public void listaHabitaciones() {
+	public void listaHabitaciones() throws IOException {
+		setReservaPane();
 		int idHotel = Integer.parseInt(lblCodeHotel.getText());
 		Conector con = new Conector();
 		Connection con2 = con.getMySQLConnection();
@@ -91,7 +113,6 @@ public class CardHotelController {
 		grid.setAlignment(Pos.TOP_CENTER);
 		List<Habitacion> habitaciones = new ManejadorHabitacion().listaHabitacionesHotel(con, idHotel);
 		for (int i = 0; i < habitaciones.size(); i++) {
-			try {
 				Habitacion hab = habitaciones.get(i);
 
 				// crear la clase que controla el archivo FXML
@@ -99,22 +120,18 @@ public class CardHotelController {
 				// creamos el panel a partir del loader
 				Pane aux = (Pane) loader.load();
 				// creamos el objeto controlador que queremos usar
-				CardRoomController chc = loader.<CardRoomController>getController();
+				CardRoomController cardRoomController = loader.<CardRoomController>getController();
 				// usamos sus metodos
-				chc.rellenarCard(hab);
-
+				cardRoomController.rellenarCard(hab,Integer.parseInt(lblCodeHotel.getText()));
+				cardRoomController.setParentAplication(parentPane);
+				cardRoomController.setUsuario(user);
+				cardRoomController.setReservaPane(reservaPane);
 				grid.add(aux, 0, i, 1, 1);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			ScrollPane scroll = new ScrollPane();
 			scroll.setContent(grid);
 			parentPane.setCenter(scroll);
-			//return scroll;
+			parentPane.setRight(reservaPane);
 		}
-
-		//return null;
 	}
 
 }

@@ -136,7 +136,7 @@ public class Sender {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// new Sender().send("mi-email", "destinatario", "Asunto","Cuerpo","ruta-archivo");
-		new Sender().send("hotelesapp@gmail.com", "alum.gwaackc.2020@iesalixar.org", "Prueba 2", "<h1>Probando el envio de correos con Java</h1>", "C:\\Users\\angela.bonilla.gomez\\OneDrive - Accenture\\Desktop\\Angela\\Documentacion\\enviarCorreoJava.txt");
+		new Sender().send("hotelesapp@gmail.com", "user-registrado", "Prueba 2", "Reserva en AG2", "ruta del archivo a enviar");
 
 	}
 
