@@ -131,12 +131,12 @@
 				<version>3.2.0</version>
 				<configuration>
 					<sourceFileExcludes>
-      					<sourceFileExclude>**/module-info.java</sourceFileExclude>
-    				</sourceFileExcludes>
-    				<doctitle>My API for ${project.name} ${project.version}</doctitle>
-	          		<windowtitle>My API for ${project.name} ${project.version}</windowtitle>
-					<testDoctitle>My Test API for ${project.name} ${project.version}</testDoctitle> 
-	          		<testWindowtitle>My Test API for ${project.name} ${project.version}</testWindowtitle> 	
+						<sourceFileExclude>**/module-info.java</sourceFileExclude>
+					</sourceFileExcludes>
+					<doctitle>My API for ${project.name} ${project.version}</doctitle>
+					<windowtitle>My API for ${project.name} ${project.version}</windowtitle>
+					<testDoctitle>My Test API for ${project.name} ${project.version}</testDoctitle>
+					<testWindowtitle>My Test API for ${project.name} ${project.version}</testWindowtitle>
 				</configuration>
 				<executions>
 					<execution>
@@ -149,4 +149,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.2.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
