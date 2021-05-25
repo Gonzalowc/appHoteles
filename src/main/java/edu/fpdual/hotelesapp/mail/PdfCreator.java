@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 
@@ -60,19 +61,27 @@ public class PdfCreator {
 			 */
 			Path pathHeader = Paths.get(getClass().getResource("/img/header.jpg").toURI());
 			Image header = Image.getInstance(pathHeader.toAbsolutePath().toString());
-			header.scalePercent(10);
-			header.setScaleToFitHeight(true);
-			header.setAlignment(Chunk.HEADER);
+			
+			header.scaleAbsoluteWidth(600);
+			header.scaleAbsoluteHeight(55);
 			
 			documento.add(header);
+			
+			/**
+			 * Agregamos espacios en blanco
+			 */
+			Paragraph espacio = new Paragraph(" ");
 			
 			/**
 			 * Agregamos el texto que queremos que aparezca
 			 */
 			Paragraph parrafo = new Paragraph();
+			
+			parrafo.add(espacio);
 			parrafo.setAlignment(Paragraph.ALIGN_JUSTIFIED);
 			parrafo.add("¡GRACIAS por confiar en nosotros! Su reserva se ha realizado con ÉXITO, a continuación tiene todos los datos.");
 			parrafo.setFont(FontFactory.getFont("Arial", 18, Font.BOLD, BaseColor.DARK_GRAY));
+			parrafo.add(espacio);
 			
 			documento.add(parrafo);
 			
@@ -81,73 +90,121 @@ public class PdfCreator {
 			 */
 			Path path = Paths.get(getClass().getResource("/img/hotel.png").toURI());
 			Image img = Image.getInstance(path.toAbsolutePath().toString());
+			
 			img.scalePercent(20);
 			img.setScaleToFitHeight(true);
 			img.setAlignment(Chunk.ALIGN_CENTER);
+			img.setBorder(Image.BOX);
+			img.setBorderWidth(7);
+			img.setBorderColor(BaseColor.DARK_GRAY);
 			
 			documento.add(img);
 			
 			/**
-			 * Creamos la tabla que veremos en el pdf
+			 * Creamos la tabla con los datos de la Reserva y le añadimos el tamaño y los espacios
 			 */
-			PdfPTable tabla = new PdfPTable(13);
-			tabla.addCell("ID de registro");
-			tabla.addCell("Hotel");
-			tabla.addCell("Localizacion");
-			tabla.addCell("Estrellas");
-			tabla.addCell("Habitacion");
-			tabla.addCell("Personas");
-			tabla.addCell("Entrada");
-			tabla.addCell("Salida");
-			tabla.addCell("Precio");
-			tabla.addCell("Usuario");
-			tabla.addCell("DNI");
-			tabla.addCell("tlf");
-			tabla.addCell("email");
+			PdfPTable tablaHotel = new PdfPTable(9);
+			tablaHotel.addCell("ID de registro");
+			tablaHotel.addCell("Hotel");
+			tablaHotel.addCell("Ubicación");
+			tablaHotel.addCell("Estrellas");
+			tablaHotel.addCell("Habitación");
+			tablaHotel.addCell("Personas");
+			tablaHotel.addCell("Entrada");
+			tablaHotel.addCell("Salida");
+			tablaHotel.addCell("Precio");
+			
+			
+			tablaHotel.setSpacingBefore(20);
+			tablaHotel.setSpacingAfter(20);
+			tablaHotel.setWidthPercentage(110);
+			
+
+			/**
+			 * Realizamos las consultas de la tabla
+			 */
+			PreparedStatement statement = con2.prepareStatement("SELECT id,nombreHotel,localizacion,Estrellas,id_habitacion,num_personas,fecha_entrada,fecha_salida,precio FROM Registro WHERE id = "+id_registro);
 			
 			/**
-			 * Realizamos las consultas de las cuatro tablas
-			 */
-			PreparedStatement statement = con2.prepareStatement("SELECT * FROM Registro WHERE id = "+id_registro);
-			
-			/**
-			 * Ejecutamos las consultas
+			 * Ejecutamos la consulta
 			 */
 			ResultSet rs = statement.executeQuery();
 			
 			/**
-			 * Indicamos las filas que corresponden a cada columna de usuario y añadimos al documento
+			 * Indicamos las filas que corresponden a cada columna y añadimos al documento
 			 */
 			if (rs.next()) {
 				do {
-					tabla.addCell(rs.getString(1));
-					tabla.addCell(rs.getString(2));
-					tabla.addCell(rs.getString(3));
-					tabla.addCell(rs.getString(4));
-					tabla.addCell(rs.getString(5));
-					tabla.addCell(rs.getString(6));
-					tabla.addCell(rs.getString(7));
-					tabla.addCell(rs.getString(8));
-					tabla.addCell(rs.getString(9));
-					tabla.addCell(rs.getString(10));
-					tabla.addCell(rs.getString(11));
-					tabla.addCell(rs.getString(12));
-					tabla.addCell(rs.getString(13));
+					tablaHotel.addCell(rs.getString(1));
+					tablaHotel.addCell(rs.getString(2));
+					tablaHotel.addCell(rs.getString(3));
+					tablaHotel.addCell(rs.getString(4));
+					tablaHotel.addCell(rs.getString(5));
+					tablaHotel.addCell(rs.getString(6));
+					tablaHotel.addCell(rs.getString(7));
+					tablaHotel.addCell(rs.getString(8));
+					tablaHotel.addCell(rs.getString(9));
 				} while(rs.next());
-				documento.add(tabla);
+				documento.add(tablaHotel);
+			}
+			
+			/**
+			 * Agregamos la tabla con los datos del Usuario
+			 */
+			PdfPTable tablaUsuario = new PdfPTable(4);
+			tablaUsuario.addCell("Usuario");
+			tablaUsuario.addCell("DNI");
+			tablaUsuario.addCell("Telefono");
+			tablaUsuario.addCell("Email");
+			
+			tablaUsuario.setSpacingAfter(20);
+			tablaUsuario.setWidthPercentage(100);
+			
+			PreparedStatement statement1 = con2.prepareStatement("SELECT nombre_usuario,dni,telefono,email FROM Registro WHERE id = "+id_registro);
+			ResultSet rs1 = statement1.executeQuery();
+			
+			if (rs1.next()) {
+				do {
+					tablaUsuario.addCell(rs1.getString(1));
+					tablaUsuario.addCell(rs1.getString(2));
+					tablaUsuario.addCell(rs1.getString(3));
+					tablaUsuario.addCell(rs1.getString(4));
+				} while(rs1.next());
+				documento.add(tablaUsuario);
 			}
 			
 			/**
 			 * Agregamos mas texto que queremos que aparezca
 			 */
 			Paragraph parrafo2 = new Paragraph();
-			parrafo2.setAlignment(Paragraph.ALIGN_JUSTIFIED);
-			parrafo2.add("Esperamos que tenga una experiencia gratificante. Para cualquier duda o problema contacte con este email.");
-			parrafo2.setFont(FontFactory.getFont("Arial", 18, Font.BOLDITALIC, BaseColor.DARK_GRAY));
 			
+			parrafo2.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+			parrafo2.add("Esperamos que tenga una experiencia gratificante. Para cualquier duda o problema contacte con nosotros. ¡GRACIAS Y HASTA PRONTO!");
+			parrafo2.setFont(FontFactory.getFont("Arial", 18, Font.BOLDITALIC, BaseColor.DARK_GRAY));
 			
 			documento.add(parrafo2);
 			
+			/**
+			 * Agregamos el correo con el que pueden contactar
+			 */
+			Font fuente = FontFactory.getFont("Arial", 12, Font.ITALIC, new BaseColor(0, 0, 255));
+			Anchor link = new Anchor("Haga click aquí para contactar.",fuente);
+			link.setReference("mailto:mihotelesapp@gmail.com");
+			
+			documento.add(link);
+			
+			/**
+			 * Imagen de footer
+			 */
+			Path path2 = Paths.get(getClass().getResource("/img/gracias.png").toURI());
+			Image footer = Image.getInstance(path2.toAbsolutePath().toString());
+			
+			footer.scalePercent(30);
+			footer.setScaleToFitHeight(true);
+			footer.setAlignment(Chunk.ALIGN_RIGHT);
+			footer.setAlignment(Chunk.ALIGN_BOTTOM);
+			
+			documento.add(footer);
 			
 			/**
 			 * Cerramos el documento
