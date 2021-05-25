@@ -96,8 +96,7 @@ public class Servicio implements Comparable<Servicio> {
 	 */
 	@Override
 	public String toString() {
-		return "Servicio [id=" + id + ", nombre_servicio=" + nombre_servicio + ", precio=" + precio + ", tipo=" + tipo
-				+ "]";
+		return nombre_servicio+" - " + precio+"€";
 	}
 	
 	/**

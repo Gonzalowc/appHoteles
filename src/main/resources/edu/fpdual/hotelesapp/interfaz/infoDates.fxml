@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="329.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.InfoDatesController">
+   <children>
+   	  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="5.0" prefHeight="57.0" prefWidth="354.0" text="Fechas Ocupadas" textFill="#000079">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listaFechas" layoutY="68.0" prefHeight="250.0" prefWidth="355.0" />
+   </children>
+</AnchorPane>

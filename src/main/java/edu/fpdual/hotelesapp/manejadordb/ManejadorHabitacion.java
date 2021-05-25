@@ -14,6 +14,7 @@ import java.util.Date;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
+import edu.fpdual.hotelesapp.objetos.Usuario;
 
 /**
  * Clase Manejador Habitacion para realizar todas las consultas en cuanto a habitaciones
@@ -184,5 +185,18 @@ public class ManejadorHabitacion {
 		}		
 		return null;
 	}
-	
+	public void alquilarHabitacion(Conector con,LocalDate entrada, LocalDate salida, Habitacion hab,Usuario user) {
+		Connection con2 = con.getMySQLConnection();
+		String sql = "UPDATE Habitacion SET fecha_entrada=?, fecha_salida=?, id_usuario=? WHERE id=?";
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			stmt.setString(1,entrada.getYear()+"-"+entrada.getMonth().getValue()+"-"+entrada.getDayOfMonth());
+			stmt.setString(2,salida.getYear()+"-"+salida.getMonth().getValue()+"-"+salida.getDayOfMonth());
+			stmt.setInt(3, user.getId());
+			stmt.setInt(4, hab.getId());
+			System.out.println(stmt.executeUpdate());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

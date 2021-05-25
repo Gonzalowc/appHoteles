@@ -21,12 +21,13 @@ public class ManejadorHotelServicio {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ManejadorHotelServicio mhs = new ManejadorHotelServicio();
-		Conector con = new Conector();
-		Hotel h = new Hotel("", "", 0, "");
-		h.setId(1);
+		//ManejadorHotelServicio mhs = new ManejadorHotelServicio();
+		//Conector con = new Conector();
+		//Hotel h = new Hotel("", "", 0, "");
+		//h.setId(1);
 		Servicio s = new Servicio(1, "", 0, TipoServicio.HOTEL);
-		System.out.println(mhs.perteneceServicioHotel(con, h, s));
+		System.out.println(s.getTipo().name());
+		//System.out.println(mhs.perteneceServicioHotel(con, h, s));
 	}
 
 	/**
@@ -61,13 +62,28 @@ public class ManejadorHotelServicio {
 	/**
 	 * Metodo para añadir un Servicio a un Hotel
 	 * @param con para conseguir la conexion
-	 * @param hotel objeto al que queremos añadir el servicio
 	 * @param servicio objeto que queremos añadir al hotel
 	 * @return true si se añade correctamente, false en caso contrario
 	 */
-	public boolean addServicioHotel(Conector con, Hotel hotel, Servicio servicio) {
-
+	public boolean addServicioHotel(Conector con, Servicio servicio) {
+		if(servicio.getTipo().equals(TipoServicio.HOTEL)) {
+			Connection con2 = con.getMySQLConnection();
+		String sql ="INSERT INTO Servicio (`nombre_servicio`, `precio`, `tipo`) VALUES(?, ?, ?)";
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			stmt.setString(1,servicio.getNombre_servicio());
+			stmt.setDouble(2, servicio.getPrecio());
+			stmt.setString(3, servicio.getTipo().name());
+			stmt.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
+		}else {
+			return false;
+		}
+		
 	}
 
 	/**

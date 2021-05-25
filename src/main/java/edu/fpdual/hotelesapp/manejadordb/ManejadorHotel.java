@@ -219,7 +219,7 @@ public class ManejadorHotel {
 	
 	public Hotel getHotelId(Conector con, int id) {
 		Connection con2 = con.getMySQLConnection();
-		String sql = "SELECT *  FROM hotel WHERE id=?";
+		String sql = "SELECT *  FROM Hotel WHERE id=?";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
 			stmt.setInt(1,id);
 			ResultSet result = stmt.executeQuery();
