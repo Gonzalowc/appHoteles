@@ -170,7 +170,6 @@ public class ReservaRoomController {
 		public void updateItem(LocalDate date, boolean empty) {
 			super.updateItem(date, empty);
 			LocalDate today = LocalDate.now();
-			System.out.print("hola ");
 			setDisable(empty || date.compareTo(today) < 0);
 			
 		}
