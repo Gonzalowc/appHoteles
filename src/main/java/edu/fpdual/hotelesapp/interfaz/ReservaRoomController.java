@@ -32,6 +32,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ReservaRoomController {
@@ -119,7 +120,7 @@ public class ReservaRoomController {
 		System.out.println(habitacion);
 		dateEntry.setShowWeekNumbers(false);
 		dateLeft.setShowWeekNumbers(false);
-		disablepastDate(dateEntry);
+		disablePastDate(dateEntry);
 		setHotel();
 		serviciosSeleccionadosHotel();
 		serviciosSeleccionadosHabitacion();
@@ -163,7 +164,7 @@ public class ReservaRoomController {
 		}
 	}
 	
-	public void disablepastDate(DatePicker dp) {
+	public void disablePastDate(DatePicker dp) {
 		
 		dp.setDayCellFactory(picker -> new DateCell() {
 			
@@ -206,17 +207,9 @@ public class ReservaRoomController {
 		System.out.println("Set infoDates");
 		Scene escena = new Scene(aux);
 		ButtonType btn_ok = new ButtonType("OK");
-		if(padre.getScene()==null) {
-			padre.setScene(escena);
-			padre.close();
-			padre.show();
-		}else {
-			if(!padre.isShowing()) {
-				padre.show();
-			}
-		}
-		
-		
+		padre.setScene(escena);
+		padre.setAlwaysOnTop(true);
+		padre.showAndWait();
 	}
 	
 	public void serviciosSeleccionadosHotel() {

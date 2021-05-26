@@ -39,21 +39,27 @@ public class ManejadorUsuario {
 	public boolean validarUsuario(Conector con, String usuario, String passwd) {
 
 		Connection con2 = con.getMySQLConnection();
-
-		try (Statement stmt = con2.createStatement()) {
-			String sql = "SELECT * FROM Usuario WHERE nombre_usuario='" + usuario + "' AND password='" + passwd
-					+ "' AND activo=1";
-			ResultSet result = stmt.executeQuery(sql);
-			result.next();
-			System.out.println("NombreUser"+result.getString("nombre_usuario"));
-			String user = result.getString("nombre_usuario");
-			String pass = result.getString("password");
-			if (user.equals(usuario) && pass.equals(passwd)) {
-				return true;
-			} else {
+		String sql = "SELECT * FROM Usuario WHERE nombre_usuario=? AND password=? AND activo=1";
+		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
+			stmt.setString(1, usuario);
+			stmt.setString(2, passwd);
+			ResultSet result = stmt.executeQuery();
+			if(result.next()) {
+				System.out.println("NombreUser"+result.getString("nombre_usuario"));
+				String user = result.getString("nombre_usuario");
+				String pass = result.getString("password");
+				if (user.equals(usuario) && pass.equals(passwd)) {
+					return true;
+				} else {
+					return false;
+				}
+			}else {
 				return false;
 			}
+			
+			
 		} catch (SQLException e) {
+			System.out.println("ValidarUsuario");
 			System.out.println(e.getMessage());
 		}
 		return false;
@@ -112,7 +118,6 @@ public class ManejadorUsuario {
 			stmt.setString(1, nombre);
 
 			ResultSet result = stmt.executeQuery();
-			result.beforeFirst();
 			if (result.next()) {
 				System.out.println(result.getString("num"));
 				if (result.getInt("num") > 0) {
