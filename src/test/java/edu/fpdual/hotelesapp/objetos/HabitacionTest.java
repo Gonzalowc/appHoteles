@@ -1,5 +1,6 @@
 package edu.fpdual.hotelesapp.objetos;
 
+import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,24 +9,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Date;
 import java.util.ArrayList;
 
-//import java.sql.ResultSet;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 
-//@RunWith(MockitoJUnitRunner.class)
+
+@RunWith(MockitoJUnitRunner.class)
 class HabitacionTest {
 	
-	/*
-	 * @InjectMocks private Habitacion h1;
-	 * 
-	 * @Mock private ResultSet result;
-	 */
+	
+	  @InjectMocks private Habitacion h1;
+	  
+	  @Mock private ResultSet result;
+	 
 	@Test
 	public void testToString() {
 		Habitacion habitacion = new Habitacion(null, 2, null, null, false, 30, null);
@@ -171,11 +174,15 @@ class HabitacionTest {
 	  
 	
 	
-	/*
-	 * @Test public void testConstructorResultSet() {
-	 * when(result.getString("")).thenReturn(new int[] { 1, 2, 3, 4, 5 });
-	 * when(result.getInt("id")).thenReturn(0); }
-	 */
+	
+	  @Test public void testConstructorResultSet() throws SQLException {
+	 
+	  when(result.getInt("id")).thenReturn(0);
+	  
+	  
+	  Habitacion h = new Habitacion(result);
+	  }
+	 
 
 	
 }
