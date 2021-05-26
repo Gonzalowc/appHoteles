@@ -3,7 +3,6 @@ package edu.fpdual.hotelesapp.interfaz;
 import java.io.IOException;
 
 import edu.fpdual.hotelesapp.conector.Conector;
-import edu.fpdual.hotelesapp.events.MD5;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorUsuario;
 import edu.fpdual.hotelesapp.objetos.Usuario;
 import javafx.fxml.FXML;
@@ -56,8 +55,8 @@ public class LoginController {
 	public void validar() throws IOException {
 		Conector con = new Conector();
 		ManejadorUsuario mu = new ManejadorUsuario();
-		if (mu.validarUsuario(con, txtUsuario.getText(), MD5.toMD5(txtPassword.getText()) )) {
-			Usuario user = mu.logging(con, txtUsuario.getText(), MD5.toMD5(txtPassword.getText()));
+		if (mu.validarUsuario(con, txtUsuario.getText(), txtPassword.getText())) {
+			Usuario user = mu.logging(con, txtUsuario.getText(), txtPassword.getText());
 			msgError.setVisible(false);
 			txtUsuario.setText("");
 			txtPassword.setText("");
