@@ -25,6 +25,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import edu.fpdual.hotelesapp.conector.Conector;
+import edu.fpdual.hotelesapp.manejadordb.ManejadorRegistro;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -120,34 +121,35 @@ public class PdfCreator {
 			tablaHotel.setWidthPercentage(110);
 			
 
-			/**
-			 * Realizamos las consultas de la tabla
-			 */
-			PreparedStatement statement = con2.prepareStatement("SELECT id,nombreHotel,localizacion,Estrellas,id_habitacion,num_personas,fecha_entrada,fecha_salida,precio FROM Registro WHERE id = "+id_registro);
-			
-			/**
-			 * Ejecutamos la consulta
-			 */
-			ResultSet rs = statement.executeQuery();
-			
-			/**
-			 * Indicamos las filas que corresponden a cada columna y añadimos al documento
-			 */
-			if (rs.next()) {
-				do {
-					tablaHotel.addCell(rs.getString(1));
-					tablaHotel.addCell(rs.getString(2));
-					tablaHotel.addCell(rs.getString(3));
-					tablaHotel.addCell(rs.getString(4));
-					tablaHotel.addCell(rs.getString(5));
-					tablaHotel.addCell(rs.getString(6));
-					tablaHotel.addCell(rs.getString(7));
-					tablaHotel.addCell(rs.getString(8));
-					tablaHotel.addCell(rs.getString(9));
-				} while(rs.next());
-				documento.add(tablaHotel);
-			}
-			
+//			/**
+//			 * Realizamos las consultas de la tabla
+//			 */
+//			PreparedStatement statement = con2.prepareStatement("SELECT id,nombreHotel,localizacion,Estrellas,id_habitacion,num_personas,fecha_entrada,fecha_salida,precio FROM Registro WHERE id = "+id_registro);
+//			
+//			/**
+//			 * Ejecutamos la consulta
+//			 */
+//			ResultSet rs = statement.executeQuery();
+//			
+//			/**
+//			 * Indicamos las filas que corresponden a cada columna y añadimos al documento
+//			 */
+//			while (rs.next()) {
+//				
+//					tablaHotel.addCell(rs.getString(1));
+//					tablaHotel.addCell(rs.getString(2));
+//					tablaHotel.addCell(rs.getString(3));
+//					tablaHotel.addCell(rs.getString(4));
+//					tablaHotel.addCell(rs.getString(5));
+//					tablaHotel.addCell(rs.getString(6));
+//					tablaHotel.addCell(rs.getString(7));
+//					tablaHotel.addCell(rs.getString(8));
+//					tablaHotel.addCell(rs.getString(9));
+//				
+//			}
+			ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
+			manejadorRegistro.setDataTablaHotel(con, tablaHotel, id_registro);
+			documento.add(tablaHotel);
 			/**
 			 * Agregamos la tabla con los datos del Usuario
 			 */
@@ -160,19 +162,20 @@ public class PdfCreator {
 			tablaUsuario.setSpacingAfter(20);
 			tablaUsuario.setWidthPercentage(100);
 			
-			PreparedStatement statement1 = con2.prepareStatement("SELECT nombre_usuario,dni,telefono,email FROM Registro WHERE id = "+id_registro);
-			ResultSet rs1 = statement1.executeQuery();
-			
-			if (rs1.next()) {
-				do {
-					tablaUsuario.addCell(rs1.getString(1));
-					tablaUsuario.addCell(rs1.getString(2));
-					tablaUsuario.addCell(rs1.getString(3));
-					tablaUsuario.addCell(rs1.getString(4));
-				} while(rs1.next());
-				documento.add(tablaUsuario);
-			}
-			
+//			PreparedStatement statement1 = con2.prepareStatement("SELECT nombre_usuario,dni,telefono,email FROM Registro WHERE id = "+id_registro);
+//			ResultSet rs1 = statement1.executeQuery();
+//			
+//			if (rs1.next()) {
+//				do {
+//					tablaUsuario.addCell(rs1.getString(1));
+//					tablaUsuario.addCell(rs1.getString(2));
+//					tablaUsuario.addCell(rs1.getString(3));
+//					tablaUsuario.addCell(rs1.getString(4));
+//				} while(rs1.next());
+//				
+//			}
+			manejadorRegistro.setDataTableUser(con, tablaUsuario, id_registro);
+			documento.add(tablaUsuario);
 			/**
 			 * Agregamos mas texto que queremos que aparezca
 			 */
@@ -213,7 +216,7 @@ public class PdfCreator {
 			//JOptionPane.showMessageDialog(null,"PDF creado"); 
 			
 			return rutaCompleta;
-		} catch (IOException| DocumentException | SQLException | URISyntaxException e) {
+		} catch (IOException| DocumentException | URISyntaxException e) {
 			System.out.println(e.getMessage());
 		}
 		return null;
@@ -224,7 +227,7 @@ public class PdfCreator {
 		try {
 			PdfCreator pdf = new PdfCreator();
 			Conector con = new Conector();
-			pdf.generarPDF(con,2);
+			pdf.generarPDF(con,1);
 		} catch (URISyntaxException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

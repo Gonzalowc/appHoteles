@@ -185,8 +185,7 @@ public class ManejadorHabitacion {
 		}		
 		return null;
 	}
-	public void alquilarHabitacion(Conector con,LocalDate entrada, LocalDate salida, Habitacion hab,Usuario user) {
-		Connection con2 = con.getMySQLConnection();
+	public void alquilarHabitacion(Connection con2,LocalDate entrada, LocalDate salida, Habitacion hab,Usuario user) {
 		String sql = "UPDATE Habitacion SET fecha_entrada=?, fecha_salida=?, id_usuario=? WHERE id=?";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
 			stmt.setString(1,entrada.getYear()+"-"+entrada.getMonth().getValue()+"-"+entrada.getDayOfMonth());

@@ -1,6 +1,9 @@
 package edu.fpdual.hotelesapp.interfaz;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -9,9 +12,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import edu.fpdual.hotelesapp.conector.Conector;
+import edu.fpdual.hotelesapp.mail.PdfCreator;
+import edu.fpdual.hotelesapp.mail.Sender;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHabitacion;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorRegistro;
+import edu.fpdual.hotelesapp.manejadordb.ManejadorRelHabitacionServicio;
+import edu.fpdual.hotelesapp.manejadordb.ManejadorRelHotelServicio;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorServicio;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
 import edu.fpdual.hotelesapp.objetos.Hotel;
@@ -32,84 +39,81 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ReservaRoomController {
 	@FXML
 	private ListView<Servicio> listDispoHotel;
-	
+
 	@FXML
 	private ListView<Servicio> listSelectHotel;
-	
+
 	@FXML
 	private ListView<Servicio> listDispoHab;
-	
+
 	@FXML
 	private ListView<Servicio> listSelectHab;
-	
+
 	@FXML
 	private Label msgExito;
-	
+
 	@FXML
 	private Label info;
-	
+
 	@FXML
 	private Label lblIdHotel;
-	
+
 	@FXML
 	private TextField txtNumPers;
-	
+
 	@FXML
 	private Label lblEntry;
-	
+
 	@FXML
 	private DatePicker dateEntry;
-	
+
 	@FXML
 	private Label lblLeft;
-	
+
 	@FXML
 	private DatePicker dateLeft;
-	
+
 	@FXML
 	private TextField txtPrice;
-	
+
 	@FXML
 	private TextField txtUser;
-	
+
 	@FXML
 	private CheckBox chkBusy;
-	
+
 	@FXML
 	private MenuButton selectBtnHotel;
-	
+
 	@FXML
 	private Label lblCorrectInsert;
-	
+
 	@FXML
 	private Label lblErrorInsert;
-	
+
 	@FXML
 	private Label infoHotel;
-	
+
 	private Habitacion habitacion;
 	private Usuario user;
 	private Stage padre = new Stage();
-	
-	
-	
+
 	@FXML
 	public void disabledateBeforeEntry(ActionEvent event) throws IOException {
 		dateLeft.setDayCellFactory(picker -> new DateCell() {
 			public void updateItem(LocalDate date, boolean empty) {
 				super.updateItem(dateEntry.getValue(), empty);
-				setDisable(empty || date.compareTo(dateEntry.getValue()) < 0 );
+				setDisable(empty || date.compareTo(dateEntry.getValue()) < 0);
 			}
 		});
 	}
-	
-	public void setData(Habitacion hab,int idHotel, int NumPersonas, double price, Usuario user) {
+
+	public void setData(Habitacion hab, int idHotel, int NumPersonas, double price, Usuario user) {
 		this.habitacion = hab;
 		lblIdHotel.setText(Integer.toString(idHotel));
 		System.out.println(idHotel);
@@ -125,74 +129,111 @@ public class ReservaRoomController {
 		serviciosSeleccionadosHotel();
 		serviciosSeleccionadosHabitacion();
 	}
-	
-	
+
 	public Date convertToDate(LocalDate localDate) {
-		
+
 		ZonedDateTime zdt = localDate.atStartOfDay(ZoneId.systemDefault());
 		Instant instant = zdt.toInstant();
 		Date date = Date.from(instant);
 		return date;
 	}
-	
+
 	@FXML
-	public void reserva() throws IOException{
+	public void reserva() throws IOException {
 		lblEntry.setStyle(null);
 		lblLeft.setStyle(null);
 		Conector con = new Conector();
 		ArrayList<LocalDate> fechas = new ArrayList<LocalDate>();
 		LocalDate entrada = dateEntry.getValue();
 		LocalDate salida = dateLeft.getValue();
-		while(entrada.compareTo(salida)<=0) {
+		while (entrada.compareTo(salida) <= 0) {
 			entrada = entrada.plusDays(1);
 			fechas.add(entrada);
 		}
-		
+
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
 		ArrayList<LocalDate> registros = manejadorRegistro.getDaysWhenIsOcupped(con, habitacion.getId());
-		if(!fechas.removeAll(registros)) {
-			ManejadorHabitacion manejadorHabitacion = new ManejadorHabitacion();
-		manejadorHabitacion.alquilarHabitacion(con,dateEntry.getValue(),dateLeft.getValue(),habitacion,user);
-		msgExito.setVisible(true);
-		dateLeft.setValue(null);
-		dateEntry.setValue(null);
-		}else {
+		if (!fechas.removeAll(registros)) {
+			Connection con2 = con.getMySQLConnection();
+			try {
+				con2.setAutoCommit(false);
+				ManejadorHabitacion manejadorHabitacion = new ManejadorHabitacion();
+				saveServiciosHabitacion(con2);
+				saveServiciosHotel(con2);
+				manejadorHabitacion.alquilarHabitacion(con2, dateEntry.getValue(), dateLeft.getValue(), habitacion,
+						user);
+				con2.commit();
+				msgExito.setVisible(true);
+				LocalDate diaEntrada = dateEntry.getValue();
+				String serviciosID = Integer.toString(habitacion.getId()) + user.getNombre() + diaEntrada.toString();
+				crearPDFyEnviar(con,serviciosID);
+				dateLeft.setValue(null);
+				dateEntry.setValue(null);
+			} catch (SQLException e) {
+				try {
+					System.out.println("rollback");
+					con2.rollback();
+					dateLeft.setValue(null);
+					dateEntry.setValue(null);
+					lblEntry.setStyle("-fx-text-fill: #D00037;");
+					lblLeft.setStyle("-fx-text-fill: #D00037;");
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				e.printStackTrace();
+			}
+
+		} else {
 			dateLeft.setValue(null);
 			dateEntry.setValue(null);
 			lblEntry.setStyle("-fx-text-fill: #D00037;");
 			lblLeft.setStyle("-fx-text-fill: #D00037;");
 		}
 	}
-	
-	public void disablePastDate(DatePicker dp) {
-		
-		dp.setDayCellFactory(picker -> new DateCell() {
-			
-		public void updateItem(LocalDate date, boolean empty) {
-			super.updateItem(date, empty);
-			LocalDate today = LocalDate.now();
-			setDisable(empty || date.compareTo(today) < 0);
-			
+
+	public int crearPDFyEnviar(Conector con, String serviciosID) {
+		Sender email = new Sender();
+		PdfCreator pdf = new PdfCreator();
+		String ruta;
+		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
+		int id_registro = manejadorRegistro.getIdRegistro(con, serviciosID);
+		try {
+			ruta = pdf.generarPDF(con, id_registro);
+			new Sender().send("hotelesapp@gmail.com", user.getEmail(), "Reserva realizada en AG2",
+					"¡Su reserva se ha realizado con éxito!", ruta);
+		} catch (URISyntaxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return 0;
+	}
+
+	public void disablePastDate(DatePicker dp) {
+
+		dp.setDayCellFactory(picker -> new DateCell() {
+
+			public void updateItem(LocalDate date, boolean empty) {
+				super.updateItem(date, empty);
+				LocalDate today = LocalDate.now();
+				setDisable(empty || date.compareTo(today) < 0);
+
+			}
 		});
 	}
-	
+
 	public void setHotel() {
 		Conector con = new Conector();
 		ManejadorHotel manejadorHotel = new ManejadorHotel();
-		System.out.println("Codigo hotel: "+Integer.parseInt(lblIdHotel.getText()));
+		System.out.println("Codigo hotel: " + Integer.parseInt(lblIdHotel.getText()));
 		Hotel hotel = manejadorHotel.getHotelId(con, Integer.parseInt(lblIdHotel.getText()));
 		System.out.println(hotel);
-		infoHotel.setText(hotel.getNombre()+" - "+hotel.getLocalizacion()+"\n"+hotel.getEstrellas()+" Estrellas");
+		infoHotel.setText(
+				hotel.getNombre() + " - " + hotel.getLocalizacion() + "\n" + hotel.getEstrellas() + " Estrellas");
 	}
-	
-	public void setAccordionDateHabitacionService() {
-		//
-	}
-	
+
 	@FXML
 	public void setInfoDates() throws IOException {
-		
+
 		Conector con = new Conector();
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
 		ArrayList<LocalDate> registros = manejadorRegistro.getDaysWhenIsOcupped(con, habitacion.getId());
@@ -211,7 +252,7 @@ public class ReservaRoomController {
 		padre.setAlwaysOnTop(true);
 		padre.showAndWait();
 	}
-	
+
 	public void serviciosSeleccionadosHotel() {
 		Conector con = new Conector();
 		ManejadorServicio servicioManejador = new ManejadorServicio();
@@ -221,7 +262,7 @@ public class ReservaRoomController {
 			listDispoHotel.getItems().add(serv);
 		}
 	}
-	
+
 	public void serviciosSeleccionadosHabitacion() {
 		Conector con = new Conector();
 		ManejadorServicio servicioManejador = new ManejadorServicio();
@@ -231,59 +272,78 @@ public class ReservaRoomController {
 			listDispoHab.getItems().add(serv);
 		}
 	}
-	
+
+	public void saveServiciosHabitacion(Connection con2) {
+		ManejadorRelHabitacionServicio manejadorHabServ = new ManejadorRelHabitacionServicio();
+		String serviciosID = habitacion.getId() + user.getNombre() + dateEntry.getValue().toString();
+		manejadorHabServ.addConjuntoServiciosHabitacion(con2, habitacion, listSelectHab.getItems(), serviciosID);
+
+	}
+
+	public void saveServiciosHotel(Connection con2) {
+		String serviciosID = habitacion.getId() + user.getNombre() + dateEntry.getValue().toString();
+		ManejadorRelHotelServicio manejadorHotelServ = new ManejadorRelHotelServicio();
+		manejadorHotelServ.addConjuntoServiciosHotel(con2, Integer.parseInt(lblIdHotel.getText()),
+				listSelectHotel.getItems(), serviciosID);
+	}
+
 	@FXML
 	public void changeServiceToSelectHotel(MouseEvent event) throws IOException {
 		Servicio servicio = listDispoHotel.getSelectionModel().getSelectedItem();
 		System.out.println("toSelectHotel");
-		if(servicio!=null) {
+		if (servicio != null) {
 			listDispoHotel.getSelectionModel().clearSelection();
 			listDispoHotel.getItems().remove(getSelectedID(listDispoHotel));
 			listSelectHotel.getItems().add(servicio);
+			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) + servicio.getPrecio())));
 		}
 	}
-	
-	
-	public void changeServiceToDispoHotel(MouseEvent  event) throws IOException{
+
+	public void changeServiceToDispoHotel(MouseEvent event) throws IOException {
 		Servicio servicio = listSelectHotel.getSelectionModel().getSelectedItem();
 		System.out.println("toDispoHotel");
-		if(servicio!=null) {
+		if (servicio != null) {
 			listSelectHotel.getSelectionModel().clearSelection();
 			listSelectHotel.getItems().remove(getSelectedID(listSelectHotel));
 			listDispoHotel.getItems().add(servicio);
+			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) - servicio.getPrecio())));
 		}
 	}
-	
+
 	@FXML
-	public void changeServicetoSelectHabitacion(MouseEvent event) throws IOException{
+	public void changeServicetoSelectHabitacion(MouseEvent event) throws IOException {
 		Servicio servicio = listDispoHab.getSelectionModel().getSelectedItem();
-		if(servicio!=null) {
+		if (servicio != null) {
 			listDispoHab.getSelectionModel().clearSelection();
 			listDispoHab.getItems().remove(getSelectedID(listDispoHab));
 			listSelectHab.getItems().add(servicio);
+			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) + servicio.getPrecio())));
 		}
 	}
-	
+
 	@FXML
-	public void changeServiceToDispoHab(MouseEvent  event) throws IOException{
+	public void changeServiceToDispoHab(MouseEvent event) throws IOException {
 		Servicio servicio = listSelectHab.getSelectionModel().getSelectedItem();
-		if(servicio!=null) {
+		if (servicio != null) {
 			listSelectHab.getSelectionModel().clearSelection();
 			listSelectHab.getItems().remove(getSelectedID(listSelectHab));
 			listDispoHab.getItems().add(servicio);
+			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) - servicio.getPrecio())));
 		}
 	}
-	
+
 	private int getSelectedID(ListView lista) {
 		int selectedID = lista.getItems().size();
-		if(selectedID!=-1) {
-			return selectedID-1;
+		if (selectedID != -1) {
+			return selectedID - 1;
 		}
 		return 0;
 	}
-	
-	//TODO: cuando este activo,que asigne ese objeto a la lista de la habitación.
-	//cuando se haga click en reservar sumar todos los precios de los servicios y añadirlo al precio final de la habitacion.
-	//TODO: tambie hacer los servicios que tiene un determinado hotel, pero a modo de informacion, no se necesita hacer check.
+
+	// TODO: cuando este activo,que asigne ese objeto a la lista de la habitación.
+	// cuando se haga click en reservar sumar todos los precios de los servicios y
+	// añadirlo al precio final de la habitacion.
+	// TODO: tambie hacer los servicios que tiene un determinado hotel, pero a modo
+	// de informacion, no se necesita hacer check.
 
 }

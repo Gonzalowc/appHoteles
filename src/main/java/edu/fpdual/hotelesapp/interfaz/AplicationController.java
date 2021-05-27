@@ -91,10 +91,12 @@ public class AplicationController {
 		
 		GridPane grid = new GridPane();
 		
-		grid.setHgap(100);
-		grid.setVgap(150);
+//		grid.setHgap(100);
+//		grid.setVgap(150);
+		grid.setHgap(10);
+		grid.setVgap(10);
 		grid.setAlignment(Pos.TOP_CENTER);
-		grid.setPadding(new Insets(20, 20, 10, 10));
+		grid.setPadding(new Insets(10, 10, 10, 10));
 		//grid.setId("gridpane");
 		//grid.getStylesheets().add("gridpane");
 		int count = 0;

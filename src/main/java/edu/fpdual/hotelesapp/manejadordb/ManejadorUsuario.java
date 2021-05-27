@@ -40,17 +40,21 @@ public class ManejadorUsuario {
 
 		Connection con2 = con.getMySQLConnection();
 
-		try (Statement stmt = con2.createStatement()) {
-			String sql = "SELECT * FROM Usuario WHERE nombre_usuario='" + usuario + "' AND password='" + passwd
-					+ "' AND activo=1";
-			ResultSet result = stmt.executeQuery(sql);
-			result.next();
-			System.out.println("NombreUser"+result.getString("nombre_usuario"));
-			String user = result.getString("nombre_usuario");
-			String pass = result.getString("password");
-			if (user.equals(usuario) && pass.equals(passwd)) {
-				return true;
-			} else {
+		String sql = "SELECT * FROM Usuario WHERE nombre_usuario=? AND password=? AND activo=1";
+		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
+			stmt.setString(1, usuario);
+			stmt.setString(2, passwd);
+			ResultSet result = stmt.executeQuery();
+			if(result.next()) {
+				System.out.println("NombreUser"+result.getString("nombre_usuario"));
+				String user = result.getString("nombre_usuario");
+				String pass = result.getString("password");
+				if (user.equals(usuario) && pass.equals(passwd)) {
+					return true;
+				} else {
+					return false;
+				}
+			}else {
 				return false;
 			}
 		} catch (SQLException e) {
@@ -74,7 +78,7 @@ public class ManejadorUsuario {
 			try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 
 				stmt.setString(1, usuario);
-				stmt.setString(2, MD5.passwd);
+				stmt.setString(2, passwd);
 				ResultSet result = stmt.executeQuery();
 
 				if (result.next()) {
