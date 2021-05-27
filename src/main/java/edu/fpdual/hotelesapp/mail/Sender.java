@@ -1,10 +1,10 @@
 package edu.fpdual.hotelesapp.mail;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -21,7 +21,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-
+import edu.fpdual.hotelesapp.conector.Conector;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -81,15 +81,15 @@ public class Sender {
 
 			File file = new File(content);
 			
-			InputStream fileData = getClass().getClassLoader().getResourceAsStream("mail.properties");
+//			InputStream fileData = getClass().getClassLoader().getResourceAsStream("mail.properties");
 			
-			try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
-	            int read;
-	            byte[] bytes = new byte[8192];
-	            while ((read = fileData.read(bytes)) != -1) {
-	                outputStream.write(bytes, 0, read);
-	            }
-	        }
+//			try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+//	            int read;
+//	            byte[] bytes = new byte[8192];
+//	            while ((read = fileData.read(bytes)) != -1) {
+//	                outputStream.write(bytes, 0, read);
+//	            }
+//	        }
 			
 			BodyPart fichero = new MimeBodyPart();
 			fichero.setDataHandler(new DataHandler(new FileDataSource(file)));
@@ -134,9 +134,13 @@ public class Sender {
 		return session;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 		// new Sender().send("mi-email", "destinatario", "Asunto","Cuerpo","ruta-archivo");
-		new Sender().send("hotelesapp@gmail.com", "user-registrado", "Prueba 2", "Reserva en AG2", "ruta del archivo a enviar");
+		PdfCreator pdf = new PdfCreator();
+		Conector con = new Conector();
+		String ruta = pdf.generarPDF(con, 2);
+		
+		new Sender().send("hotelesapp@gmail.com", "alum.abonillag.2020@iesalixar.org", "Reserva realizada en AG2", "¡Su reserva se ha realizado con éxito!", ruta);
 
 	}
 

@@ -42,8 +42,7 @@ public class PdfCreator {
 	 * @throws IOException 
 	 * @throws MalformedURLException 
 	 */
-	@SuppressWarnings("unused")
-	private void generarPDF(Conector con, int id_registro) throws URISyntaxException, MalformedURLException, IOException {
+	public String generarPDF(Conector con, int id_registro) throws URISyntaxException, MalformedURLException, IOException {
 		//java.awt.event.ActionEvent event deberia ir entre los parentesis para que se ejecute al pulsar el boton
 		Document documento = new Document();
 		try {
@@ -53,7 +52,8 @@ public class PdfCreator {
 			 * Ruta donde se va a guardar el pdf
 			 */
 			String ruta = System.getProperty("user.home");
-			PdfWriter.getInstance(documento, new FileOutputStream(ruta+"/Documents/reserva"+id_registro+".pdf"));
+			String rutaCompleta = ruta+"/Documents/reserva"+id_registro+".pdf";
+			PdfWriter.getInstance(documento, new FileOutputStream(rutaCompleta));
 			documento.open();
 			
 			/**
@@ -211,9 +211,12 @@ public class PdfCreator {
 			 */
 			documento.close();
 			//JOptionPane.showMessageDialog(null,"PDF creado"); 
+			
+			return rutaCompleta;
 		} catch (IOException| DocumentException | SQLException | URISyntaxException e) {
 			System.out.println(e.getMessage());
 		}
+		return null;
 		
 	}
 	
@@ -221,7 +224,7 @@ public class PdfCreator {
 		try {
 			PdfCreator pdf = new PdfCreator();
 			Conector con = new Conector();
-			pdf.generarPDF(con,1);
+			pdf.generarPDF(con,2);
 		} catch (URISyntaxException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
