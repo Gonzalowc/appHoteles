@@ -74,7 +74,7 @@ public class ManejadorUsuario {
 			try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 
 				stmt.setString(1, usuario);
-				stmt.setString(2, passwd);
+				stmt.setString(2, MD5.passwd);
 				ResultSet result = stmt.executeQuery();
 
 				if (result.next()) {

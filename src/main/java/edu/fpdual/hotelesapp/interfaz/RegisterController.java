@@ -3,12 +3,14 @@ package edu.fpdual.hotelesapp.interfaz;
 import java.io.IOException;
 
 import edu.fpdual.hotelesapp.conector.Conector;
+import edu.fpdual.hotelesapp.events.MD5;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorUsuario;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Clase Register Controller
@@ -55,7 +57,7 @@ public class RegisterController {
 		msgError.setVisible(false);
 		msgValid.setVisible(false);
 		if (!mu.existeUsuario(con, txtUsuario.getText())) {
-			if(mu.nuevoUsuario(con, txtUsuario.getText(), txtPassword.getText(), txtDNI.getText(), txtPhone.getText(),
+			if(mu.nuevoUsuario(con, txtUsuario.getText(),MD5.toMD5(txtPassword.getText()) , txtDNI.getText(), txtPhone.getText(),
 					txtEmail.getText())) {
 				msgValid.setVisible(true);
 				txtUsuario.setText("");
