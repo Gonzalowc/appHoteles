@@ -197,17 +197,44 @@ public class PdfCreator {
 			documento.add(link);
 			
 			/**
+			 * Gracias
+			 */
+			Paragraph parrafo3 = new Paragraph();
+			
+			parrafo3.add(espacio);
+			parrafo3.add(espacio);
+			parrafo3.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafo3.add("AG2 Hoteles");
+			parrafo3.setFont(FontFactory.getFont("Arial", 16, Font.BOLDITALIC, BaseColor.DARK_GRAY));
+			parrafo3.add(espacio);
+			
+			documento.add(parrafo3);
+			
+			/**
 			 * Imagen de footer
 			 */
 			Path path2 = Paths.get(getClass().getResource("/img/gracias.png").toURI());
 			Image footer = Image.getInstance(path2.toAbsolutePath().toString());
 			
-			footer.scalePercent(30);
+			footer.scalePercent(26);
 			footer.setScaleToFitHeight(true);
 			footer.setAlignment(Chunk.ALIGN_RIGHT);
 			footer.setAlignment(Chunk.ALIGN_BOTTOM);
 			
 			documento.add(footer);
+			
+			/**
+			 * Logo
+			 */
+			Path path3 = Paths.get(getClass().getResource("/img/logo2.png").toURI());
+			Image logo = Image.getInstance(path3.toAbsolutePath().toString());
+			
+			logo.scalePercent(15);
+			logo.setScaleToFitHeight(true);
+			logo.setAlignment(Chunk.ALIGN_LEFT);
+			
+			
+			documento.add(logo);
 			
 			/**
 			 * Cerramos el documento
