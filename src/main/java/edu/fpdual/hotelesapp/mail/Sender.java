@@ -138,9 +138,9 @@ public class Sender {
 		// new Sender().send("mi-email", "destinatario", "Asunto","Cuerpo","ruta-archivo");
 		PdfCreator pdf = new PdfCreator();
 		Conector con = new Conector();
-		String ruta = pdf.generarPDF(con, 2);
+		String ruta = pdf.generarPDF(con, 1);
 		
-		new Sender().send("hotelesapp@gmail.com", "alum.abonillag.2020@iesalixar.org", "Reserva realizada en AG2", "¡Su reserva se ha realizado con éxito!", ruta);
+		new Sender().send("hotelesapp@gmail.com", "alum.gwaackc.2020@iesalixar.org", "Reserva en AG2", "¡Su reserva se ha realizado con éxito!", ruta);
 
 	}
 
