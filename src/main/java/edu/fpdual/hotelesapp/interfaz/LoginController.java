@@ -14,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 /**
  * Clase Login Controller
  * @author angela.bonilla.gomez
@@ -40,12 +41,11 @@ public class LoginController {
 	 */
 	@FXML
 	private void switchToRegister() throws IOException {
-		App.setRoot("register");
 		Stage stage = App.getStage();
 		Scene scene = new Scene(App.loadFXML("register"));
 		stage.setScene(scene);
-		stage.setWidth(scene.getWidth());
-		stage.setHeight(scene.getHeight());
+		//stage.setWidth(scene.getWidth());
+		//stage.setHeight(scene.getHeight());
 		App.setStage(stage);
 	}
 	
@@ -63,7 +63,10 @@ public class LoginController {
 			txtPassword.setText("");
 			
 //			App.cambiarVentana("aplication",StageStyle.DECORATED,true);
-			Stage stage = App.getStage();
+			 App.getStage().close();
+			 Stage stage = new Stage();
+			 stage.close();
+			 stage.initStyle(StageStyle.DECORATED);
 			
 			//crear la clase que controla el archivo FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("aplication.fxml"));
@@ -77,7 +80,6 @@ public class LoginController {
 			appController.setAplicationLoader(loader);
 			Scene scene = new Scene(aux);
 			stage.hide();
-			//stage.initStyle(StageStyle.DECORATED);
 			stage.setMaximized(true);
 			stage.setScene(scene);
 			stage.show();

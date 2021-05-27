@@ -37,6 +37,8 @@ public class Registro implements Comparable<Registro>{
 	 */
 	private Date fecha;
 	
+	private String id_services;
+	
 	/**
 	 * Constructor de registro
 	 * @param id del registro

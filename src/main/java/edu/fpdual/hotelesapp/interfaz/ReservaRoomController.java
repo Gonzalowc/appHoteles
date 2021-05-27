@@ -271,21 +271,18 @@ public class ReservaRoomController {
 			listSelectHab.getSelectionModel().clearSelection();
 			listSelectHab.getItems().remove(getSelectedID(listSelectHab));
 			listDispoHab.getItems().add(servicio);
-			
 		}
 	}
 	
-	public int getSelectedID(ListView lista) {
+	private int getSelectedID(ListView lista) {
 		int selectedID = lista.getItems().size();
 		if(selectedID!=-1) {
 			return selectedID-1;
 		}
 		return 0;
-		
 	}
 	
-	//TODO: hacer lista con los servicios con checkbox, 
-	//cuando este activo,que asigne ese objeto a la lista de la habitación.
+	//TODO: cuando este activo,que asigne ese objeto a la lista de la habitación.
 	//cuando se haga click en reservar sumar todos los precios de los servicios y añadirlo al precio final de la habitacion.
 	//TODO: tambie hacer los servicios que tiene un determinado hotel, pero a modo de informacion, no se necesita hacer check.
 

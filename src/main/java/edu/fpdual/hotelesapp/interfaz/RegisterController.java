@@ -6,7 +6,9 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.events.MD5;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorUsuario;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
@@ -73,6 +75,9 @@ public class RegisterController {
 	 * @throws IOException
 	 */
 	public void goBack() throws IOException {
-		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
+		Stage stage = App.getStage();
+		Scene scene = new Scene(App.loadFXML("logIn"));
+		stage.setScene(scene);
+		App.setStage(stage);
 	}
 }
