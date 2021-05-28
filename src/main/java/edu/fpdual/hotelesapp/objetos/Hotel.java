@@ -64,8 +64,9 @@ public class Hotel implements Comparable<Hotel> {
 	/**
 	 * Constructor de Hotel a partir de la base de datos
 	 * @param result
+	 * @throws SQLException 
 	 */
-	public Hotel(ResultSet result) {
+	public Hotel(ResultSet result) throws SQLException {
 
 		try {
 			this.id = result.getInt("id");
@@ -77,6 +78,7 @@ public class Hotel implements Comparable<Hotel> {
 			serviciosHotel = new ArrayList<>();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}
