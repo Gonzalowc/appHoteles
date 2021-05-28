@@ -11,6 +11,8 @@ module edu.fpdual.hotelesapp.hotelesapp {
 	requires itextpdf;
 	requires java.desktop;
 	requires org.apache.commons.codec;
+	requires core;
+	requires pdfbox;
     opens edu.fpdual.hotelesapp.interfaz to javafx.fxml;
     opens edu.fpdual.hotelesapp.objetos;
     opens edu.fpdual.hotelesapp.conector;
