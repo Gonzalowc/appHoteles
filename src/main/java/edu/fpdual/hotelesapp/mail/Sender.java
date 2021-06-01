@@ -27,6 +27,7 @@ import lombok.Setter;
 
 /**
  * Clase Sender para enviar los correos
+ * 
  * @author angela.bonilla.gomez
  *
  */
@@ -43,7 +44,8 @@ public class Sender {
 	Properties prop = new Properties();
 
 	/**
-	 * Constructor de la clase donde se cargan las propiedades del mail y los credenciales
+	 * Constructor de la clase donde se cargan las propiedades del mail y los
+	 * credenciales
 	 */
 	public Sender() {
 		try {
@@ -55,17 +57,20 @@ public class Sender {
 	}
 
 	/**
-	 * Metodo Send para enviar el email, al que le pasamos las direcciones, el asunto, el texto y algun archivo
-	 * @param from direccion del emisor 
-	 * @param to direccion del receptor
+	 * Metodo Send para enviar el email, al que le pasamos las direcciones, el
+	 * asunto, el texto y algun archivo
+	 * 
+	 * @param from    direccion del emisor
+	 * @param to      direccion del receptor
 	 * @param subject asunto del correo
-	 * @param text cuerpo de texto
+	 * @param text    cuerpo de texto
 	 * @param content contenido de archivo a enviar
 	 * @return true o false si el mensaje es enviado con exito
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public boolean send(String from, String to, String subject, String text, String content) throws FileNotFoundException, IOException {
+	public boolean send(String from, String to, String subject, String text, String content)
+			throws FileNotFoundException, IOException {
 		Session session = createSession();
 		try {
 			MimeMessage message = new MimeMessage(session);
@@ -78,11 +83,13 @@ public class Sender {
 
 			BodyPart texto = new MimeBodyPart();
 			texto.setText(text);
+			Multipart multiPart = new MimeMultipart();
+			multiPart.addBodyPart(texto);
+			if (!content.equals("")) {
+				File file = new File(content);
 
-			File file = new File(content);
-			
 //			InputStream fileData = getClass().getClassLoader().getResourceAsStream("mail.properties");
-			
+
 //			try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
 //	            int read;
 //	            byte[] bytes = new byte[8192];
@@ -90,22 +97,20 @@ public class Sender {
 //	                outputStream.write(bytes, 0, read);
 //	            }
 //	        }
-			
-			BodyPart fichero = new MimeBodyPart();
-			fichero.setDataHandler(new DataHandler(new FileDataSource(file)));
-			fichero.setFileName(file.getName());
-			
-			Multipart multiPart = new MimeMultipart();
-			multiPart.addBodyPart(texto);
-			multiPart.addBodyPart(fichero);
-			
+
+				BodyPart fichero = new MimeBodyPart();
+				fichero.setDataHandler(new DataHandler(new FileDataSource(file)));
+				fichero.setFileName(file.getName());
+
+				multiPart.addBodyPart(fichero);
+			}
 			message.setContent(multiPart);
-			
+
 			System.out.println("ENVIANDO...");
-			
+
 			Transport.send(message);
 			System.out.println("MENSAJE ENVIADO CON EXITO");
-			
+
 			return true;
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
@@ -114,10 +119,10 @@ public class Sender {
 
 	}
 
-
 	/**
 	 * Metodo Create Session para autenticar las credenciales
-	 * @return 
+	 * 
+	 * @return
 	 */
 	private Session createSession() {
 		Session session = Session.getInstance(mailProp, new javax.mail.Authenticator() {
@@ -128,19 +133,20 @@ public class Sender {
 
 		});
 
-
 		session.setDebug(true);
-		
+
 		return session;
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
-		// new Sender().send("mi-email", "destinatario", "Asunto","Cuerpo","ruta-archivo");
+		// new Sender().send("mi-email", "destinatario",
+		// "Asunto","Cuerpo","ruta-archivo");
 		PdfCreator pdf = new PdfCreator();
 		Conector con = new Conector();
 		String ruta = pdf.generarPDF(con, 1);
-		
-		new Sender().send("hotelesapp@gmail.com", "alum.gwaackc.2020@iesalixar.org", "Reserva en AG2", "¡Su reserva se ha realizado con éxito!", ruta);
+
+		new Sender().send("hotelesapp@gmail.com", "alum.gwaackc.2020@iesalixar.org", "Reserva en AG2",
+				"¡Su reserva se ha realizado con éxito!", ruta);
 
 	}
 
