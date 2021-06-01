@@ -94,7 +94,7 @@ public class Sender {
 			BodyPart fichero = new MimeBodyPart();
 			fichero.setDataHandler(new DataHandler(new FileDataSource(file)));
 			fichero.setFileName(file.getName());
-
+			
 			Multipart multiPart = new MimeMultipart();
 			multiPart.addBodyPart(texto);
 			multiPart.addBodyPart(fichero);

@@ -108,8 +108,9 @@ public class Habitacion implements Comparable<Habitacion> {
 	/**
 	 * Constructor de habitacion a partir de la base de datos
 	 * @param result
+	 * @throws SQLException 
 	 */
-	public Habitacion(ResultSet result) {
+	public Habitacion(ResultSet result) throws SQLException {
 		try {
 			this.id = result.getInt("id");
 			this.hotel = null;
@@ -122,11 +123,12 @@ public class Habitacion implements Comparable<Habitacion> {
 			this.serviciosHabitacion = new ArrayList<>();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}
 	
-	
+
 	/**
 	 * HashCode 
 	 */

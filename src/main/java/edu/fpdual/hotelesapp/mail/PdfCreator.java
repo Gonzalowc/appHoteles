@@ -255,6 +255,7 @@ public class PdfCreator {
 			PdfCreator pdf = new PdfCreator();
 			Conector con = new Conector();
 			pdf.generarPDF(con,1);
+		
 		} catch (URISyntaxException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

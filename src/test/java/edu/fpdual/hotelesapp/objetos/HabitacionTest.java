@@ -1,10 +1,12 @@
 package edu.fpdual.hotelesapp.objetos;
 
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -12,22 +14,25 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
-
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 class HabitacionTest {
 	
-	
-	  @InjectMocks private Habitacion h1;
 	  
-	  @Mock private ResultSet result;
+	  @Mock private  ResultSet result;
+	  
+	 @BeforeEach
+	 private void setUp() {
+		 MockitoAnnotations.initMocks(this);
+	 }
 	 
 	@Test
 	public void testToString() {
@@ -92,7 +97,7 @@ class HabitacionTest {
 	  }
 	  
 	  @Test
-	  public void testCompaerTo() {
+	  public void testCompareTo() {
 		  Habitacion h = new Habitacion(51, null, 1, null, null, false, 52.3);
 		  Habitacion h1 = new Habitacion(53, null, 1, null, null, false, 52.3);
 		  
@@ -172,15 +177,32 @@ class HabitacionTest {
 		  assertEquals(h.getId()+1*31,h.hashCode());
 	  }
 	  
-	
+
 	
 	
 	  @Test public void testConstructorResultSet() throws SQLException {
+		  
+		  long millis=System.currentTimeMillis();  
+		  java.sql.Date date=new java.sql.Date(millis);  
 	 
-	  when(result.getInt("id")).thenReturn(0);
+	  when(result.getInt(Mockito.anyString())).thenReturn(43);
+	  when(result.getDate(Mockito.anyString())).thenReturn(date);
+	  when(result.getBoolean(Mockito.anyString())).thenReturn(false);
+	  when(result.getDouble(Mockito.anyString())).thenReturn(5.6);
 	  
+	 Habitacion habitacion1 = new Habitacion(result);
+
+	 assertNotNull(habitacion1);
+	  }
 	  
-	  Habitacion h = new Habitacion(result);
+	  @Test public void testConstructorResultSet2() throws SQLException {
+		  
+		  long millis=System.currentTimeMillis();  
+		  java.sql.Date date=new java.sql.Date(millis);  
+	 
+	  when(result.getInt(Mockito.anyString())).thenThrow(new SQLException());
+
+	 assertThrows(SQLException.class,() -> new Habitacion(result));
 	  }
 	 
 
