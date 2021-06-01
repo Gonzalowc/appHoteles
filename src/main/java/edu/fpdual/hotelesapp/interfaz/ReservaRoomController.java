@@ -142,18 +142,12 @@ public class ReservaRoomController {
 	public void reserva() throws IOException {
 		lblEntry.setStyle(null);
 		lblLeft.setStyle(null);
+		ArrayList<LocalDate> fechas = listaFechasSelected();
 		Conector con = new Conector();
-		ArrayList<LocalDate> fechas = new ArrayList<LocalDate>();
-		LocalDate entrada = dateEntry.getValue();
-		LocalDate salida = dateLeft.getValue();
-		while (entrada.compareTo(salida) <= 0) {
-			entrada = entrada.plusDays(1);
-			fechas.add(entrada);
-		}
-
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
 		ArrayList<LocalDate> registros = manejadorRegistro.getDaysWhenIsOcupped(con, habitacion.getId());
-		if (!fechas.removeAll(registros)) {
+		boolean hayCambios = fechas.removeAll(registros);
+		if (!hayCambios) {
 			Connection con2 = con.getMySQLConnection();
 			try {
 				con2.setAutoCommit(false);
@@ -173,10 +167,6 @@ public class ReservaRoomController {
 				try {
 					System.out.println("rollback");
 					con2.rollback();
-					dateLeft.setValue(null);
-					dateEntry.setValue(null);
-					lblEntry.setStyle("-fx-text-fill: #D00037;");
-					lblLeft.setStyle("-fx-text-fill: #D00037;");
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -191,6 +181,17 @@ public class ReservaRoomController {
 		}
 	}
 
+	private ArrayList<LocalDate> listaFechasSelected() {
+		ArrayList<LocalDate> fechas = new ArrayList<LocalDate>();
+		LocalDate entrada = dateEntry.getValue();
+		LocalDate salida = dateLeft.getValue();
+		while (entrada.compareTo(salida) <= 0) {
+			entrada = entrada.plusDays(1);
+			fechas.add(entrada);
+		}
+		return fechas;
+	}
+
 	public int crearPDFyEnviar(Conector con, String serviciosID) {
 		Sender email = new Sender();
 		PdfCreator pdf = new PdfCreator();
@@ -202,7 +203,6 @@ public class ReservaRoomController {
 			new Sender().send("hotelesapp@gmail.com", user.getEmail(), "Reserva realizada en AG2",
 					"¡Su reserva se ha realizado con éxito!", ruta);
 		} catch (URISyntaxException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -339,11 +339,4 @@ public class ReservaRoomController {
 		}
 		return 0;
 	}
-
-	// TODO: cuando este activo,que asigne ese objeto a la lista de la habitación.
-	// cuando se haga click en reservar sumar todos los precios de los servicios y
-	// añadirlo al precio final de la habitacion.
-	// TODO: tambie hacer los servicios que tiene un determinado hotel, pero a modo
-	// de informacion, no se necesita hacer check.
-
 }

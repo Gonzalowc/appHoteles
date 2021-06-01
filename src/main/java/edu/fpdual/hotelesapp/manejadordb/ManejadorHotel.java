@@ -245,5 +245,46 @@ public class ManejadorHotel {
 		idsFormat = idsFormat.replace("]", ")");
 		return idsFormat;
 	}
+	
+	public ArrayList<String> listaHotelesOrdenCantidadCiudad(Conector con){
+		Connection con2 = con.getMySQLConnection();
+		String sql = "SELECT id, localizacion, COUNT(localizacion) FROM Hotel GROUP BY localizacion ORDER BY COUNT(localizacion) DESC, localizacion ASC";
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			ArrayList<String> ciudades = new ArrayList<>();
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				ciudades.add(result.getString("localizacion"));
+			}
+			return ciudades;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

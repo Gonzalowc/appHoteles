@@ -68,7 +68,6 @@ public class CardRoomController {
 			lblDisponible.setVisible(true);
 		}
 		lblCodeHabitacion.setText(Integer.toString(hab.getId()));
-		//TODO
 	}
 	
 	public void rellenarReserva() throws IOException {
