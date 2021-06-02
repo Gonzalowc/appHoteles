@@ -167,5 +167,23 @@ public class ManejadorUsuario {
 		}
 		return false;
 	}
+	
+	public String getEmailUser(Conector con, String usuario) {
+		Connection con2 = con.getMySQLConnection();
+		String sql = "Select email from Usuario where nombre_usuario=?";
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			stmt.setString(1, usuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				return result.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return usuario;
+		
+	}
 
 }

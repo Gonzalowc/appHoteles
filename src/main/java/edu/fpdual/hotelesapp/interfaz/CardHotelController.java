@@ -127,11 +127,15 @@ public class CardHotelController {
 				cardRoomController.setUsuario(user);
 				cardRoomController.setReservaPane(reservaPane);
 				grid.add(aux, 0, i, 1, 1);
-			ScrollPane scroll = new ScrollPane();
-			scroll.setContent(grid);
-			parentPane.setCenter(scroll);
-			parentPane.setRight(reservaPane);
 		}
+			ScrollPane scroll = new ScrollPane();
+			System.out.println(parentPane);
+			scroll.setContent(grid);
+			parentPane.setCenter(null);
+			parentPane.setCenter(scroll);
+			parentPane.setRight(null);
+			parentPane.setRight(reservaPane);
+			parentPane.setBottom(null);		
 	}
 
 }
