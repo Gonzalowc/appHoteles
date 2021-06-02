@@ -2,6 +2,8 @@ package edu.fpdual.hotelesapp.interfaz;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.events.MD5;
@@ -11,6 +13,7 @@ import excepciones.ManyFails;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -31,6 +34,8 @@ public class LoginController {
 	private PasswordField txtPassword;
 	@FXML
 	private Label msgError;
+	@FXML
+	private Button btnLogin;
 
 	private LinkedHashMap<String, Integer> intentosDeSesionFallidos = new LinkedHashMap<>();
 
@@ -86,32 +91,53 @@ public class LoginController {
 			System.out.println(user);
 			appController.setUsuario(user);
 			appController.setAplicationLoader(loader);
+			aux.setCenter(aux);
 			Scene scene = new Scene(aux);
 			stage.hide();
 			stage.setMaximized(true);
 			stage.setScene(scene);
 			stage.show();
 			App.setStage(stage);
-
 		} else {
-			if (mu.existeUsuario(con, txtUsuario.getText())) {
-				if (intentosDeSesionFallidos.containsKey(txtUsuario.getText())) {
-					intentosDeSesionFallidos.put(txtUsuario.getText(),intentosDeSesionFallidos.get(txtUsuario.getText())+1 );
-				} else {
-					intentosDeSesionFallidos.put(txtUsuario.getText(), 1);
-				}
-			}
+			addFallo(con, mu);
 
-			
+			msgError.setVisible(true);
 			System.out.println(intentosDeSesionFallidos);
-			if(intentosDeSesionFallidos.get(txtUsuario.getText())==5) {
+			if (intentosDeSesionFallidos.get(txtUsuario.getText()) == 5) {
+				desactivarCampos();
 				String correo = mu.getEmailUser(con, txtUsuario.getText());
 				throw new ManyFails("Error Inicio De sesión", correo);
 			}
-			msgError.setVisible(true);
+
 			txtPassword.setText(null);
 			txtUsuario.setText(null);
 		}
+	}
+
+	private void addFallo(Conector con, ManejadorUsuario mu) {
+		if (mu.existeUsuario(con, txtUsuario.getText())) {
+			if (intentosDeSesionFallidos.containsKey(txtUsuario.getText())) {
+				intentosDeSesionFallidos.put(txtUsuario.getText(),
+						intentosDeSesionFallidos.get(txtUsuario.getText()) + 1);
+			} else {
+				intentosDeSesionFallidos.put(txtUsuario.getText(), 1);
+			}
+		}
+	}
+
+	private void desactivarCampos() {
+		txtPassword.setDisable(true);
+		txtUsuario.setDisable(true);
+		btnLogin.setDisable(true);
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				txtPassword.setDisable(false);
+				txtUsuario.setDisable(false);
+				btnLogin.setDisable(false);
+			}
+		}, 25000);
+		intentosDeSesionFallidos.remove(txtUsuario.getText());
 	}
 
 }

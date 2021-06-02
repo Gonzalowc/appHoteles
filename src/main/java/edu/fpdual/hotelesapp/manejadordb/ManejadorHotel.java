@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -246,14 +247,14 @@ public class ManejadorHotel {
 		return idsFormat;
 	}
 	
-	public ArrayList<String> listaHotelesOrdenCantidadCiudad(Conector con){
+	public LinkedHashMap<String,Integer> listaHotelesOrdenCantidadCiudad(Conector con){
 		Connection con2 = con.getMySQLConnection();
-		String sql = "SELECT id, localizacion, COUNT(localizacion) FROM Hotel GROUP BY localizacion ORDER BY COUNT(localizacion) DESC, localizacion ASC";
+		String sql = "SELECT id, localizacion, COUNT(localizacion) as cantidad FROM Hotel GROUP BY localizacion ORDER BY COUNT(localizacion) DESC, localizacion ASC";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
-			ArrayList<String> ciudades = new ArrayList<>();
+			LinkedHashMap<String,Integer> ciudades = new LinkedHashMap<>();
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				ciudades.add(result.getString("localizacion"));
+				ciudades.put(result.getString("localizacion"),result.getInt("cantidad"));
 			}
 			return ciudades;
 		} catch (SQLException e) {
