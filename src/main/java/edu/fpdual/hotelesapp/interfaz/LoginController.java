@@ -91,7 +91,7 @@ public class LoginController {
 			System.out.println(user);
 			appController.setUsuario(user);
 			appController.setAplicationLoader(loader);
-			aux.setCenter(aux);
+			//aux.setCenter(aux);
 			Scene scene = new Scene(aux);
 			stage.hide();
 			stage.setMaximized(true);
