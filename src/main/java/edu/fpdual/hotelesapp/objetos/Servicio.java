@@ -49,8 +49,9 @@ public class Servicio implements Comparable<Servicio> {
 	/**
 	 * Constructor de servicio a partir de la base de datos
 	 * @param result
+	 * @throws SQLException 
 	 */
-	public Servicio(ResultSet result) {
+	public Servicio(ResultSet result) throws SQLException {
 		
 		try {
 			this.id = result.getInt("id");
@@ -59,6 +60,7 @@ public class Servicio implements Comparable<Servicio> {
 			this.tipo = (result.getString("tipo").equalsIgnoreCase("hotel")) ? TipoServicio.HOTEL : TipoServicio.HABITACION;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 	

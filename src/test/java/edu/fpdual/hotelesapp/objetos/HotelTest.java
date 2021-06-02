@@ -26,17 +26,17 @@ class HotelTest {
 	 }
 
 	@Test
-	public void testResultSetConnector() throws SQLException {	 
+	public void testResultSetConstructor() throws SQLException {	 
 	  when(result.getInt(Mockito.anyString())).thenReturn(43);
 	  when(result.getString(Mockito.anyString())).thenReturn("a");
 	  
-	 Hotel Hotel = new Hotel(result);
+	 Hotel hotel = new Hotel(result);
 
-	 assertNotNull(Hotel);
+	 assertNotNull(hotel);
 	}
 	
 	@Test
-	public void testresultSetConnector2() throws SQLException{
+	public void testresultSetConstructor2() throws SQLException{
 		 when(result.getInt(Mockito.anyString())).thenThrow(new SQLException());
 
 		 assertThrows(SQLException.class,() -> new Hotel(result));
@@ -116,7 +116,7 @@ class HotelTest {
 	  }
 	  
 	  @Test
-	  public void testSetters(){
+	  public void testGettersSetters(){
 		  Hotel h = new Hotel(null, null, 0, null);
 		  Habitacion h1 = new Habitacion(51, null, 1, null, null, false, 52.3);
 		  ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();

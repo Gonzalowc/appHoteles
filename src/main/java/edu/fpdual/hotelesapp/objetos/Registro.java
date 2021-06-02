@@ -58,8 +58,9 @@ public class Registro implements Comparable<Registro>{
 	/**
 	 * Constructor de registro a partir de la base de datos
 	 * @param result
+	 * @throws SQLException 
 	 */
-	public Registro(ResultSet result) {
+	public Registro(ResultSet result) throws SQLException {
 		try {
 		this.id = result.getInt("id");
 		this.habitacion = null;//result.getInt("id_habitacion");
@@ -68,6 +69,7 @@ public class Registro implements Comparable<Registro>{
 		this.fecha = result.getDate("fecha");	
 		}catch(SQLException e){
 			e.getStackTrace();
+			throw e;
 		}
 		
 	}

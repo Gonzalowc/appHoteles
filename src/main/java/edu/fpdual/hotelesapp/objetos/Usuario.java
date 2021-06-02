@@ -60,8 +60,9 @@ public class Usuario implements Comparable<Usuario>{
 	/**
 	 * Constructor de usuario a partir de la base de datos
 	 * @param result
+	 * @throws SQLException 
 	 */
-	public Usuario(ResultSet result) {
+	public Usuario(ResultSet result) throws SQLException {
 		try {
 			this.id = result.getInt("id");
 			this.nombre = result.getString("nombre_usuario");
@@ -71,6 +72,7 @@ public class Usuario implements Comparable<Usuario>{
 			this.email = result.getString("email");
 		}catch(SQLException e) {
 			e.getStackTrace();
+			throw e;
 		}
 	}
 	
