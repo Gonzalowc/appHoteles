@@ -92,6 +92,7 @@ public class BuscadorHotelController {
 						CardHotelController chc = loader.<CardHotelController>getController();
 						// usamos sus metodos
 						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
+						chc.setImage(h.getId()+".jpg");
 						chc.setUser(user);
 						chc.setParentPane(parent);
 						grid.add(aux, j, i, 1, 1);

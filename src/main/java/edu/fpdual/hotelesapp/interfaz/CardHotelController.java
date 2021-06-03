@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -37,14 +39,14 @@ public class CardHotelController {
 	private Label lblNumEstrella;
 	@FXML
 	private AnchorPane paneCardHotel;
+	@FXML
+	private ImageView image;
 
 	private BorderPane parentPane;
 	
 	private AnchorPane reservaPane;
 	
 	private Usuario user;
-	
-	private Habitacion habitacion;
 	
 	public void setUser(Usuario usuario) {
 		this.user = usuario;
@@ -96,6 +98,13 @@ public class CardHotelController {
 
 	public int getLblCodeHotel() {
 		return Integer.parseInt(lblCodeHotel.getText());
+	}
+	
+	public void setImage(String img) {
+		System.out.println(img);
+		Image imagen = new Image(getClass().getResource("img/"+img).toExternalForm());
+		
+		image.setImage(imagen);
 	}
 
 	

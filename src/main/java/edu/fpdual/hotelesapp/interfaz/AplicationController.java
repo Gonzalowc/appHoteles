@@ -128,6 +128,7 @@ public class AplicationController {
 						CardHotelController chc = loader.<CardHotelController>getController();
 						// usamos sus metodos
 						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
+						chc.setImage(h.getId()+".jpg");
 						chc.setUser(user);
 						chc.setParentPane(myPanel);
 						grid.add(aux, j, i, 1, 1);
