@@ -3,9 +3,9 @@ package edu.fpdual.hotelesapp.manejadordb;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doThrow;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +13,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Any;
+import org.mockito.stubbing.Answer;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Hotel;
@@ -54,9 +54,7 @@ class ManejadorHotelTest {
 			h = new Hotel("Los pajaritos","Sevilla", 4, "Elegante");
 			h.setId(43);
 			
-//			when(rs.getInt(Mockito.anyString())).thenReturn(43);
-//			when(rs.getString(Mockito.anyString())).thenReturn("Mundo");
-			when(stmt.executeQuery()).thenReturn(rs);
+			
 	}
 	
 	@Test
@@ -77,7 +75,26 @@ class ManejadorHotelTest {
 	}
 	
 	@Test
-	public void testGetHotelId() {
+	public void testGetHotelId() throws SQLException {
+		
+		when(rs.getInt(Mockito.anyString())).thenReturn(43);
+		when(rs.getString(Mockito.anyString())).thenReturn("Mundo");
+		when(stmt.executeQuery()).thenReturn(rs);
+		Mockito.when(rs.next()).thenAnswer(new Answer<Boolean>() {
+
+			private int count = 0;
+
+			@Override
+			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+				if (count == 0) {
+					count++;
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
+		
 		ManejadorHotel h2 = new ManejadorHotel();
 		
 		h2.crearHotel(c, h);
@@ -86,4 +103,16 @@ class ManejadorHotelTest {
 		
 		assertEquals(43,h3.getId());
 	}
+	
+	@Test
+	public void testGetHotelIdFail() throws SQLException {
+		ManejadorHotel h2 = new ManejadorHotel();
+		
+		when(stmt.executeQuery()).thenThrow(new SQLException());
+		assertNull(h2.getHotelId(c, 43));
+		
+		
+	}
 }
+
+
