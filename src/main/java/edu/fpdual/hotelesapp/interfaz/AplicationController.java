@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.StageStyle;
 
 /**
  * Clase Aplication Controller
@@ -90,6 +91,16 @@ public class AplicationController {
 		myPanel.setRight(null);
 		myPanel.setBottom(null);
 	}
+	
+	/**
+	 * Metodo para cerrarSesion
+	 * @throws IOException
+	 */
+	@FXML
+	public void goBack() throws IOException {
+		user = null;
+		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
+	}
 
 	/**
 	 * Metodo para general la vista de lista de hoteles
@@ -128,7 +139,7 @@ public class AplicationController {
 						CardHotelController chc = loader.<CardHotelController>getController();
 						// usamos sus metodos
 						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
-						chc.setImage(h.getId()+".jpg");
+						//chc.setImage(h.getId()+".jpg");
 						chc.setUser(user);
 						chc.setParentPane(myPanel);
 						grid.add(aux, j, i, 1, 1);

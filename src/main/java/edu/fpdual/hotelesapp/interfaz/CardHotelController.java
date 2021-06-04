@@ -1,8 +1,13 @@
 package edu.fpdual.hotelesapp.interfaz;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHabitacion;
@@ -100,11 +105,12 @@ public class CardHotelController {
 		return Integer.parseInt(lblCodeHotel.getText());
 	}
 	
-	public void setImage(String img) {
-		System.out.println(img);
-		Image imagen = new Image(getClass().getResource("img/"+img).toExternalForm());
-		
-		image.setImage(imagen);
+	public void setImage(byte[] imagenByte) {
+		if(imagenByte!=null) {
+			Image img = new Image(new ByteArrayInputStream(imagenByte));
+			image.setImage(img);
+		}
+	    
 	}
 
 	

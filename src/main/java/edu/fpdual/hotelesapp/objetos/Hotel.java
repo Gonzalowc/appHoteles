@@ -1,5 +1,6 @@
 package edu.fpdual.hotelesapp.objetos;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class Hotel implements Comparable<Hotel> {
 	 */
 	private ArrayList<Servicio> serviciosHotel;
 	
+	private byte[] imagen;
+	
 	/**
 	 * Constructor de Hotel
 	 * @param nombre del hotel
@@ -59,6 +62,7 @@ public class Hotel implements Comparable<Hotel> {
 		this.descripcion = descripcion;
 		habitaciones = new ArrayList<>();
 		serviciosHotel = new ArrayList<>();
+		imagen = null;
 	}
 	
 	/**
@@ -76,6 +80,20 @@ public class Hotel implements Comparable<Hotel> {
 			this.descripcion = result.getString("descripcion");
 			habitaciones = new ArrayList<>();
 			serviciosHotel = new ArrayList<>();
+			//Blob imageBlob 
+			imagen = result.getBytes("imagen");
+//			if(imageBlob!=null) {
+//				int blobLength = (int) imageBlob.length();
+//				imagen = imageBlob.getBytes(1, blobLength);
+//				imageBlob.free();
+//				System.out.println(imagen.toString());
+//			}
+			if(imagen!=null) {
+				System.out.println("IMAGEN CARGADA");
+			}else {
+				System.out.println("La imagen a la kk"+" Hotel "+nombre+" creado");
+			}
+			System.out.println();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
