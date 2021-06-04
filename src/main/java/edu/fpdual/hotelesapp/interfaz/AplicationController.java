@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.StageStyle;
 
 /**
  * Clase Aplication Controller
@@ -34,7 +35,7 @@ public class AplicationController {
 
 	private FXMLLoader aplicationLoader;
 	private ManejadorHotel mh = new ManejadorHotel();
-	private ArrayList<Hotel> hoteles = mh.listaHoteles(new Conector());;
+	private ArrayList<Hotel> hoteles = mh.listaHoteles(new Conector());
 	private ArrayList<Hotel> hotelesMostrar = hoteles;
 	private Usuario user;
 
@@ -64,10 +65,11 @@ public class AplicationController {
 	 */
 	@FXML
 	public void toHotelesVista(ActionEvent event) throws IOException {
+		hoteles = mh.listaHoteles(new Conector());
+		hotelesMostrar = hoteles;
 		myPanel.setCenter(listaHoteles(hotelesMostrar));
 		myPanel.setBottom(generarBuscador());
 		myPanel.setRight(null);
-
 	}
 
 	@FXML
@@ -89,6 +91,16 @@ public class AplicationController {
 		myPanel.setCenter(App.loadFXML("insertHotel"));
 		myPanel.setRight(null);
 		myPanel.setBottom(null);
+	}
+	
+	/**
+	 * Metodo para cerrarSesion
+	 * @throws IOException
+	 */
+	@FXML
+	public void goBack() throws IOException {
+		user = null;
+		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
 	}
 
 	/**
@@ -128,7 +140,7 @@ public class AplicationController {
 						CardHotelController chc = loader.<CardHotelController>getController();
 						// usamos sus metodos
 						chc.setDataHotel(h.getId(), h.getNombre(), h.getLocalizacion(), h.getEstrellas());
-						chc.setImage(h.getId()+".jpg");
+						chc.setImage(h.getImagen());
 						chc.setUser(user);
 						chc.setParentPane(myPanel);
 						grid.add(aux, j, i, 1, 1);

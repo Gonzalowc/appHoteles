@@ -7,9 +7,9 @@ import java.util.TimerTask;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.events.MD5;
+import edu.fpdual.hotelesapp.excepciones.ManyFails;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorUsuario;
 import edu.fpdual.hotelesapp.objetos.Usuario;
-import excepciones.ManyFails;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -100,7 +100,6 @@ public class LoginController {
 			App.setStage(stage);
 		} else {
 			addFallo(con, mu);
-
 			msgError.setVisible(true);
 			System.out.println(intentosDeSesionFallidos);
 			if (intentosDeSesionFallidos.get(txtUsuario.getText()) == 5) {
@@ -114,7 +113,7 @@ public class LoginController {
 		}
 	}
 
-	private void addFallo(Conector con, ManejadorUsuario mu) {
+	private void addFallo(Conector con, ManejadorUsuario mu){
 		if (mu.existeUsuario(con, txtUsuario.getText())) {
 			if (intentosDeSesionFallidos.containsKey(txtUsuario.getText())) {
 				intentosDeSesionFallidos.put(txtUsuario.getText(),

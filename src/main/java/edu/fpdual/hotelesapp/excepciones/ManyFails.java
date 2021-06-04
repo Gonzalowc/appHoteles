@@ -1,4 +1,4 @@
-package excepciones;
+package edu.fpdual.hotelesapp.excepciones;
 
 import java.io.IOException;
 

@@ -7,38 +7,53 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.InsertHotelController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1274.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.InsertHotelController">
    <children>
-      <TextField fx:id="txtHotelName" layoutX="192.0" layoutY="180.0" prefHeight="39.0" prefWidth="224.0" />
-      <Label fx:id="lblHotelName" layoutX="191.0" layoutY="149.0" text="Nombre:">
+      <TextField fx:id="txtHotelName" layoutX="371.0" layoutY="176.0" prefHeight="39.0" prefWidth="224.0" />
+      <Label fx:id="lblHotelName" layoutX="370.0" layoutY="145.0" text="Nombre:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblHotelLocation" layoutX="192.0" layoutY="232.0" text="Localización:">
+      <Label fx:id="lblHotelLocation" layoutX="371.0" layoutY="228.0" text="Localización:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelLocation" layoutX="193.0" layoutY="262.0" prefHeight="39.0" prefWidth="224.0" />
-      <Label fx:id="lblHotelStars" layoutX="192.0" layoutY="314.0" text="Estrellas:">
+      <TextField fx:id="txtHotelLocation" layoutX="372.0" layoutY="258.0" prefHeight="39.0" prefWidth="224.0" />
+      <Label fx:id="lblHotelStars" layoutX="371.0" layoutY="310.0" text="Estrellas:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtHotelStars" layoutX="192.0" layoutY="354.0" prefHeight="39.0" prefWidth="55.0" />
-      <Label fx:id="lblHotelDescription" layoutX="472.0" layoutY="149.0" text="Descripción:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtHotelDescription" layoutX="472.0" layoutY="180.0" prefHeight="213.0" prefWidth="459.0" />
-      <Button fx:id="btnInsertHotel" layoutX="373.0" layoutY="407.0" mnemonicParsing="false" onAction="#insertHotel" prefHeight="59.0" prefWidth="147.0" text="Insertar" />
-      <Label fx:id="btnBack" layoutX="14.0" layoutY="14.0" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="64.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="882.0" AnchorPane.topAnchor="14.0" />
-      <ImageView fitHeight="59.0" fitWidth="55.0" layoutX="257.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="star" fx:id="star" fitHeight="59.0" fitWidth="55.0" layoutX="436.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/stat.png" />
          </image>
       </ImageView>
+      <Label layoutX="64.0" layoutY="176.0" onMouseClicked="#chargeImage" prefHeight="203.0" prefWidth="197.0" style="-fx-border-color: gray; -fx-background-color: E2E6FF;">
+         <graphic>
+            <ImageView id="upImage" fx:id="upImage" fitHeight="200.0" fitWidth="197.0" onMouseClicked="#chargeImage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/uploadImage.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <TextField fx:id="txtHotelStars" layoutX="371.0" layoutY="350.0" prefHeight="39.0" prefWidth="55.0" />
+      <Label fx:id="lblHotelDescription" layoutX="651.0" layoutY="145.0" text="Descripción:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtHotelDescription" layoutX="651.0" layoutY="176.0" prefHeight="213.0" prefWidth="459.0" />
+      <Button fx:id="btnInsertHotel" layoutX="552.0" layoutY="403.0" mnemonicParsing="false" onAction="#insertHotel" prefHeight="59.0" prefWidth="147.0" text="Insertar" />
+      <Label layoutX="313.0" layoutY="106.0" prefHeight="39.0" prefWidth="559.0" AnchorPane.bottomAnchor="427.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="359.0" AnchorPane.topAnchor="106.0" />
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="235.0" layoutY="176.0" onMouseClicked="#deleteImage" prefHeight="30.0" prefWidth="28.0" text="x" textFill="#f50808" visible="false" fx:id="xDeteleImage">
+         <font>
+            <Font name="Century Schoolbook" size="18.0" />
+         </font>
+      </Label>
+      
    </children>
 </AnchorPane>

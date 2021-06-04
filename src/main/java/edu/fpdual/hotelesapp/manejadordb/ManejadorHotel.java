@@ -1,5 +1,6 @@
 package edu.fpdual.hotelesapp.manejadordb;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import edu.fpdual.hotelesapp.conector.Conector;
+import edu.fpdual.hotelesapp.objetos.DatosTarjetaCiudades;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 
 /**
@@ -67,6 +69,27 @@ public class ManejadorHotel {
 
 		return false;
 	}
+	
+	
+	public boolean crearHotel(Conector con, Hotel hotel, InputStream imageBlob) {
+		Connection con2 = con.getMySQLConnection();
+		String sql = "INSERT INTO Hotel(`nombre`,`localizacion`,`estrellas`,`descripcion`,`imagen`) VALUES(?,?,?,?,?)";
+		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
+			stmt.setString(1, hotel.getNombre());
+			stmt.setString(2, hotel.getLocalizacion());
+			stmt.setInt(3, hotel.getEstrellas());
+			stmt.setString(4, hotel.getDescripcion());
+			stmt.setBlob(5, imageBlob);
+			stmt.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	
 
 	/**
 	 * Metodo Lista Hoteles para mostrar la lista de todos los hoteles disponibles
@@ -247,14 +270,14 @@ public class ManejadorHotel {
 		return idsFormat;
 	}
 	
-	public LinkedHashMap<String,Integer> listaHotelesOrdenCantidadCiudad(Conector con){
+	public ArrayList<DatosTarjetaCiudades> listaHotelesOrdenCantidadCiudad(Conector con){
 		Connection con2 = con.getMySQLConnection();
-		String sql = "SELECT id, localizacion, COUNT(localizacion) as cantidad FROM Hotel GROUP BY localizacion ORDER BY COUNT(localizacion) DESC, localizacion ASC";
+		String sql = "SELECT localizacion, COUNT(localizacion) as cantidad, SUM(estrellas) as sumEstrellas FROM Hotel GROUP BY localizacion ORDER BY COUNT(localizacion) DESC, localizacion ASC";
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
-			LinkedHashMap<String,Integer> ciudades = new LinkedHashMap<>();
+			ArrayList<DatosTarjetaCiudades> ciudades = new ArrayList<>();
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				ciudades.put(result.getString("localizacion"),result.getInt("cantidad"));
+				ciudades.add(new DatosTarjetaCiudades(result.getString("localizacion"),result.getInt("cantidad"),result.getInt("sumEstrellas")));
 			}
 			return ciudades;
 		} catch (SQLException e) {
