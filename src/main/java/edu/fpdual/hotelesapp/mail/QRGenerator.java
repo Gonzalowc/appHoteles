@@ -24,7 +24,9 @@ public class QRGenerator {
 		int width = 300;
 		int height = 300;
 		String format = "jpg";
-		String content = "C:\\Users\\angela.bonilla.gomez\\Documents\\reserva1.pdfImagen.png";// Contenido del código QR
+		String ruta = System.getProperty("user.home");
+		String rutaCompleta = ruta+"/Documents/reserva"+1+".pdf";
+		String content = rutaCompleta+"Imagen.png";// Contenido del código QR
 
 		/**
 		 * Definir sugerencias HashMap
@@ -49,11 +51,10 @@ public class QRGenerator {
 			/**
 			 * Finalmente, usamos la clase de función MultiformatWriter para llamar a la
 			 * función echoed y devolver un valor, luego escribimos en el archivo
-			 */
-			//
-			BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, width, height, hints);
-
-			Path file = new File("C:\\Users\\angela.bonilla.gomez\\Documents\\codigoQR.png").toPath();
+			 */												/*content*/			
+			BitMatrix bitMatrix = multiFormatWriter.encode("iVBORw0KGgoAAAANSUhEUgAACa8AAA20CAIAAAB3e7Q/AAAACXBIWXMAAC4jAAAuIwF4pT92AACAAElEQVR4AQBGkbluAP" , BarcodeFormat.QR_CODE, width, height, hints);
+			String rutaCompleta2 = ruta+"/Documents/codigoQR.png";
+			Path file = new File(rutaCompleta2).toPath();
 			MatrixToImageWriter.writeToPath(bitMatrix, format, file);
 			/**
 			 * ************* Agregar logo *****************
@@ -64,12 +65,12 @@ public class QRGenerator {
 			 */
 			BufferedImage bufferedImage = ImageIO.read(new File(file.toString()));
 			Graphics2D graphics = bufferedImage.createGraphics();
-
+System.out.println("ruta "+ruta);
 			/**
 			 * Leer la imagen del logo
 			 */
 			BufferedImage logo = ImageIO
-					.read(new File("C:\\Users\\angela.bonilla.gomez\\eclipse-workspace\\appHoteles\\src\\main\\resources\\img\\logo2.png"));
+					.read(new File(ruta+"\\ejemplosConJavaFX\\apphoteles\\src\\main\\resources\\img\\logo2.png"));
 
 			/**
 			 * Establece el tamaño del logo, si es demasiado grande cubrirá el código QR,
@@ -102,7 +103,7 @@ public class QRGenerator {
 			logo.flush();
 			bufferedImage.flush();
 			
-			ImageIO.write(bufferedImage, format, new File("C:\\Users\\angela.bonilla.gomez\\Documents\\codigoQR2.png"));
+			ImageIO.write(bufferedImage, format, new File(ruta+"\\Documents\\codigoQR2.png"));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -11,7 +11,9 @@ import org.apache.pdfbox.util.ImageIOUtil;
 
 public class PdfToImageConverter {
 	public static void main(String[] args) {
-		String pdfFileName ="C:\\Users\\angela.bonilla.gomez\\Documents\\reserva1.pdf";
+		String ruta = System.getProperty("user.home");
+		String rutaCompleta = ruta+"/Documents/reserva"+1+".pdf";
+		String pdfFileName =rutaCompleta;
 		try {
 			PDDocument document = PDDocument.load(new File(pdfFileName));
 			
