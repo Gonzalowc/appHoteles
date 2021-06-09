@@ -48,8 +48,6 @@ class HotelTest {
 		
 		String string = hotel.toString();
 		
-		System.out.println(hotel);
-		
 		assertTrue(string.equals("Hotel [id=0, nombre=Pajaritos, localizacion=Sevilla, estrellas=3, descripcion=Nuevo, habitaciones=[], serviciosHotel=[]]"));
 	}
 	
