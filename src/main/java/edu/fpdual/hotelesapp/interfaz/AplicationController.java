@@ -32,29 +32,31 @@ public class AplicationController {
 	 */
 	@FXML
 	private BorderPane myPanel;
-
-	private FXMLLoader aplicationLoader;
 	private ManejadorHotel mh = new ManejadorHotel();
 	private ArrayList<Hotel> hoteles = mh.listaHoteles(new Conector());
 	private ArrayList<Hotel> hotelesMostrar = hoteles;
 	private Usuario user;
-
+	
 	public void setHotelesMostrar(ArrayList<Hotel> hotelesFiltro) {
 		this.hotelesMostrar = hotelesFiltro;
 	}
-	public ArrayList<Hotel> getHotelesMostrar(){
+
+	public ArrayList<Hotel> getHotelesMostrar() {
 		return hotelesMostrar;
 	}
+
 	public void setUsuario(Usuario usuario) {
 		this.user = usuario;
 	}
 
+	public BorderPane getMyPanel() {
+		return myPanel;
+	}
+	public void setMyPanel(BorderPane myPanel) {
+		this.myPanel = myPanel;
+	}
 	public Usuario getUsuario() {
 		return user;
-	}
-
-	public void setAplicationLoader(FXMLLoader loader) {
-		aplicationLoader = loader;
 	}
 
 	/**
@@ -71,6 +73,13 @@ public class AplicationController {
 		myPanel.setBottom(generarBuscador());
 		myPanel.setRight(null);
 	}
+	@FXML
+	public void toPrincipalVista(ActionEvent event) throws IOException{
+		System.out.println("toPrinciaplVista: AplicationController"+myPanel);
+		primeraVentana();
+	}
+
+	
 
 	@FXML
 	public void toReservaRoomVista(ActionEvent event) throws IOException {
@@ -92,15 +101,22 @@ public class AplicationController {
 		myPanel.setRight(null);
 		myPanel.setBottom(null);
 	}
-	
+	@FXML
+	public void toReservaRegistro(ActionEvent event) throws IOException{
+		myPanel.setCenter(tablaReservas());
+		myPanel.setBottom(null);
+		myPanel.setRight(null);
+	}
+
 	/**
 	 * Metodo para cerrarSesion
+	 * 
 	 * @throws IOException
 	 */
 	@FXML
 	public void goBack() throws IOException {
 		user = null;
-		App.cambiarVentana("logIn",StageStyle.UNDECORATED,false);
+		App.cambiarVentana("logIn", StageStyle.UNDECORATED, false);
 	}
 
 	/**
@@ -117,14 +133,11 @@ public class AplicationController {
 
 		GridPane grid = new GridPane();
 
-//		grid.setHgap(100);
-//		grid.setVgap(150);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.TOP_CENTER);
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		// grid.setId("gridpane");
-		// grid.getStylesheets().add("gridpane");
+
 		int count = 0;
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ANCHO; j++) {
@@ -224,6 +237,48 @@ public class AplicationController {
 			buscadorHotelController.setUser(user);
 			return aux;
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@FXML
+	public void primeraVentana() throws IOException{
+		try {
+			// crear la clase que controla el archivo FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("inicio.fxml"));
+			// creamos el panel a partir del loader
+			AnchorPane inicio = (AnchorPane) loader.load();
+
+			// creamos el objeto controlador que queremos usar
+			InicioController inicioController = loader.<InicioController>getController();
+			// usamos sus metodos
+			inicioController.setParent(myPanel);
+			inicioController.setPanelCiudades(inicioController.listaCiudades());
+			myPanel.setCenter(inicio);
+			myPanel.setBottom(null);
+			myPanel.setRight(null);
+			System.out.println("primeraVentana: AplicationController"+ myPanel);
+			System.out.println("Primera ventana");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public AnchorPane tablaReservas() throws IOException{
+		try {
+			// crear la clase que controla el archivo FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("reservaRegistro.fxml"));
+			// creamos el panel a partir del loader
+			AnchorPane registros = (AnchorPane) loader.load();
+
+			// creamos el objeto controlador que queremos usar
+			ReservaRegistroController reservaRegistroController = loader.<ReservaRegistroController>getController();
+			// usamos sus metodos
+			reservaRegistroController.setUser(user);
+			reservaRegistroController.rellenarTabla();
+			return registros;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

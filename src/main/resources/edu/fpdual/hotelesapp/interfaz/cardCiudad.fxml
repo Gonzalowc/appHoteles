@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane prefHeight="98.0" prefWidth="306.0" style="-fx-background-color: #A2DCFD; -fx-background-radius: 25px; -fx-border-color: #094293; -fx-border-width: 3px; -fx-border-radius: 25px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane onMouseClicked="#toBuscadorCiudad" prefHeight="98.0" prefWidth="306.0" style="-fx-background-color: #A2DCFD; -fx-background-radius: 25px; -fx-border-color: #094293; -fx-border-width: 3px; -fx-border-radius: 25px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.CardCiudadController">
    <children>
-      <Label fx:id="nomCiudad" contentDisplay="CENTER" layoutX="14.0" layoutY="21.0" prefHeight="56.0" prefWidth="200.0" text="Localización" textAlignment="CENTER">
+      <Label fx:id="nomCiudad" contentDisplay="CENTER" layoutX="14.0" layoutY="8.0" prefHeight="81.0" prefWidth="174.0" text="Republica Dominicana" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="8.0" prefHeight="25.0" prefWidth="115.0" text="Hoteles" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="179.0" layoutY="1.0" prefHeight="25.0" prefWidth="115.0" text="Hoteles" textAlignment="CENTER">
+      <Label fx:id="nHoteles" alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="28.0" prefHeight="35.0" prefWidth="108.0" text="nº" textAlignment="CENTER" textFill="#0017bf">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="nHoteles" alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="21.0" prefHeight="27.0" prefWidth="115.0" text="nº" textAlignment="CENTER">
+      <Label fx:id="nMediaEstrellas" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="209.0" layoutY="57.0" prefHeight="35.0" prefWidth="46.0" text="nº" textAlignment="CENTER" textFill="#8d7516">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="179.0" layoutY="42.0" prefHeight="25.0" prefWidth="115.0" text="Habitaciones" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="nHabitaciones" alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="64.0" prefHeight="27.0" prefWidth="115.0" text="nº" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
+      <ImageView fitHeight="27.0" fitWidth="26.0" layoutX="255.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/stat.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

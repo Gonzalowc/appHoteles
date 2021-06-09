@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="671.0" prefWidth="1056.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="597.0" prefWidth="1237.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.InicioController">
    <children>
-      <AnchorPane layoutX="41.0" layoutY="14.0" prefHeight="120.0" prefWidth="955.0" />
+      <AnchorPane fx:id="panelCambiar" layoutX="32.0" layoutY="14.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: gray;" />
+      <ScrollPane fx:id="panelCiudades" fitToHeight="true" fitToWidth="true" layoutX="32.0" layoutY="179.0" maxHeight="1.7976931348623157E308" prefHeight="400.0" prefWidth="1200.0">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
