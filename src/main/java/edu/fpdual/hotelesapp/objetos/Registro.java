@@ -5,83 +5,77 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 /**
  * Clase Registro
+ * 
  * @author angela.bonilla.gomez
  *
  */
-
+@AllArgsConstructor
 @Getter
 @Setter
-public class Registro implements Comparable<Registro>{
+@ToString
+public class Registro implements Comparable<Registro> {
 	/**
 	 * ID del registro
 	 */
 	private int id;
-	/**
-	 * Habitacion relacionada del registro
-	 */
-	private Habitacion habitacion;
-	/**
-	 * Usuario relacionado con el registro
-	 */
-	private Usuario usuario;
-	/**
-	 * Precio de la reserva
-	 */
+	private String nombreHotel;
+	private String localizacion;
+	private int estrellas;
+	private int id_habitacion;
+	private int num_personas;
+	private String fecha_Entrada;
+	private String fecha_salida;
 	private double precio;
-	/**
-	 * Fecha de la reserva
-	 */
-	private Date fecha;
-	
+	private String nombre_usuario;
+	private String dni;
+	private String telefono;
+	private String email;
 	private String id_services;
-	
+
 	/**
 	 * Constructor de registro
-	 * @param id del registro
+	 * 
+	 * @param id         del registro
 	 * @param habitacion relacionada con el registro
-	 * @param usuario relacionado con el registro
-	 * @param precio de la reserva
-	 * @param fecha del registro
+	 * @param usuario    relacionado con el registro
+	 * @param precio     de la reserva
+	 * @param fecha      del registro
 	 */
-	public Registro(int id, Habitacion habitacion, Usuario usuario, double precio, Date fecha) {
-		this.id = id;
-		this.habitacion = habitacion;
-		this.usuario = usuario;
-		this.precio = precio;
-		this.fecha = fecha;
-	}
-	
+
 	/**
 	 * Constructor de registro a partir de la base de datos
+	 * 
 	 * @param result
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
-	public Registro(ResultSet result) throws SQLException {
+	public Registro(ResultSet result, Boolean all) throws SQLException {
 		try {
-		this.id = result.getInt("id");
-		this.habitacion = null;//result.getInt("id_habitacion");
-		this.usuario = null;//result.getInt("id_usuario");
-		this.precio = result.getDouble("precio");
-		this.fecha = result.getDate("fecha");	
-		}catch(SQLException e){
+			id = result.getInt("id");
+			nombreHotel = result.getString("nombreHotel");
+			localizacion = result.getString("localizacion");
+			estrellas = result.getInt("estrellas");
+			id_habitacion = result.getInt("id_habitacion");
+			num_personas = result.getInt("num_personas");
+			fecha_Entrada = result.getString("fecha_Entrada");
+			fecha_salida = result.getString("fecha_salida");
+			precio = result.getDouble("precio");
+			nombre_usuario = result.getString("nombre_usuario");
+			dni = result.getString("dni");
+			telefono = result.getString("telefono");
+			email = result.getString("email");
+			id_services = result.getString("id_services");
+		} catch (SQLException e) {
 			e.getStackTrace();
 			throw e;
 		}
-		
-	}
 
-	
-	/**
-	 * ToString para mostrar los datos de la clase
-	 */
-	@Override
-	public String toString() {
-		return "Registro [id=" + id + ", habitacion=" + habitacion + ", usuario=" + usuario + ", precio=" + precio
-				+ ", fecha=" + fecha + "]";
 	}
 
 	/**
@@ -119,7 +113,5 @@ public class Registro implements Comparable<Registro>{
 	public int compareTo(Registro r) {
 		return this.id - r.getId();
 	}
-	
 
-	
 }

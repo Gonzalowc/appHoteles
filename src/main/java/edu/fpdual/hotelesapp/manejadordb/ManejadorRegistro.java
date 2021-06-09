@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.itextpdf.text.pdf.PdfPTable;
 
 import edu.fpdual.hotelesapp.conector.Conector;
+import edu.fpdual.hotelesapp.objetos.Registro;
 
 public class ManejadorRegistro {
 
@@ -104,5 +104,25 @@ public class ManejadorRegistro {
 		}
 		return -1;
 	}
+	public ArrayList<Registro> getRegistrosPorUsuario(Conector con, String nombreUsuario) {
+		ArrayList<Registro> registros = new ArrayList<>();
+		Connection con2 = con.getMySQLConnection();
+		/**
+		 * Realizamos las consultas de la tabla
+		 */
+		String sql = "SELECT * FROM Registro WHERE nombre_usuario=?";
+		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
+			stmt.setString(1, nombreUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Registro registro = new Registro(result,false);
+				registros.add(registro);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return registros;
+	}
+	
 
 }

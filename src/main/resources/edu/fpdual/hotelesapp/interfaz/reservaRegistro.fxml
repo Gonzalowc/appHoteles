@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxWidth="1.7976931348623157E308" prefHeight="529.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="edu.fpdual.hotelesapp.interfaz.ReservaRegistroController">
+   <children>
+      <TableView fx:id="tabla" layoutX="22.0" layoutY="61.0" prefWidth="1140.0">
+        <columns>
+          <TableColumn   fx:id="id_Registro" prefWidth="75.0" text="idRegistro" visible="false" />
+          <TableColumn   fx:id="nombreHotel" minWidth="20.0" prefWidth="130.0" text="Nombre Hotel" />
+            <TableColumn fx:id="localizacion" minWidth="20.0" prefWidth="110.0" text="Localización" />
+            <TableColumn fx:id="estrellas" minWidth="20.0" prefWidth="90.0" text="Estrellas" />
+            <TableColumn fx:id="id_Habitacion" prefWidth="75.0" text="idHabitacion" visible="false" />
+            <TableColumn fx:id="numPersonas" minWidth="20.0" prefWidth="90.0" text="Personas" />
+            <TableColumn fx:id="fechaEntrada" minWidth="20.0" prefWidth="140.0" text="Fecha Entrada" />
+            <TableColumn fx:id="fechaSalida" minWidth="20.0" prefWidth="140.0" text="Fecha Salida" />
+            <TableColumn fx:id="precio" minWidth="20.0" prefWidth="110.0" text="Precio" />
+            <TableColumn fx:id="id_Services" minWidth="20.0" prefWidth="110.0" text="idServices" visible="false" />
+            <TableColumn fx:id="opciones" minWidth="20.0" prefWidth="250.0" text="Opciones" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

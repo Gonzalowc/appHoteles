@@ -44,5 +44,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="loadImg" fitHeight="111.0" fitWidth="112.0" layoutX="367.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@img/carga.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

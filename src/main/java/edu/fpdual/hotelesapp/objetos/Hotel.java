@@ -91,7 +91,7 @@ public class Hotel implements Comparable<Hotel> {
 			if(imagen!=null) {
 				System.out.println("IMAGEN CARGADA");
 			}else {
-				System.out.println("La imagen a la kk"+" Hotel "+nombre+" creado");
+				System.out.println("Hotel Creado");
 			}
 			System.out.println();
 		} catch (SQLException e) {

@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,6 +37,8 @@ public class LoginController {
 	private Label msgError;
 	@FXML
 	private Button btnLogin;
+	@FXML
+	private ImageView loadImg;
 
 	private LinkedHashMap<String, Integer> intentosDeSesionFallidos = new LinkedHashMap<>();
 
@@ -90,15 +93,15 @@ public class LoginController {
 			// usamos sus metodos
 			System.out.println(user);
 			appController.setUsuario(user);
-			appController.setAplicationLoader(loader);
-			//aux.setCenter(aux);
 			Scene scene = new Scene(aux);
 			stage.hide();
 			stage.setMaximized(true);
 			stage.setScene(scene);
 			stage.show();
 			App.setStage(stage);
+			appController.primeraVentana();
 		} else {
+			
 			addFallo(con, mu);
 			msgError.setVisible(true);
 			System.out.println(intentosDeSesionFallidos);
@@ -106,10 +109,11 @@ public class LoginController {
 				desactivarCampos();
 				String correo = mu.getEmailUser(con, txtUsuario.getText());
 				throw new ManyFails("Error Inicio De sesión", correo);
+				
 			}
 
-			txtPassword.setText(null);
-			txtUsuario.setText(null);
+			
+			
 		}
 	}
 
@@ -125,6 +129,7 @@ public class LoginController {
 	}
 
 	private void desactivarCampos() {
+		loadImg.setVisible(true);
 		txtPassword.setDisable(true);
 		txtUsuario.setDisable(true);
 		btnLogin.setDisable(true);
@@ -134,9 +139,12 @@ public class LoginController {
 				txtPassword.setDisable(false);
 				txtUsuario.setDisable(false);
 				btnLogin.setDisable(false);
+				loadImg.setVisible(false);
 			}
 		}, 25000);
 		intentosDeSesionFallidos.remove(txtUsuario.getText());
+		txtPassword.setText(null);
+		txtUsuario.setText(null);
 	}
 
 }

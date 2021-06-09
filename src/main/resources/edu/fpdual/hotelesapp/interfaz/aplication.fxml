@@ -9,17 +9,22 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Hoteles">
+          <Menu mnemonicParsing="false" text="Inicio">
             <items>
-              <MenuItem mnemonicParsing="false" text="Modificar" />
-                  <MenuItem mnemonicParsing="false" text="Nuevo" onAction="#toNewHotelVista"/>
-                  <MenuItem mnemonicParsing="false" onAction="#toHotelesVista" text="Listado" />
-                  <MenuItem mnemonicParsing="false" text="Buscar" />
+                  <MenuItem mnemonicParsing="false" onAction="#toPrincipalVista" text="Principal" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Hoteles">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Modificar" />
+                  <MenuItem mnemonicParsing="false" onAction="#toNewHotelVista" text="Nuevo" />
+                  <MenuItem mnemonicParsing="false" onAction="#toHotelesVista" text="Listado" />
+                  <MenuItem mnemonicParsing="false" text="Buscar" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Habitaciones">
             <items>
-             	 <MenuItem mnemonicParsing="false" text="Nueva" onAction="#toNewRoomVista"  />
+             	 <MenuItem mnemonicParsing="false" onAction="#toNewRoomVista" text="Nueva" />
                   <MenuItem mnemonicParsing="false" text="Modificar" />
                   <MenuItem mnemonicParsing="false" text="Listado" />
                   <MenuItem mnemonicParsing="false" text="Buscar" />
@@ -27,10 +32,15 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Reservas">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Registro" />
+                  <MenuItem mnemonicParsing="false" onAction="#toReservaRegistro" text="Registro" />
                   <MenuItem mnemonicParsing="false" text="Activas" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Ajustes">
+               <items>
+                  <MenuItem fx:id="salir" mnemonicParsing="false" text="Salir" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
