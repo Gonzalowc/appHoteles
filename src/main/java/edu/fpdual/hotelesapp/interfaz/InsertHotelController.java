@@ -67,6 +67,10 @@ public class InsertHotelController {
 		}else {
 			mh.crearHotel(con, h);
 		}
+		txtHotelLocation.setText(null);
+		txtHotelStars.setText(null);
+		txtHotelDescription.setText(null);
+		deleteImage();
 	}
 	
 	

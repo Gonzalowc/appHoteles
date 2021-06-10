@@ -41,8 +41,10 @@ public class ReservaRegistroController {
 	@FXML
 	private TableColumn<Registro, String> id_Services;
 	@FXML
-	private TableColumn<Registro, String> opciones;
-
+	private TableColumn opciones;
+	@FXML
+	private TableColumn estado;
+	
 	private Usuario user;
 
 	public void setUser(Usuario user) {
@@ -61,42 +63,22 @@ public class ReservaRegistroController {
 		ArrayList<Registro> registrosDB = manejadorRegistro.getRegistrosPorUsuario(con, user.getNombre());
 		for (int i = 0; i < registrosDB.size(); i++) {
 			registros.add(registrosDB.get(i));
-			id_Registro.setCellValueFactory(new PropertyValueFactory<>("id"));
-			nombreHotel.setCellValueFactory(new PropertyValueFactory<>("nombreHotel"));
-			localizacion.setCellValueFactory(new PropertyValueFactory<>("localizacion"));
-			estrellas.setCellValueFactory(new PropertyValueFactory<>("estrellas"));
-			id_Habitacion.setCellValueFactory(new PropertyValueFactory<>("id_Habitacion"));
-			numPersonas.setCellValueFactory(new PropertyValueFactory<>("num_personas"));
-			fechaEntrada.setCellValueFactory(new PropertyValueFactory<>("fecha_Entrada"));
-			fechaSalida.setCellValueFactory(new PropertyValueFactory<>("fecha_salida"));
-			precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
-			id_Services.setCellValueFactory(new PropertyValueFactory<>("id_Services"));
 		}
-		
+		id_Registro.setCellValueFactory(new PropertyValueFactory<>("id"));
+		nombreHotel.setCellValueFactory(new PropertyValueFactory<>("nombreHotel"));
+		localizacion.setCellValueFactory(new PropertyValueFactory<>("localizacion"));
+		estrellas.setCellValueFactory(new PropertyValueFactory<>("estrellas"));
+		id_Habitacion.setCellValueFactory(new PropertyValueFactory<>("id_Habitacion"));
+		numPersonas.setCellValueFactory(new PropertyValueFactory<>("num_personas"));
+		fechaEntrada.setCellValueFactory(new PropertyValueFactory<>("fecha_Entrada"));
+		fechaSalida.setCellValueFactory(new PropertyValueFactory<>("fecha_salida"));
+		precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+		id_Services.setCellValueFactory(new PropertyValueFactory<>("id_Services"));
+		//Rellenar tabla
 		tabla.setItems(registros);
-		fechaEntrada.setCellFactory(new Callback<TableColumn<Registro,String>, TableCell<Registro,String>>(){
-	        @Override
-	        public TableCell<Registro, String> call(TableColumn<Registro, Integer> fechaEntrada) {
-	            return new TableCell<Registro,String>(){
-	                @Override
-	                protected void updateItem(String item, boolean empty) {
-	                    super.updateItem(item, empty);
-
-	                    if (item != null){
-	                        if (comprobarFecha(item)<0){
-	                            setStyle("-fx-background-color: red;");
-	                        }
-	                        else if (comprobarFecha(item)>0){
-	                            setStyle("-fx-background-color: green;");
-	                        }
-	                    }
-
-	                }
-	            };
-	        }
-	    });
 	}
 
+	
 	public int comprobarFecha(String fecha) {
 		ArrayList<String> fechaSeparada = (ArrayList<String>) Arrays.asList(fecha.split("-"));
 		LocalDate fechaComprobar =  LocalDate.of(Integer.parseInt(fechaSeparada.get(0)),Integer.parseInt(fechaSeparada.get(1)),Integer.parseInt(fechaSeparada.get(2)));

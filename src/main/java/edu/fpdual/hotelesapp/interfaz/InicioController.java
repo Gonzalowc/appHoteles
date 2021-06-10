@@ -29,6 +29,13 @@ public class InicioController {
 	private Usuario user;
 	private ArrayList<DatosTarjetaCiudades> ciudades;
 	
+	public void setUser(Usuario user) {
+		this.user=user;
+	}
+	public Usuario getUser() {
+		return user;
+	}
+	
 	public ArrayList<DatosTarjetaCiudades> getCiudades(){
 		return ciudades;
 	}
@@ -97,7 +104,7 @@ public class InicioController {
 						// usamos sus metodos
 						cardCiudadController.setParent(parent);
 						cardCiudadController.setDataCard(ciudad);
-						
+						cardCiudadController.setUser(user);
 						System.out.println("listaCiudad: InicioController: "+parent);
 						grid.add(aux, j, i, 1, 1);
 						System.out.println("Tarjeta "+i+" "+j);

@@ -254,6 +254,7 @@ public class AplicationController {
 			InicioController inicioController = loader.<InicioController>getController();
 			// usamos sus metodos
 			inicioController.setParent(myPanel);
+			inicioController.setUser(user);
 			inicioController.setPanelCiudades(inicioController.listaCiudades());
 			myPanel.setCenter(inicio);
 			myPanel.setBottom(null);

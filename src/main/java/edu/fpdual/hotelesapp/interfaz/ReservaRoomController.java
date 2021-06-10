@@ -158,9 +158,7 @@ public class ReservaRoomController {
 						user);
 				con2.commit();
 				msgExito.setVisible(true);
-				LocalDate diaEntrada = dateEntry.getValue();
-				String serviciosID = Integer.toString(habitacion.getId()) + user.getNombre() + diaEntrada.toString();
-				crearPDFyEnviar(con,serviciosID);
+				
 				dateLeft.setValue(null);
 				dateEntry.setValue(null);
 			} catch (SQLException e) {
@@ -172,7 +170,9 @@ public class ReservaRoomController {
 				}
 				e.printStackTrace();
 			}
-
+			LocalDate diaEntrada = dateEntry.getValue();
+			String serviciosID = Integer.toString(habitacion.getId()) + user.getNombre() + diaEntrada.toString();
+			crearPDFyEnviar(con,serviciosID);
 		} else {
 			dateLeft.setValue(null);
 			dateEntry.setValue(null);
