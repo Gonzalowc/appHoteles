@@ -43,6 +43,18 @@ class HotelTest {
 	}
 	
 	@Test
+	public void testResultSetConstructor3() throws SQLException {	
+		 byte[] imagen = {20,10,30,5};
+	  when(result.getInt(Mockito.anyString())).thenReturn(43);
+	  when(result.getString(Mockito.anyString())).thenReturn("a");
+	  when(result.getBytes(Mockito.anyString())).thenReturn(imagen);
+	  
+	 Hotel hotel = new Hotel(result);
+
+	 assertNotNull(hotel);
+	}
+	
+	@Test
 	public void toStringTest() {
 		Hotel hotel = new Hotel("Pajaritos","Sevilla",3,"Nuevo");
 		
@@ -124,6 +136,8 @@ class HotelTest {
 		  ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 		  servicios.add(s);
 		  
+		  byte[] imagen = {20,10,30,5};
+		  
 		  h.setId(3);
 		  assertEquals(3, h.getId());
 		  
@@ -149,5 +163,9 @@ class HotelTest {
 		  h.setServiciosHotel(servicios);
 		  assertNotNull(h.getServiciosHotel());
 		  assertEquals(servicios, h.getServiciosHotel());
+		  
+		  h.setImagen(imagen);
+		  assertNotNull(h.getImagen());
+		  assertEquals(imagen,h.getImagen());
 	  }
 }
