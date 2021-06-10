@@ -51,7 +51,7 @@ public class ManejadorRegistro {
 		/**
 		 * Realizamos las consultas de la tabla
 		 */
-		String sql = "SELECT id,nombreHotel,localizacion,Estrellas,id_habitacion,num_personas,fecha_entrada,fecha_salida,precio FROM Registro WHERE id = ?";
+		String sql = "SELECT nombreHotel,localizacion,Estrellas,id_habitacion,num_personas,fecha_entrada,fecha_salida,precio FROM Registro WHERE id = ?";
 		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 			stmt.setInt(1, idRegistro);
 			ResultSet result = stmt.executeQuery();
@@ -64,7 +64,6 @@ public class ManejadorRegistro {
 				tablaHotel.addCell(result.getString(6));
 				tablaHotel.addCell(result.getString(7));
 				tablaHotel.addCell(result.getString(8));
-				tablaHotel.addCell(result.getString(9));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,7 +114,7 @@ public class ManejadorRegistro {
 			stmt.setString(1, nombreUsuario);
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				Registro registro = new Registro(result,false);
+				Registro registro = new Registro(result);
 				registros.add(registro);
 			}
 		} catch (SQLException e) {
@@ -123,6 +122,20 @@ public class ManejadorRegistro {
 		}
 		return registros;
 	}
-	
+	public Registro getRegistroPorID(Conector con, int idRegistro) {
+		Connection con2 = con.getMySQLConnection();
+		String sql = "Select *  from Registro where id=?";
+		try(PreparedStatement stmt = con2.prepareStatement(sql)){
+			stmt.setInt(1, idRegistro);
+			ResultSet result = stmt.executeQuery();
+			if(result.next()) {
+				return new Registro(result);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

@@ -2,9 +2,13 @@ package edu.fpdual.hotelesapp.manejadordb;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.itextpdf.text.pdf.PdfPTable;
+
 import edu.fpdual.hotelesapp.conector.Conector;
+import edu.fpdual.hotelesapp.objetos.Registro;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -36,6 +40,28 @@ public class ManejadorRelHotelServicio {
 			System.out.println("No hay servicios de Hotel seleccionados");
 		}
 
+	}
+	public void setDataTableServices(Conector con, PdfPTable tablaServicios, int idRegistro) {
+		Connection con2 = con.getMySQLConnection();
+		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
+		String sql = "SELECT Servicio.nombre_servicio, Servicio.precio, Servicio.tipo "
+				+ "FROM `Rel_hotel_servicio` JOIN Servicio "
+				+ "ON Rel_hotel_servicio.id_servicio = Servicio.id  "
+				+ "WHERE Rel_hotel_servicio.servicio_registro_id=?";
+		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
+			Registro registro = manejadorRegistro.getRegistroPorID(con, idRegistro);
+			String code = registro.getId_services();
+			stmt.setString(1, code);
+			ResultSet result = stmt.executeQuery();
+			while (result.next()) {
+				tablaServicios.addCell(result.getString(1));
+				tablaServicios.addCell(result.getString(2));
+				tablaServicios.addCell(result.getString(3));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

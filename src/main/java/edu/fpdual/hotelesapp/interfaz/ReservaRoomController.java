@@ -171,7 +171,7 @@ public class ReservaRoomController {
 			}
 			LocalDate diaEntrada = dateEntry.getValue();
 			String serviciosID = Integer.toString(habitacion.getId()) + user.getNombre() + diaEntrada.toString();
-			// crearPDFyEnviar(con,serviciosID);
+			crearPDFyEnviar(con,serviciosID);
 			dateLeft.setValue(null);
 			dateEntry.setValue(null);
 		} else {
