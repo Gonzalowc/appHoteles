@@ -158,21 +158,22 @@ public class ReservaRoomController {
 						user);
 				con2.commit();
 				msgExito.setVisible(true);
-				
-				dateLeft.setValue(null);
-				dateEntry.setValue(null);
+
 			} catch (SQLException e) {
+				e.printStackTrace();
 				try {
 					System.out.println("rollback");
 					con2.rollback();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				e.printStackTrace();
+
 			}
 			LocalDate diaEntrada = dateEntry.getValue();
 			String serviciosID = Integer.toString(habitacion.getId()) + user.getNombre() + diaEntrada.toString();
-			crearPDFyEnviar(con,serviciosID);
+			// crearPDFyEnviar(con,serviciosID);
+			dateLeft.setValue(null);
+			dateEntry.setValue(null);
 		} else {
 			dateLeft.setValue(null);
 			dateEntry.setValue(null);
@@ -277,7 +278,6 @@ public class ReservaRoomController {
 		ManejadorRelHabitacionServicio manejadorHabServ = new ManejadorRelHabitacionServicio();
 		String serviciosID = habitacion.getId() + user.getNombre() + dateEntry.getValue().toString();
 		manejadorHabServ.addConjuntoServiciosHabitacion(con2, habitacion, listSelectHab.getItems(), serviciosID);
-
 	}
 
 	public void saveServiciosHotel(Connection con2) {
@@ -293,7 +293,7 @@ public class ReservaRoomController {
 		System.out.println("toSelectHotel");
 		if (servicio != null) {
 			listDispoHotel.getSelectionModel().clearSelection();
-			listDispoHotel.getItems().remove(getSelectedID(listDispoHotel));
+			listDispoHotel.getItems().remove(servicio);
 			listSelectHotel.getItems().add(servicio);
 			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) + servicio.getPrecio())));
 		}
@@ -304,7 +304,7 @@ public class ReservaRoomController {
 		System.out.println("toDispoHotel");
 		if (servicio != null) {
 			listSelectHotel.getSelectionModel().clearSelection();
-			listSelectHotel.getItems().remove(getSelectedID(listSelectHotel));
+			listSelectHotel.getItems().remove(servicio);
 			listDispoHotel.getItems().add(servicio);
 			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) - servicio.getPrecio())));
 		}
@@ -315,7 +315,7 @@ public class ReservaRoomController {
 		Servicio servicio = listDispoHab.getSelectionModel().getSelectedItem();
 		if (servicio != null) {
 			listDispoHab.getSelectionModel().clearSelection();
-			listDispoHab.getItems().remove(getSelectedID(listDispoHab));
+			listDispoHab.getItems().remove(servicio);
 			listSelectHab.getItems().add(servicio);
 			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) + servicio.getPrecio())));
 		}
@@ -326,17 +326,9 @@ public class ReservaRoomController {
 		Servicio servicio = listSelectHab.getSelectionModel().getSelectedItem();
 		if (servicio != null) {
 			listSelectHab.getSelectionModel().clearSelection();
-			listSelectHab.getItems().remove(getSelectedID(listSelectHab));
+			listSelectHab.getItems().remove(servicio);
 			listDispoHab.getItems().add(servicio);
 			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) - servicio.getPrecio())));
 		}
-	}
-
-	private int getSelectedID(ListView lista) {
-		int selectedID = lista.getItems().size();
-		if (selectedID != -1) {
-			return selectedID - 1;
-		}
-		return 0;
 	}
 }
