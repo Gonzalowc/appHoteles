@@ -31,7 +31,7 @@ class RegistroTest {
 	  when(result.getDouble(Mockito.anyString())).thenReturn(43.5);
 	  when(result.getString(Mockito.anyString())).thenReturn("A");
 	  
-	 Registro r = new Registro(result,true);
+	 Registro r = new Registro(result);
 
 	 assertNotNull(r);
 	}
@@ -40,7 +40,7 @@ class RegistroTest {
 	public void testresultSetConstructor2() throws SQLException{
 		 when(result.getInt(Mockito.anyString())).thenThrow(new SQLException());
 
-		 assertThrows(SQLException.class,() -> new Registro(result,true));
+		 assertThrows(SQLException.class,() -> new Registro(result));
 	}
 	
 	@Test

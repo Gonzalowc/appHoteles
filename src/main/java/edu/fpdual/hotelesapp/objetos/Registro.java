@@ -40,22 +40,12 @@ public class Registro implements Comparable<Registro> {
 	private String id_services;
 
 	/**
-	 * Constructor de registro
-	 * 
-	 * @param id         del registro
-	 * @param habitacion relacionada con el registro
-	 * @param usuario    relacionado con el registro
-	 * @param precio     de la reserva
-	 * @param fecha      del registro
-	 */
-
-	/**
 	 * Constructor de registro a partir de la base de datos
 	 * 
 	 * @param result
 	 * @throws SQLException
 	 */
-	public Registro(ResultSet result, Boolean all) throws SQLException {
+	public Registro(ResultSet result) throws SQLException {
 		try {
 			id = result.getInt("id");
 			nombreHotel = result.getString("nombreHotel");
