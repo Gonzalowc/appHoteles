@@ -195,6 +195,8 @@ public class PdfCreator {
 			tablaServicios.setWidthPercentage(100);
 			
 			// Falta la consulta para meterle los datos a la tabla AQUI
+			
+			documento.add(tablaServicios);
 
 			/**
 			 * Agregamos mas texto que queremos que aparezca
