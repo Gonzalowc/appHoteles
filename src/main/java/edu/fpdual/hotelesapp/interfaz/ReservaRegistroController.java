@@ -74,27 +74,6 @@ public class ReservaRegistroController {
 		}
 		
 		tabla.setItems(registros);
-		fechaEntrada.setCellFactory(new Callback<TableColumn<Registro,String>, TableCell<Registro,String>>(){
-	        @Override
-	        public TableCell<Registro, String> call(TableColumn<Registro, Integer> fechaEntrada) {
-	            return new TableCell<Registro,String>(){
-	                @Override
-	                protected void updateItem(String item, boolean empty) {
-	                    super.updateItem(item, empty);
-
-	                    if (item != null){
-	                        if (comprobarFecha(item)<0){
-	                            setStyle("-fx-background-color: red;");
-	                        }
-	                        else if (comprobarFecha(item)>0){
-	                            setStyle("-fx-background-color: green;");
-	                        }
-	                    }
-
-	                }
-	            };
-	        }
-	    });
 	}
 
 	public int comprobarFecha(String fecha) {
