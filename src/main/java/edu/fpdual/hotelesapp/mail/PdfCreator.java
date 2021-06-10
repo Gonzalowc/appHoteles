@@ -16,6 +16,7 @@ import com.itextpdf.text.Chunk;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
@@ -96,7 +97,7 @@ public class PdfCreator {
 			Path path = Paths.get(getClass().getResource("/img/hotel.png").toURI());
 			Image img = Image.getInstance(path.toAbsolutePath().toString());
 
-			img.scalePercent(10);
+			img.scalePercent(15);
 			img.setScaleToFitHeight(true);
 			img.setAlignment(Chunk.ALIGN_CENTER);
 			img.setBorder(Image.BOX);
@@ -150,11 +151,10 @@ public class PdfCreator {
 			tablaServicios.addCell("Tipo");
 
 			tablaServicios.setSpacingAfter(20);
-			tablaServicios.setWidthPercentage(100);
+			tablaServicios.setWidthPercentage(85);
 			
 			new ManejadorRelHotelServicio().setDataTableServices(con, tablaServicios, id_registro);
 			new ManejadorRelHabitacionServicio().setDataTableServices(con, tablaServicios, id_registro);
-			// Falta la consulta para meterle los datos a la tabla AQUI
 			
 			documento.add(tablaServicios);
 
@@ -199,7 +199,7 @@ public class PdfCreator {
 			Path path2 = Paths.get(getClass().getResource("/img/gracias.png").toURI());
 			Image footer = Image.getInstance(path2.toAbsolutePath().toString());
 
-			footer.scalePercent(26);
+			footer.scalePercent(20);
 			footer.setScaleToFitHeight(true);
 			footer.setAlignment(Chunk.ALIGN_RIGHT);
 			footer.setAlignment(Chunk.ALIGN_BOTTOM);
