@@ -257,18 +257,6 @@ public class ManejadorHotel {
 		return null;
 	}
 	
-
-	/**
-	 * Metodo Format Int para dar formato 
-	 * @param ids parametro que queremos formatear
-	 * @return id formateados de int a cadena
-	 */
-	private String formatInt(ArrayList<Integer> ids) {
-		String cadena = ids.toString();
-		String idsFormat = cadena.replace("[", "(");
-		idsFormat = idsFormat.replace("]", ")");
-		return idsFormat;
-	}
 	
 	public ArrayList<DatosTarjetaCiudades> listaHotelesOrdenCantidadCiudad(Conector con){
 		Connection con2 = con.getMySQLConnection();
