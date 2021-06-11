@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class DatosTarjetaCiudades {
 	/**
-	 * Localizacion
+	 * Localizacion del hotel
 	 */
 	private String localizacion;
 	/**
