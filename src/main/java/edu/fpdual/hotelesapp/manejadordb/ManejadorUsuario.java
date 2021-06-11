@@ -145,7 +145,12 @@ public class ManejadorUsuario {
 		}
 		return false;
 	}
-	
+	/**
+	 * Metodo para obtener el email del usuario con su nombre
+	 * @param con Conexion con la base de datos
+	 * @param usuario Usuario
+	 * @return El usuario
+	 */
 	public String getEmailUser(Conector con, String usuario) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "Select email from Usuario where nombre_usuario=?";

@@ -16,7 +16,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
 /**
  * Clase para generar un codigoQR con logo
  * 
@@ -76,6 +75,7 @@ public class QRGenerator {
 			 */
 			BufferedImage bufferedImage = ImageIO.read(new File(file.toString()));
 			Graphics2D graphics = bufferedImage.createGraphics();
+
 			/**
 			 * Leer la imagen del logo
 			 */

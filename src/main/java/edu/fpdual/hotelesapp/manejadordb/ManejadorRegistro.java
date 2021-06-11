@@ -12,9 +12,18 @@ import com.itextpdf.text.pdf.PdfPTable;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Registro;
-
+/**
+ * Clase para el manejador de registro
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorRegistro {
-
+	/**
+	 * Metodo para guardar y mostrar los dias que estan ocupados con reservas
+	 * @param con Conexion con la base de datos
+	 * @param id_habitacion ID de la habitacion
+	 * @return Los dias no disponibles
+	 */
 	public ArrayList<LocalDate> getDaysWhenIsOcupped(Conector con, int id_habitacion) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT fecha_entrada, fecha_salida FROM Registro WHERE id_habitacion=?";
@@ -43,6 +52,12 @@ public class ManejadorRegistro {
 		return null;
 	}
 
+	/**
+	 * Metodo para añadir los datos a la tabla de hotel que aparecera en el pdf
+	 * @param con Conexion con la base de datos
+	 * @param tablaHotel Tabla con los campos del hotel
+	 * @param idRegistro ID de registro
+	 */
 	public void setDataTablaHotel(Conector con, PdfPTable tablaHotel, int idRegistro) {
 		Connection con2 = con.getMySQLConnection();
 		/**
@@ -67,6 +82,12 @@ public class ManejadorRegistro {
 		}
 	}
 
+	/**
+	 * Metodo para añadir los datos a la tabla de usuario que aparecera en el pdf
+	 * @param con Conexion con la base de datos
+	 * @param tablaUsuario Tabla con los campos de usuario
+	 * @param idRegistro ID de registro
+	 */
 	public void setDataTableUser(Conector con, PdfPTable tablaUsuario, int idRegistro) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT nombre_usuario,dni,telefono,email FROM Registro WHERE id = ?";
@@ -83,6 +104,13 @@ public class ManejadorRegistro {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Metodo para coger el ID de registro
+	 * @param con Conexion con la base de datos
+	 * @param serviciosID ID de servicios
+	 * @return El id 
+	 */
 	public int getIdRegistro(Conector con, String serviciosID) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "select id  from Registro where id_services=?";
@@ -97,6 +125,13 @@ public class ManejadorRegistro {
 		}
 		return -1;
 	}
+	
+	/**
+	 * Metodo para obtener los registros por usuario
+	 * @param con Conexion con la base de datos
+	 * @param nombreUsuario Nombre del usuario
+	 * @return Lista de registros de ese usuario
+	 */
 	public ArrayList<Registro> getRegistrosPorUsuario(Conector con, String nombreUsuario) {
 		ArrayList<Registro> registros = new ArrayList<>();
 		Connection con2 = con.getMySQLConnection();
@@ -116,6 +151,13 @@ public class ManejadorRegistro {
 		}
 		return registros;
 	}
+	
+	/**
+	 * Metodo para obtener los registros por ID
+	 * @param con Conexion con la base de datos
+	 * @param idRegistro ID del registro
+	 * @return Registros
+	 */
 	public Registro getRegistroPorID(Conector con, int idRegistro) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "Select *  from Registro where id=?";

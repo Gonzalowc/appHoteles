@@ -69,7 +69,13 @@ public class ManejadorHotel {
 		return false;
 	}
 	
-	
+	/**
+	 * Metodo para crear un hotel
+	 * @param con Conexion con la base de datos
+	 * @param hotel Hotel
+	 * @param imageBlob Imagen
+	 * @return true o false
+	 */
 	public boolean crearHotel(Conector con, Hotel hotel, InputStream imageBlob) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "INSERT INTO Hotel(`nombre`,`localizacion`,`estrellas`,`descripcion`,`imagen`) VALUES(?,?,?,?,?)";
@@ -237,6 +243,12 @@ public class ManejadorHotel {
 		return hotelesAgrup;
 	}
 	
+	/**
+	 * Metodo para mostrar hotel por id
+	 * @param con Conexion con la base de datos
+	 * @param id ID del hotel
+	 * @return Hotel
+	 */
 	public Hotel getHotelId(Conector con, int id) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT *  FROM Hotel WHERE id=?";
@@ -252,7 +264,11 @@ public class ManejadorHotel {
 		return null;
 	}
 	
-	
+	/**
+	 * Metodo para ordenar la cantidad de hoteles por ciudad
+	 * @param con Conexion con la base de datos
+	 * @return lista de ciudades
+	 */
 	public ArrayList<DatosTarjetaCiudades> listaHotelesOrdenCantidadCiudad(Conector con){
 		Connection con2 = con.getMySQLConnection();
 		String sql = "SELECT localizacion, COUNT(localizacion) as cantidad, SUM(estrellas) as sumEstrellas FROM Hotel GROUP BY localizacion ORDER BY COUNT(localizacion) DESC, localizacion ASC";
