@@ -13,7 +13,11 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
+/**
+ * Clase para generar un codigoQR 
+ * @author angela.bonilla.gomez
+ *
+ */
 public class GeneradorQR2 {
 	public static void main(String[] args) {
 		try {

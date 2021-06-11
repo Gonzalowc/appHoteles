@@ -8,7 +8,11 @@ import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.util.ImageIOUtil;
-
+/**
+ * Clase para convertir el pdf a imagen
+ * @author angela.bonilla.gomez
+ *
+ */
 public class PdfToImageConverter {
 	public static void main(String[] args) {
 		String ruta = System.getProperty("user.home");

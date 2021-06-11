@@ -13,7 +13,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.HashMap;
-
+/**
+ * Clase para generar un codigoQR con logo
+ * @author angela.bonilla.gomez
+ *
+ */
 public class QRGenerator {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
