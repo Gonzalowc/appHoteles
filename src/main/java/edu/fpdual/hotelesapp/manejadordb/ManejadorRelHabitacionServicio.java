@@ -12,8 +12,19 @@ import edu.fpdual.hotelesapp.objetos.Habitacion;
 import edu.fpdual.hotelesapp.objetos.Registro;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import javafx.collections.ObservableList;
-
+/**
+ * Clase manejador para la relacion de habitacion con servicio
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorRelHabitacionServicio {
+	/**
+	 * Metodo para añadir un conjunto de servicios a una habitacion
+	 * @param con2 Conexion con la base de datos
+	 * @param habitacion Habitacion
+	 * @param serviciosHab Servicios de la habitacion
+	 * @param serviciosID ID del servicio
+	 */
 	public void addConjuntoServiciosHabitacion(Connection con2, Habitacion habitacion,
 			ObservableList<Servicio> serviciosHab, String serviciosID) {
 
@@ -43,6 +54,12 @@ public class ManejadorRelHabitacionServicio {
 
 	}
 
+	/**
+	 * Metodo para añadir los datos de los servicios de habitacion a la tabla que aparecera en el pdf
+	 * @param con Conexion con la base de datos
+	 * @param tablaServicios Tabla de servicios
+	 * @param idRegistro ID del registro
+	 */
 	public void setDataTableServices(Conector con, PdfPTable tablaServicios, int idRegistro) {
 		Connection con2 = con.getMySQLConnection();
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();

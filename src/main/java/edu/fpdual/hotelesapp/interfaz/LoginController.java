@@ -23,23 +23,40 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * Clase Login Controller
+ * Clase Login Controller 
  * 
  * @author angela.bonilla.gomez
  *
  */
 public class LoginController {
+	/**
+	 * Campo de texto de Usuario
+	 */
 	@FXML
 	private TextField txtUsuario;
+	/**
+	 * Campo de contraseña
+	 */
 	@FXML
 	private PasswordField txtPassword;
+	/**
+	 * Etiqueta de mensaje de error
+	 */
 	@FXML
 	private Label msgError;
+	/**
+	 * Boton de Login
+	 */
 	@FXML
 	private Button btnLogin;
+	/**
+	 * Imagen
+	 */
 	@FXML
 	private ImageView loadImg;
-
+	/**
+	 * Intentos de sesion fallidos
+	 */
 	private LinkedHashMap<String, Integer> intentosDeSesionFallidos = new LinkedHashMap<>();
 
 	/**

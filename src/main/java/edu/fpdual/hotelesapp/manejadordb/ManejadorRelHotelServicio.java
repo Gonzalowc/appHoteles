@@ -12,9 +12,19 @@ import edu.fpdual.hotelesapp.objetos.Registro;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-
+/**
+ * Clase manejador para la relacion de servicios con hoteles
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManejadorRelHotelServicio {
-
+	/**
+	 * Metodo para añadir un conjunto de servicios a un hotel
+	 * @param con2 Conexion con la base de datos
+	 * @param IdHotel ID del hotel
+	 * @param serviciosHotel Servicios del hotel
+	 * @param serviciosID ID del servicio
+	 */
 	public void addConjuntoServiciosHotel(Connection con2, int IdHotel, ObservableList<Servicio> serviciosHotel,
 			String serviciosID) {
 		if (serviciosHotel != null) {
@@ -41,6 +51,13 @@ public class ManejadorRelHotelServicio {
 		}
 
 	}
+	
+	/**
+	 * Metodo para añadir los datos de los servicios de hotel a la tabla que aparecera en el pdf
+	 * @param con Conexion con la base de datos
+	 * @param tablaServicios Tabla de servicios
+	 * @param idRegistro ID del registro
+	 */
 	public void setDataTableServices(Conector con, PdfPTable tablaServicios, int idRegistro) {
 		Connection con2 = con.getMySQLConnection();
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
