@@ -4,8 +4,18 @@ import java.io.IOException;
 
 import edu.fpdual.hotelesapp.mail.Sender;
 
+/**
+ * Clase Many Fails que se trata de una excepcion propia
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ManyFails extends Exception{
 
+	/**
+	 * Metodo que devuelve un error cuando hay demasiados fallos de inicio de sesion y que se usa para enviar correos
+	 * @param message mensaje a enviar
+	 * @param correo correo desde el que se envia
+	 */
 	public ManyFails(String message,String correo) {
 		super(message);
 		

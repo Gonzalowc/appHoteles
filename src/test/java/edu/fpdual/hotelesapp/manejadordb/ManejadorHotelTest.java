@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -48,7 +47,7 @@ class ManejadorHotelTest {
 
 	
 	@BeforeEach
-	private void setUp(TestInfo info) throws Exception {
+	private void setUp() throws Exception {
 		 	MockitoAnnotations.initMocks(this);
 			assertNotNull(c);
 			when(c1.prepareStatement(Mockito.anyString())).thenReturn(stmt);
@@ -353,7 +352,7 @@ class ManejadorHotelTest {
 	
 	@Test
 	public void testListaHotelesOrdenCantidadFail() throws SQLException {
-ManejadorHotel h2 = new ManejadorHotel();
+		ManejadorHotel h2 = new ManejadorHotel();
 		
 		when(stmt.executeQuery()).thenThrow(new SQLException());
 		assertNull(h2.listaHotelesOrdenCantidadCiudad(c));

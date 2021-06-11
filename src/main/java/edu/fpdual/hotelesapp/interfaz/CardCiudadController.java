@@ -14,16 +14,34 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-
+/**
+ * Clase Card Ciudad Controller
+ * @author angela.bonilla.gomez
+ *
+ */
 public class CardCiudadController {
-
+	/**
+	 * Nombre de ciudad
+	 */
 	@FXML
 	private Label nomCiudad;
+	/**
+	 * Numero de hoteles
+	 */
 	@FXML
 	private Label nHoteles;
+	/**
+	 * Numero de media de estrellas
+	 */
 	@FXML
 	private Label nMediaEstrellas;
+	/**
+	 * Panel padre
+	 */
 	private BorderPane parent;
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
 
 	public void setDataCard(DatosTarjetaCiudades datoCiudad) {
@@ -43,7 +61,6 @@ public class CardCiudadController {
 
 	/**
 	 * Metodo para cambiar a la vista de Hoteles
-	 * 
 	 * @param event Evento de click
 	 * @throws IOException
 	 */

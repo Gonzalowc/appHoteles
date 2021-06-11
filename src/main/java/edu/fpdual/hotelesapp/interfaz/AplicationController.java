@@ -22,7 +22,6 @@ import javafx.stage.StageStyle;
 
 /**
  * Clase Aplication Controller
- * 
  * @author angela.bonilla.gomez
  *
  */
@@ -32,9 +31,21 @@ public class AplicationController {
 	 */
 	@FXML
 	private BorderPane myPanel;
+	/**
+	 * Manejador de hotel
+	 */
 	private ManejadorHotel mh = new ManejadorHotel();
+	/**
+	 * Lista de hoteles
+	 */
 	private ArrayList<Hotel> hoteles = mh.listaHoteles(new Conector());
+	/**
+	 * Lista de hoteles que se muestra
+	 */
 	private ArrayList<Hotel> hotelesMostrar = hoteles;
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
 	
 	public void setHotelesMostrar(ArrayList<Hotel> hotelesFiltro) {
@@ -73,20 +84,35 @@ public class AplicationController {
 		myPanel.setBottom(generarBuscador());
 		myPanel.setRight(null);
 	}
+	
+	/**
+	 * Metodo para cambiar a la vista principal
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void toPrincipalVista(ActionEvent event) throws IOException{
 		primeraVentana();
 	}
 
 	
-
+	/**
+	 * Metodo para cambiar a la vista de reserva de habitacion
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void toReservaRoomVista(ActionEvent event) throws IOException {
 		myPanel.setCenter(rellenarMenuReservaRoom());
 		myPanel.setRight(null);
 		myPanel.setBottom(null);
 	}
-
+	
+	/**
+	 * Metodo para cambiar a la vista de nueva habitacion
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void toNewRoomVista(ActionEvent event) throws IOException {
 		myPanel.setCenter(rellenarMenuNewRoom());
@@ -94,12 +120,23 @@ public class AplicationController {
 		myPanel.setBottom(null);
 	}
 
+	/**
+	 * Metodo para cambiar a la vista de nuevo hotel
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void toNewHotelVista(ActionEvent event) throws IOException {
 		myPanel.setCenter(App.loadFXML("insertHotel"));
 		myPanel.setRight(null);
 		myPanel.setBottom(null);
 	}
+	
+	/**
+	 * Metodo para cambiar a la vista de registro de reservas
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void toReservaRegistro(ActionEvent event) throws IOException{
 		myPanel.setCenter(tablaReservas());
@@ -119,7 +156,7 @@ public class AplicationController {
 	}
 
 	/**
-	 * Metodo para general la vista de lista de hoteles
+	 * Metodo para generar la vista de lista de hoteles
 	 * 
 	 * @return scrollPane El panel completo
 	 */
@@ -167,6 +204,10 @@ public class AplicationController {
 		return scrollPane;
 	}
 
+	/**
+	 * Metodo para rellenar el menu de reserva de habitaciones
+	 * @return AnchorPane
+	 */
 	public AnchorPane rellenarMenuReservaRoom() {
 		Conector con = new Conector();
 		ManejadorHotel mho = new ManejadorHotel();
@@ -195,6 +236,10 @@ public class AplicationController {
 		return null;
 	}
 
+	/**
+	 * Metodo para rellenar el menu de nueva habitacion
+	 * @return AnchorPane
+	 */
 	public AnchorPane rellenarMenuNewRoom() {
 
 		Conector con = new Conector();
@@ -221,6 +266,10 @@ public class AplicationController {
 
 	}
 
+	/**
+	 * Metodo para generar un buscador
+	 * @return ToolBar
+	 */
 	public ToolBar generarBuscador() {
 		try {
 			// crear la clase que controla el archivo FXML
@@ -241,6 +290,11 @@ public class AplicationController {
 		}
 		return null;
 	}
+	
+	/**
+	 * Metodo para crear la primera ventana de la aplicacion
+	 * @throws IOException
+	 */
 	@FXML
 	public void primeraVentana() throws IOException{
 		try {
@@ -265,6 +319,11 @@ public class AplicationController {
 		}
 	}
 	
+	/**
+	 * Metodo para crear la tabla de reservas y rellenarla
+	 * @return AnchorPane de registros
+	 * @throws IOException
+	 */
 	@FXML
 	public AnchorPane tablaReservas() throws IOException{
 		try {

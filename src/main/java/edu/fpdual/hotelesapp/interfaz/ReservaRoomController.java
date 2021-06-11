@@ -40,69 +40,124 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+/**
+ * Clase para reserva de habitaciones
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ReservaRoomController {
+	/**
+	 * Lista de hoteles disponibles
+	 */
 	@FXML
 	private ListView<Servicio> listDispoHotel;
-
+	/**
+	 * Lista de hoteles seleccionables
+	 */
 	@FXML
 	private ListView<Servicio> listSelectHotel;
-
+	/**
+	 * Lista de habitaciones disponibles
+	 */
 	@FXML
 	private ListView<Servicio> listDispoHab;
-
+	/**
+	 * Lista de habitaciones seleccionables
+	 */
 	@FXML
 	private ListView<Servicio> listSelectHab;
-
+	/**
+	 * Etiqueta de mensaje de exito
+	 */
 	@FXML
 	private Label msgExito;
-
+	/**
+	 * Etiqueta de info
+	 */
 	@FXML
 	private Label info;
-
+	/**
+	 * Etiqueta de id de hotel
+	 */
 	@FXML
 	private Label lblIdHotel;
-
+	/**
+	 * Campo de texto de numero de personas
+	 */
 	@FXML
 	private TextField txtNumPers;
-
+	/**
+	 * Etiqueta de fecha entrada
+	 */
 	@FXML
 	private Label lblEntry;
-
+	/**
+	 * Seleccionador de fecha de entrada
+	 */
 	@FXML
 	private DatePicker dateEntry;
-
+	/**
+	 * Etiqueta de fecha salida
+	 */
 	@FXML
 	private Label lblLeft;
-
+	/**
+	 * Seleccionador de fecha de salida
+	 */
 	@FXML
 	private DatePicker dateLeft;
-
+	/**
+	 * Campo de texto de precio
+	 */
 	@FXML
 	private TextField txtPrice;
-
+	/**
+	 * Campo de texto de usuario
+	 */
 	@FXML
 	private TextField txtUser;
-
+	/**
+	 * Checkbox
+	 */
 	@FXML
 	private CheckBox chkBusy;
-
+	/**
+	 * Boton para seleccionar hotel
+	 */
 	@FXML
 	private MenuButton selectBtnHotel;
-
+	/**
+	 * Etiqueta de insercion correcta
+	 */
 	@FXML
 	private Label lblCorrectInsert;
-
+	/**
+	 * Etiqueta de insercion incorrecta
+	 */
 	@FXML
 	private Label lblErrorInsert;
-
+	/**
+	 * Etiqueta de info de hotel
+	 */
 	@FXML
 	private Label infoHotel;
-
+	/**
+	 * Habitacion
+	 */
 	private Habitacion habitacion;
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
+	/**
+	 * Escenario padre
+	 */
 	private Stage padre = new Stage();
-
+	/**
+	 * Metodo para desactivar la fecha antes de la entrada en el calendario a elegir
+	 * @param event Evento de click
+	 * @throws IOException
+	 */
 	@FXML
 	public void disabledateBeforeEntry(ActionEvent event) throws IOException {
 		dateLeft.setDayCellFactory(picker -> new DateCell() {
@@ -112,7 +167,15 @@ public class ReservaRoomController {
 			}
 		});
 	}
-
+	
+	/**
+	 * Metodo para introducir los datos de la reserva
+	 * @param hab Habitacion
+	 * @param idHotel ID del hotel
+	 * @param NumPersonas Numero de personas
+	 * @param price Precio
+	 * @param user Usuario
+	 */
 	public void setData(Habitacion hab, int idHotel, int NumPersonas, double price, Usuario user) {
 		this.habitacion = hab;
 		lblIdHotel.setText(Integer.toString(idHotel));
@@ -130,6 +193,11 @@ public class ReservaRoomController {
 		serviciosSeleccionadosHabitacion();
 	}
 
+	/**
+	 * Metodo para la fecha
+	 * @param localDate fecha local
+	 * @return
+	 */
 	public Date convertToDate(LocalDate localDate) {
 
 		ZonedDateTime zdt = localDate.atStartOfDay(ZoneId.systemDefault());
@@ -137,7 +205,11 @@ public class ReservaRoomController {
 		Date date = Date.from(instant);
 		return date;
 	}
-
+	
+	/**
+	 * Metodo para realizar la reserva con todos los datos introducidos
+	 * @throws IOException
+	 */
 	@FXML
 	public void reserva() throws IOException {
 		lblEntry.setStyle(null);
@@ -182,6 +254,10 @@ public class ReservaRoomController {
 		}
 	}
 
+	/**
+	 * Metodo para listar las fechas seleccionadas
+	 * @return
+	 */
 	private ArrayList<LocalDate> listaFechasSelected() {
 		ArrayList<LocalDate> fechas = new ArrayList<LocalDate>();
 		LocalDate entrada = dateEntry.getValue();
@@ -193,6 +269,12 @@ public class ReservaRoomController {
 		return fechas;
 	}
 
+	/**
+	 * Metodo para crear el pdf y que se envie por correo
+	 * @param con Conexion con la base de datos
+	 * @param serviciosID ID del servicio
+	 * @return
+	 */
 	public int crearPDFyEnviar(Conector con, String serviciosID) {
 		Sender email = new Sender();
 		PdfCreator pdf = new PdfCreator();
@@ -209,6 +291,10 @@ public class ReservaRoomController {
 		return 0;
 	}
 
+	/**
+	 * Metodo para desactivar las fechas anteriores a la actual
+	 * @param dp Seleccionador de fecha/calendario
+	 */
 	public void disablePastDate(DatePicker dp) {
 
 		dp.setDayCellFactory(picker -> new DateCell() {
@@ -221,7 +307,9 @@ public class ReservaRoomController {
 			}
 		});
 	}
-
+	/**
+	 * Metodo para los datos del hotel
+	 */
 	public void setHotel() {
 		Conector con = new Conector();
 		ManejadorHotel manejadorHotel = new ManejadorHotel();
@@ -231,7 +319,11 @@ public class ReservaRoomController {
 		infoHotel.setText(
 				hotel.getNombre() + " - " + hotel.getLocalizacion() + "\n" + hotel.getEstrellas() + " Estrellas");
 	}
-
+	
+	/**
+	 * Metodo para la info de las fechas
+	 * @throws IOException
+	 */
 	@FXML
 	public void setInfoDates() throws IOException {
 
@@ -254,6 +346,9 @@ public class ReservaRoomController {
 		padre.showAndWait();
 	}
 
+	/**
+	 * Metodo para añadir los servicios de hotel seleccionados
+	 */
 	public void serviciosSeleccionadosHotel() {
 		Conector con = new Conector();
 		ManejadorServicio servicioManejador = new ManejadorServicio();
@@ -264,6 +359,9 @@ public class ReservaRoomController {
 		}
 	}
 
+	/**
+	 * Metodo para añadir los servicios de habitacion seleccionados
+	 */
 	public void serviciosSeleccionadosHabitacion() {
 		Conector con = new Conector();
 		ManejadorServicio servicioManejador = new ManejadorServicio();
@@ -274,12 +372,20 @@ public class ReservaRoomController {
 		}
 	}
 
+	/**
+	 * Metodo para guardar los servicios de habitacion
+	 * @param con2 Conexion con la base de datos
+	 */
 	public void saveServiciosHabitacion(Connection con2) {
 		ManejadorRelHabitacionServicio manejadorHabServ = new ManejadorRelHabitacionServicio();
 		String serviciosID = habitacion.getId() + user.getNombre() + dateEntry.getValue().toString();
 		manejadorHabServ.addConjuntoServiciosHabitacion(con2, habitacion, listSelectHab.getItems(), serviciosID);
 	}
 
+	/**
+	 * Metodo para guardar los servicios del hotel
+	 * @param con2 Conexion con la base de datos
+	 */
 	public void saveServiciosHotel(Connection con2) {
 		String serviciosID = habitacion.getId() + user.getNombre() + dateEntry.getValue().toString();
 		ManejadorRelHotelServicio manejadorHotelServ = new ManejadorRelHotelServicio();
@@ -287,6 +393,11 @@ public class ReservaRoomController {
 				listSelectHotel.getItems(), serviciosID);
 	}
 
+	/**
+	 * Metodo para cambiar servicios de hotel de disponible a seleccionados
+	 * @param event Evento de raton
+	 * @throws IOException
+	 */
 	@FXML
 	public void changeServiceToSelectHotel(MouseEvent event) throws IOException {
 		Servicio servicio = listDispoHotel.getSelectionModel().getSelectedItem();
@@ -299,6 +410,11 @@ public class ReservaRoomController {
 		}
 	}
 
+	/**
+	 * Metodo para cambiar servicios de hotel de seleccionados a disponibles
+	 * @param event Evento de raton
+	 * @throws IOException
+	 */
 	public void changeServiceToDispoHotel(MouseEvent event) throws IOException {
 		Servicio servicio = listSelectHotel.getSelectionModel().getSelectedItem();
 		System.out.println("toDispoHotel");
@@ -309,7 +425,11 @@ public class ReservaRoomController {
 			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) - servicio.getPrecio())));
 		}
 	}
-
+	/**
+	 * Metodo para cambiar servicio de habitacion de disponibles a seleccionados
+	 * @param event Evento de raton
+	 * @throws IOException
+	 */
 	@FXML
 	public void changeServicetoSelectHabitacion(MouseEvent event) throws IOException {
 		Servicio servicio = listDispoHab.getSelectionModel().getSelectedItem();
@@ -320,7 +440,11 @@ public class ReservaRoomController {
 			txtPrice.setText(Double.toString((Double.parseDouble(txtPrice.getText()) + servicio.getPrecio())));
 		}
 	}
-
+	/**
+	 * Metodo para cambiar servicio de habitacion de seleccionados a disponibles
+	 * @param event Evento de raton
+	 * @throws IOException
+	 */
 	@FXML
 	public void changeServiceToDispoHab(MouseEvent event) throws IOException {
 		Servicio servicio = listSelectHab.getSelectionModel().getSelectedItem();

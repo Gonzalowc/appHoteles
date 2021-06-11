@@ -22,25 +22,43 @@ import javafx.stage.FileChooser;
  *
  */
 public class InsertHotelController {
-
+	/**
+	 * Campo de texto con el nombre del hotel
+	 */
 	@FXML
 	private TextField txtHotelName;
-	
+	/**
+	 * Campo de texto con la localizacion del hotel
+	 */
 	@FXML
 	private TextField txtHotelLocation;
-	
+	/**
+	 * Campo de texto con las estrellas del hotel
+	 */
 	@FXML
 	private TextField txtHotelStars;
-	
+	/**
+	 * Campo de texto con la descripcion del hotel
+	 */
 	@FXML
 	private TextField txtHotelDescription;
-	
+	/**
+	 * Subir imagen
+	 */
 	@FXML
 	private ImageView upImage;
+	/**
+	 * Borrar imagen
+	 */
 	@FXML
 	private Label xDeteleImage;
-	
+	/**
+	 * Imagen cargada
+	 */
 	private File imagenCargada;
+	/**
+	 * Imagen por defecto
+	 */
 	private Image imagenDefecto = new Image(getClass().getResource("img/uploadImage.png").toExternalForm());
 	
 	/**
@@ -73,7 +91,10 @@ public class InsertHotelController {
 		deleteImage();
 	}
 	
-	
+	/**
+	 * Metodo para cargar la imagen al crear un hotel
+	 * @throws IOException
+	 */
 	@FXML
 	public void chargeImage() throws IOException{
 		imagenCargada = buscarImagen();
@@ -85,6 +106,10 @@ public class InsertHotelController {
 		
 	}
 	
+	/**
+	 * Metodo para buscar la imagen y seleccionarla para subir
+	 * @return
+	 */
 	public File buscarImagen() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Selecciona Imagen de Hotel");
@@ -97,6 +122,10 @@ public class InsertHotelController {
     	return fileChooser.showOpenDialog(App.getStage());
 	}
 	
+	/**
+	 * Metodo para borrar la imagen seleccionada
+	 * @throws IOException
+	 */
 	@FXML
 	public void deleteImage() throws IOException{
 		upImage.setImage(imagenDefecto);
