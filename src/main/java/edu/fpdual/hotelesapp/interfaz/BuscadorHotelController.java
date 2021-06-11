@@ -18,13 +18,27 @@ import javafx.scene.layout.Pane;
 
 public class BuscadorHotelController {
 
+	/**
+	 * Buscador de hoteles
+	 */
 	@FXML
 	private TextField buscador;
+	/**
+	 * Titulo del panel buscar
+	 */
 	@FXML
 	private TitledPane buscar;
-
+	/**
+	 * Panel padre
+	 */
 	private BorderPane parent;
+	/**
+	 * Lista de hoteles
+	 */
 	private ArrayList<Hotel> hoteles;
+	/**
+	 * Lista de usuarios
+	 */
 	private Usuario user;
 
 	public void setParent(BorderPane aplication) {
@@ -39,6 +53,10 @@ public class BuscadorHotelController {
 		this.hoteles = hoteles;
 	}
 
+	/**
+	 * Metodo para filtrar hoteles segun el buscador
+	 * @return lista de hoteles filtrados
+	 */
 	public ArrayList<Hotel> filtrarHoteles() {
 		ArrayList<Hotel> hotelesFiltro = new ArrayList<Hotel>();
 		String filtro = buscador.getText().toLowerCase();
@@ -55,6 +73,10 @@ public class BuscadorHotelController {
 		return hotelesFiltro;
 	}
 
+	/**
+	 * Metodo para hacer la busqueda de hoteles
+	 * @throws IOException
+	 */
 	@FXML
 	public void hacerBusqueda() throws IOException {
 //		// crear la clase que controla el archivo FXML

@@ -16,17 +16,33 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
+/**
+ * Clase de Controlador de inicio
+ * @author angela.bonilla.gomez
+ *
+ */
 public class InicioController {
-	
-	
+	/**
+	 * Panel de ciudades
+	 */
 	@FXML
 	private ScrollPane panelCiudades;
+	/**
+	 * Panel para cambiar
+	 */
 	@FXML
 	private AnchorPane panelCambiar;
+	/**
+	 * Panel padre
+	 */
 	private BorderPane parent;
-	
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
+	/**
+	 * Lista de ciudades
+	 */
 	private ArrayList<DatosTarjetaCiudades> ciudades;
 	
 	public void setUser(Usuario user) {
@@ -45,6 +61,9 @@ public class InicioController {
 	public void setParent(BorderPane parent) {
 		this.parent = parent;
 	}
+	/**
+	 * Metodo para rellenar localizaciones
+	 */
 	public void rellenarLocalizaciones() {
 		ManejadorHotel manejadorHotel = new ManejadorHotel();
 		Conector con = new Conector();
@@ -77,6 +96,10 @@ public class InicioController {
 //		},0, 2000);
 //	}
 	
+	/**
+	 * Metodo para generar un panel con la lista de ciudades y rellenar los datos
+	 * @return GridPane
+	 */
 	public GridPane listaCiudades(){
 		rellenarLocalizaciones();
 		final int ANCHO = 3;

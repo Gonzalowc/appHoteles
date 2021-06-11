@@ -117,6 +117,11 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * Metodo para añadir intentos fallidos de inicio de sesion
+	 * @param con conexion a la base de datos
+	 * @param mu manejador de usuario
+	 */
 	private void addFallo(Conector con, ManejadorUsuario mu){
 		if (mu.existeUsuario(con, txtUsuario.getText())) {
 			if (intentosDeSesionFallidos.containsKey(txtUsuario.getText())) {
@@ -128,6 +133,9 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * Metodo para desactivar los campos de inicio de sesion segun intentos fallidos
+	 */
 	private void desactivarCampos() {
 		loadImg.setVisible(true);
 		txtPassword.setDisable(true);

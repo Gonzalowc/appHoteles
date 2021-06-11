@@ -16,35 +16,80 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-
+/**
+ * Clase para el registro de reservas
+ * @author angela.bonilla.gomez
+ *
+ */
 public class ReservaRegistroController {
+	/**
+	 * Tabla de registro
+	 */
 	@FXML
 	private TableView<Registro> tabla;
+	/**
+	 * Columna de tabla de registro con el campo ID de registro
+	 */
 	@FXML
 	private TableColumn<Registro, String> id_Registro;
+	/**
+	 * Columna de tabla de registro con el campo nombre hotel
+	 */
 	@FXML
 	private TableColumn<Registro, String> nombreHotel;
+	/**
+	 * Columna de tabla de registro con el campo localizacion
+	 */
 	@FXML
 	private TableColumn<Registro, String> localizacion;
+	/**
+	 * Columna de tabla de registro con el campo estrellas
+	 */
 	@FXML
 	private TableColumn<Registro, String> estrellas;
+	/**
+	 * Columna de tabla de registro con el campo id de habitacion
+	 */
 	@FXML
 	private TableColumn<Registro, String> id_Habitacion;
+	/**
+	 * Columna de tabla de registro con el campo numero de personas
+	 */
 	@FXML
 	private TableColumn<Registro, String> numPersonas;
+	/**
+	 * Columna de tabla de registro con el campo fecha de entrada
+	 */
 	@FXML
 	private TableColumn<Registro, String> fechaEntrada;
+	/**
+	 * Columna de tabla de registro con el campo fecha de salida
+	 */
 	@FXML
 	private TableColumn<Registro, String> fechaSalida;
+	/**
+	 * Columna de tabla de registro con el campo precio
+	 */
 	@FXML
 	private TableColumn<Registro, String> precio;
+	/**
+	 * Columna de tabla de registro con el campo id de servicios
+	 */
 	@FXML
 	private TableColumn<Registro, String> id_Services;
+	/**
+	 * Columna de tabla de registro con el campo opciones
+	 */
 	@FXML
 	private TableColumn opciones;
+	/**
+	 * Columna de tabla de registro con el campo estado
+	 */
 	@FXML
 	private TableColumn estado;
-	
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
 
 	public void setUser(Usuario user) {
@@ -55,6 +100,9 @@ public class ReservaRegistroController {
 		return user;
 	}
 
+	/**
+	 * Metodo para rellenar la tabla de registro
+	 */
 	public void rellenarTabla() {
 		// crear observableList de Registro
 		ObservableList<Registro> registros = FXCollections.observableArrayList();
@@ -78,7 +126,11 @@ public class ReservaRegistroController {
 		tabla.setItems(registros);
 	}
 
-	
+	/**
+	 * Metodo para comprobar la fecha
+	 * @param fecha que se introduce
+	 * @return La comparacion de la fecha
+	 */
 	public int comprobarFecha(String fecha) {
 		ArrayList<String> fechaSeparada = (ArrayList<String>) Arrays.asList(fecha.split("-"));
 		LocalDate fechaComprobar =  LocalDate.of(Integer.parseInt(fechaSeparada.get(0)),Integer.parseInt(fechaSeparada.get(1)),Integer.parseInt(fechaSeparada.get(2)));

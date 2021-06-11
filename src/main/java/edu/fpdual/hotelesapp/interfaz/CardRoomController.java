@@ -15,28 +15,60 @@ import javafx.scene.layout.BorderPane;
  *
  */
 public class CardRoomController {
-	
+	/**
+	 * Etiqueta de boton reservar
+	 */
 	@FXML
 	private Label lblBtnReservar;
+	/**
+	 * Etiqueta de numero de personas
+	 */
 	@FXML
 	private Label lblNumPersonas;
+	/**
+	 * Etiqueta de precio
+	 */
 	@FXML
 	private Label lblPrecio;
+	/**
+	 * Etiqueta de habitacion disponible
+	 */
 	@FXML
 	private Label lblDisponible;
+	/**
+	 * Etiqueta de habitacion ocupada
+	 */
 	@FXML
 	private Label lblOcupada;
+	/**
+	 * Etiqueta de descripcion
+	 */
 	@FXML
 	private Label lblDescripcion;
+	/**
+	 * Etiqueta de codigo de habitacion
+	 */
 	@FXML
 	private Label lblCodeHabitacion;
-	
+	/**
+	 * Codigo de hotel
+	 */
 	private int codeHotel;
+	/**
+	 * Panel de reserva
+	 */
 	private AnchorPane reservaPane;
-	
+	/**
+	 * Panel padre
+	 */
 	private BorderPane parent;
-	
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
+	/**
+	 * Habitacion
+	 */
 	private Habitacion habitacion;
 	
 	public void setUsuario(Usuario usuario) {
@@ -69,7 +101,10 @@ public class CardRoomController {
 		}
 		lblCodeHabitacion.setText(Integer.toString(hab.getId()));
 	}
-	
+	/**
+	 * Metodo para rellenar la reserva
+	 * @throws IOException
+	 */
 	public void rellenarReserva() throws IOException {
 		
 		// crear la clase que controla el archivo FXML

@@ -18,18 +18,29 @@ import javafx.stage.Stage;
  *
  */
 public class RegisterController {
+	/**
+	 * Campo de texto de usuario
+	 */
 	@FXML
 	private TextField txtUsuario;
-
+	/**
+	 * Campo de texto de contraseña
+	 */
 	@FXML
 	private PasswordField txtPassword;
-
+	/**
+	 * Campo de texto de dni
+	 */
 	@FXML
 	private TextField txtDNI;
-
+	/**
+	 * Campo de texto de telefono
+	 */
 	@FXML
 	private TextField txtPhone;
-
+	/**
+	 * Campo de texto de email
+	 */
 	@FXML
 	private TextField txtEmail;
 	
@@ -40,10 +51,14 @@ public class RegisterController {
 	public void exit() {
 		System.exit(0);
 	}
-
+	/**
+	 * Etiqueta de mensaje de error
+	 */
 	@FXML
 	private Label msgError;
-	
+	/**
+	 * Etiqueta de mensaje valido
+	 */
 	@FXML
 	private Label msgValid;
 
