@@ -11,7 +11,7 @@ import edu.fpdual.hotelesapp.objetos.Usuario;
 /**
  * Clase Manejador Usuario para realizar todas las consultas en cuanto a los usuarios
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class ManejadorUsuario {
 	/**
@@ -30,7 +30,6 @@ public class ManejadorUsuario {
 			stmt.setString(2, passwd);
 			ResultSet result = stmt.executeQuery();
 			if(result.next()) {
-				System.out.println("NombreUser"+result.getString("nombre_usuario"));
 				String user = result.getString("nombre_usuario");
 				String pass = result.getString("password");
 				if (user.equals(usuario) && pass.equals(passwd)) {
@@ -58,18 +57,14 @@ public class ManejadorUsuario {
 		Connection con2 = con.getMySQLConnection();
 		if (validarUsuario(con, usuario, passwd)) {
 			String sql = "SELECT id,nombre_usuario,dni,telefono,email FROM Usuario WHERE nombre_usuario =? AND password=?";
-
 			try (PreparedStatement stmt = con2.prepareStatement(sql)) {
-
 				stmt.setString(1, usuario);
 				stmt.setString(2, passwd);
 				ResultSet result = stmt.executeQuery();
-
 				if (result.next()) {
 					System.out.println(
 							"Usuario Iniciado.--->" + result.getInt("id") + " " + result.getString("nombre_usuario"));
 					return new Usuario(result);
-
 				} else {
 					System.out.println("El usuario no se encuentra");
 					return null;
@@ -83,7 +78,6 @@ public class ManejadorUsuario {
 		}
 		System.out.println("Usuario no entra");
 		return null;
-
 	}
 
 	/**
@@ -162,10 +156,8 @@ public class ManejadorUsuario {
 				return result.getString(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return usuario;
 		
 	}

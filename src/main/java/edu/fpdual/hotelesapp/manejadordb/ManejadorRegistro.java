@@ -27,10 +27,8 @@ public class ManejadorRegistro {
 			ArrayList<LocalDate> diasNoDisponibles = new ArrayList<LocalDate>();
 			while (result.next()) {
 				String fechaE = result.getString("fecha_entrada");
-				System.out.println("manejador Entrada " + fechaE);
 				entrada = LocalDate.parse(fechaE, formatter);
 				String fechaS = result.getString("fecha_salida");
-				System.out.println("manejador Salida " + fechaS);
 				salida = LocalDate.parse(fechaS, formatter);
 				while (!entrada.equals(salida)) {
 					diasNoDisponibles.add(entrada);
@@ -40,7 +38,6 @@ public class ManejadorRegistro {
 			}
 			return diasNoDisponibles;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -68,7 +65,6 @@ public class ManejadorRegistro {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//return tablaHotel;
 	}
 
 	public void setDataTableUser(Conector con, PdfPTable tablaUsuario, int idRegistro) {
@@ -86,8 +82,6 @@ public class ManejadorRegistro {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//return tablaUsuario;
-
 	}
 	public int getIdRegistro(Conector con, String serviciosID) {
 		Connection con2 = con.getMySQLConnection();
@@ -132,7 +126,6 @@ public class ManejadorRegistro {
 				return new Registro(result);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

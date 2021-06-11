@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import lombok.Getter;
 import lombok.Setter;
+
 /**
  * Clase Hotel
+ * 
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 
 @Getter
@@ -44,15 +46,16 @@ public class Hotel implements Comparable<Hotel> {
 	 * Lista de servicios del que dispone el hotel
 	 */
 	private ArrayList<Servicio> serviciosHotel;
-	
+
 	private byte[] imagen;
-	
+
 	/**
 	 * Constructor de Hotel
-	 * @param nombre del hotel
+	 * 
+	 * @param nombre       del hotel
 	 * @param localizacion del hotel
-	 * @param estrellas del hotel
-	 * @param descripcion del hotel
+	 * @param estrellas    del hotel
+	 * @param descripcion  del hotel
 	 */
 	public Hotel(String nombre, String localizacion, int estrellas, String descripcion) {
 		this.id = 0;
@@ -64,11 +67,12 @@ public class Hotel implements Comparable<Hotel> {
 		serviciosHotel = new ArrayList<>();
 		imagen = null;
 	}
-	
+
 	/**
 	 * Constructor de Hotel a partir de la base de datos
+	 * 
 	 * @param result
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public Hotel(ResultSet result) throws SQLException {
 
@@ -80,25 +84,11 @@ public class Hotel implements Comparable<Hotel> {
 			this.descripcion = result.getString("descripcion");
 			habitaciones = new ArrayList<>();
 			serviciosHotel = new ArrayList<>();
-			//Blob imageBlob 
 			imagen = result.getBytes("imagen");
-//			if(imageBlob!=null) {
-//				int blobLength = (int) imageBlob.length();
-//				imagen = imageBlob.getBytes(1, blobLength);
-//				imageBlob.free();
-//				System.out.println(imagen.toString());
-//			}
-			if(imagen!=null) {
-				System.out.println("IMAGEN CARGADA");
-			}else {
-				System.out.println("Hotel Creado");
-			}
-			System.out.println();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
 
 	/**
@@ -146,13 +136,5 @@ public class Hotel implements Comparable<Hotel> {
 	public int compareTo(Hotel h) {
 		return this.id - h.getId();
 	}
-
-	
-	
-	
-	
-	
-	
-	
 
 }

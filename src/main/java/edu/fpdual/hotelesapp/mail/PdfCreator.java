@@ -11,9 +11,6 @@ import java.sql.Connection;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
-
-//import javax.swing.JOptionPane;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -40,14 +37,12 @@ public class PdfCreator {
 	 * Metodo para generar pdf y añadirle las tablas necesarias para mostrar los
 	 * datos de la reserva al cliente
 	 * 
-	 * @throws URISyntaxException
-	 * @throws IOException
-	 * @throws MalformedURLException
+	 * @throws URISyntaxException Error
+	 * @throws IOException Error
+	 * @throws MalformedURLException Error
 	 */
 	public String generarPDF(Conector con, int id_registro)
 			throws URISyntaxException, MalformedURLException, IOException {
-		// java.awt.event.ActionEvent event deberia ir entre los parentesis para que se
-		// ejecute al pulsar el boton
 		Document documento = new Document();
 		try {
 			Connection con2 = con.getMySQLConnection();
@@ -221,14 +216,11 @@ public class PdfCreator {
 			 * Cerramos el documento
 			 */
 			documento.close();
-			// JOptionPane.showMessageDialog(null,"PDF creado");
-
 			return rutaCompleta;
 		} catch (IOException | DocumentException | URISyntaxException e) {
 			System.out.println(e.getMessage());
 		}
 		return null;
-
 	}
 
 	public static void main(String[] args) {

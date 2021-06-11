@@ -6,14 +6,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
  * JavaFX App
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class App extends Application {
 
@@ -78,7 +77,7 @@ public class App extends Application {
      * @param FXML Parametro que corresponde al archivo fxml
      * @param style Parametro que corresponde al estilo del escenario
      * @param maximized Parametro que te permite maximizar el escenario
-     * @throws IOException
+     * @throws IOException Error
      */
     public static void cambiarVentana(String FXML,StageStyle style,boolean maximized) throws IOException {
 		App.getStage().close();

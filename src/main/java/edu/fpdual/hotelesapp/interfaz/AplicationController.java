@@ -23,7 +23,7 @@ import javafx.stage.StageStyle;
 /**
  * Clase Aplication Controller
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class AplicationController {
 	/**
@@ -238,7 +238,7 @@ public class AplicationController {
 
 	/**
 	 * Metodo para rellenar el menu de nueva habitacion
-	 * @return AnchorPane
+	 * @return AnchorPane Menu relleno
 	 */
 	public AnchorPane rellenarMenuNewRoom() {
 
@@ -268,7 +268,7 @@ public class AplicationController {
 
 	/**
 	 * Metodo para generar un buscador
-	 * @return ToolBar
+	 * @return ToolBar Buscador
 	 */
 	public ToolBar generarBuscador() {
 		try {
@@ -293,7 +293,7 @@ public class AplicationController {
 	
 	/**
 	 * Metodo para crear la primera ventana de la aplicacion
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void primeraVentana() throws IOException{
@@ -312,8 +312,6 @@ public class AplicationController {
 			myPanel.setCenter(inicio);
 			myPanel.setBottom(null);
 			myPanel.setRight(null);
-			System.out.println("primeraVentana: AplicationController"+ myPanel);
-			System.out.println("Primera ventana");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

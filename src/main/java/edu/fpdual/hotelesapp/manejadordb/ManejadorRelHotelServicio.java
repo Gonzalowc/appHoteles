@@ -11,8 +11,12 @@ import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Registro;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-
+/**
+ * 
+ * 
+ * @author g.waack.carneado
+ *
+ */
 public class ManejadorRelHotelServicio {
 
 	public void addConjuntoServiciosHotel(Connection con2, int IdHotel, ObservableList<Servicio> serviciosHotel,
@@ -41,12 +45,12 @@ public class ManejadorRelHotelServicio {
 		}
 
 	}
+
 	public void setDataTableServices(Conector con, PdfPTable tablaServicios, int idRegistro) {
 		Connection con2 = con.getMySQLConnection();
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
 		String sql = "SELECT Servicio.nombre_servicio, Servicio.precio, Servicio.tipo "
-				+ "FROM `Rel_hotel_servicio` JOIN Servicio "
-				+ "ON Rel_hotel_servicio.id_servicio = Servicio.id  "
+				+ "FROM `Rel_hotel_servicio` JOIN Servicio " + "ON Rel_hotel_servicio.id_servicio = Servicio.id  "
 				+ "WHERE Rel_hotel_servicio.servicio_registro_id=?";
 		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 			Registro registro = manejadorRegistro.getRegistroPorID(con, idRegistro);
@@ -59,7 +63,6 @@ public class ManejadorRelHotelServicio {
 				tablaServicios.addCell(result.getString(3));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -19,7 +19,7 @@ import javafx.stage.FileChooser;
 /**
  * Clase Insert Hotel Controller
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class InsertHotelController {
 	/**
@@ -68,11 +68,9 @@ public class InsertHotelController {
 		System.exit(0);
 	}
 	
-	
-	
 	/**
 	 * Metodo para insertar hotel
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void insertHotel() throws IOException {
 		Conector con = new Conector();
@@ -93,7 +91,7 @@ public class InsertHotelController {
 	
 	/**
 	 * Metodo para cargar la imagen al crear un hotel
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void chargeImage() throws IOException{
@@ -108,7 +106,7 @@ public class InsertHotelController {
 	
 	/**
 	 * Metodo para buscar la imagen y seleccionarla para subir
-	 * @return
+	 * @return Imagen seleccionada.
 	 */
 	public File buscarImagen() {
 		FileChooser fileChooser = new FileChooser();
@@ -124,7 +122,7 @@ public class InsertHotelController {
 	
 	/**
 	 * Metodo para borrar la imagen seleccionada
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void deleteImage() throws IOException{

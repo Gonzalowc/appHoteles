@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * Clase Register Controller
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class RegisterController {
 	/**
@@ -44,7 +44,7 @@ public class RegisterController {
 	@FXML
 	private TextField txtEmail;
 	
-
+	
 	/**
 	 * Metodo para salir de la app
 	 */
@@ -64,7 +64,7 @@ public class RegisterController {
 
 	/**
 	 * Metodo para registrar un usuario
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void registrar() throws IOException {
 		Conector con = new Conector();
@@ -88,7 +88,7 @@ public class RegisterController {
 	
 	/**
 	 * Metodo para volver atras
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void goBack() throws IOException {
 		Stage stage = App.getStage();

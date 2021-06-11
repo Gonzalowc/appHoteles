@@ -13,18 +13,9 @@ import edu.fpdual.hotelesapp.objetos.TipoServicio;
 /**
  * Clase Manejador Servicio para realizar todas las consultas en cuanto a los servicios
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class ManejadorServicio {
-	/**
-	 * Clase main para ejecutar los métodos
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Conector con = new Conector();
-		ManejadorServicio ms = new ManejadorServicio();
-		ms.nuevoServicio(con, "nuevo", 30, TipoServicio.HABITACION);
-	}
 
 	/**
 	 * Metodo Nuevo Servicio para crear nuevos servicios
@@ -34,11 +25,10 @@ public class ManejadorServicio {
 	 * @param tipo para insertar el tipo de servicio
 	 * @return true si se ha insertado correctamente, false en caso contrario
 	 */
-	public boolean nuevoServicio(Conector con, String nombreServicio, double precio, TipoServicio tipo) {
+	public void nuevoServicio(Conector con, String nombreServicio, double precio, TipoServicio tipo) {
 		Connection con2 = con.getMySQLConnection();
 		String sql = "INSERT INTO Servicio(`nombre_servicio`,`precio`,`tipo`) VALUES(?,?,?)";
 		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
-
 			stmt.setString(1, nombreServicio);
 			stmt.setDouble(2, precio);
 			stmt.setString(3, tipo.name());
@@ -46,8 +36,6 @@ public class ManejadorServicio {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return false;
 	}
 	
 	/**
@@ -71,7 +59,6 @@ public class ManejadorServicio {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	

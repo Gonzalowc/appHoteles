@@ -1,7 +1,6 @@
 package edu.fpdual.hotelesapp.mail;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -87,17 +86,6 @@ public class Sender {
 			multiPart.addBodyPart(texto);
 			if (!content.equals("")) {
 				File file = new File(content);
-
-//			InputStream fileData = getClass().getClassLoader().getResourceAsStream("mail.properties");
-
-//			try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
-//	            int read;
-//	            byte[] bytes = new byte[8192];
-//	            while ((read = fileData.read(bytes)) != -1) {
-//	                outputStream.write(bytes, 0, read);
-//	            }
-//	        }
-
 				BodyPart fichero = new MimeBodyPart();
 				fichero.setDataHandler(new DataHandler(new FileDataSource(file)));
 				fichero.setFileName(file.getName());

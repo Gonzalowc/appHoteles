@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ import edu.fpdual.hotelesapp.objetos.Hotel;
 /**
  * Clase Manejador Hotel para realizar todas las consultas en cuanto a hoteles
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class ManejadorHotel {
 
@@ -85,12 +84,9 @@ public class ManejadorHotel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return false;
 	}
 	
-	
-
 	/**
 	 * Metodo Lista Hoteles para mostrar la lista de todos los hoteles disponibles
 	 * @param con para conseguir la conexion
@@ -251,7 +247,6 @@ public class ManejadorHotel {
 				return new Hotel(result);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -273,30 +268,4 @@ public class ManejadorHotel {
 		}
 		return null;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

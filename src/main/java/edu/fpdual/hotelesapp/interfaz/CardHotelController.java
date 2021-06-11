@@ -1,13 +1,9 @@
 package edu.fpdual.hotelesapp.interfaz;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHabitacion;
@@ -31,7 +27,7 @@ import javafx.scene.layout.Pane;
  * Clase Card Hotel Controller
  * 
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class CardHotelController {
 	/**
@@ -99,7 +95,7 @@ public class CardHotelController {
 	 * Metodo para asignar la ventana de reserva.
 	 * 
 	 * @param borderPane Ventana Reserva.
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void setReservaPane() throws IOException {
 		AnchorPane panelLateral;
@@ -150,7 +146,7 @@ public class CardHotelController {
 	/**
 	 * Metodo para crear la lista de habitaciones de un hotel y cambiar la vista
 	 * 
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void listaHabitaciones() throws IOException {
@@ -186,5 +182,4 @@ public class CardHotelController {
 		parentPane.setRight(reservaPane);
 		parentPane.setBottom(null);
 	}
-
 }

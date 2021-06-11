@@ -4,9 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import lombok.experimental.PackagePrivate;
-import lombok.Getter;
-import lombok.Setter;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +12,7 @@ import lombok.Setter;
 /**
  * Clase Habitacion
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 @Getter
 @Setter
@@ -173,12 +170,5 @@ public class Habitacion implements Comparable<Habitacion> {
 	@Override
 	public int compareTo(Habitacion h) {
 		return this.id - h.getId();
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

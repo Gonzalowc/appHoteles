@@ -43,7 +43,7 @@ import javafx.stage.Stage;
 /**
  * Clase para reserva de habitaciones
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class ReservaRoomController {
 	/**
@@ -208,7 +208,7 @@ public class ReservaRoomController {
 	
 	/**
 	 * Metodo para realizar la reserva con todos los datos introducidos
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void reserva() throws IOException {
@@ -256,7 +256,7 @@ public class ReservaRoomController {
 
 	/**
 	 * Metodo para listar las fechas seleccionadas
-	 * @return
+	 * @return lista de fechas seleccionadas
 	 */
 	private ArrayList<LocalDate> listaFechasSelected() {
 		ArrayList<LocalDate> fechas = new ArrayList<LocalDate>();
@@ -273,9 +273,8 @@ public class ReservaRoomController {
 	 * Metodo para crear el pdf y que se envie por correo
 	 * @param con Conexion con la base de datos
 	 * @param serviciosID ID del servicio
-	 * @return
 	 */
-	public int crearPDFyEnviar(Conector con, String serviciosID) {
+	public void crearPDFyEnviar(Conector con, String serviciosID) {
 		Sender email = new Sender();
 		PdfCreator pdf = new PdfCreator();
 		String ruta;
@@ -288,7 +287,6 @@ public class ReservaRoomController {
 		} catch (URISyntaxException | IOException e) {
 			e.printStackTrace();
 		}
-		return 0;
 	}
 
 	/**
@@ -322,7 +320,7 @@ public class ReservaRoomController {
 	
 	/**
 	 * Metodo para la info de las fechas
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void setInfoDates() throws IOException {
@@ -396,7 +394,7 @@ public class ReservaRoomController {
 	/**
 	 * Metodo para cambiar servicios de hotel de disponible a seleccionados
 	 * @param event Evento de raton
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void changeServiceToSelectHotel(MouseEvent event) throws IOException {
@@ -413,7 +411,7 @@ public class ReservaRoomController {
 	/**
 	 * Metodo para cambiar servicios de hotel de seleccionados a disponibles
 	 * @param event Evento de raton
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void changeServiceToDispoHotel(MouseEvent event) throws IOException {
 		Servicio servicio = listSelectHotel.getSelectionModel().getSelectedItem();
@@ -428,7 +426,7 @@ public class ReservaRoomController {
 	/**
 	 * Metodo para cambiar servicio de habitacion de disponibles a seleccionados
 	 * @param event Evento de raton
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void changeServicetoSelectHabitacion(MouseEvent event) throws IOException {
@@ -443,7 +441,7 @@ public class ReservaRoomController {
 	/**
 	 * Metodo para cambiar servicio de habitacion de seleccionados a disponibles
 	 * @param event Evento de raton
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void changeServiceToDispoHab(MouseEvent event) throws IOException {

@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * Clase Card Room Controller
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class CardRoomController {
 	/**
@@ -103,10 +103,9 @@ public class CardRoomController {
 	}
 	/**
 	 * Metodo para rellenar la reserva
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void rellenarReserva() throws IOException {
-		
 		// crear la clase que controla el archivo FXML
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("reservaRoom.fxml"));
 		// creamos el panel a partir del loader
@@ -117,7 +116,4 @@ public class CardRoomController {
 		reservaRoomController.setData(habitacion,codeHotel, Integer.parseInt(lblNumPersonas.getText()), Double.parseDouble(lblPrecio.getText()),user);;
 		parent.setRight(aux);
 	}
-	
-	
-
 }

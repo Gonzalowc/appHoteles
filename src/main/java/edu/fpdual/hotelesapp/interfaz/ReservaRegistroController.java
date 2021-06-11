@@ -27,12 +27,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import javafx.util.Callback;
 /**
  * Clase para el registro de reservas
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 
 public class ReservaRegistroController {

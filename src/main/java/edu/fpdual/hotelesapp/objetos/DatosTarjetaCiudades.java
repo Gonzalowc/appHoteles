@@ -2,7 +2,12 @@ package edu.fpdual.hotelesapp.objetos;
 
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * 
+ * 
+ * @author g.waack.carneado
+ *
+ */
 @Getter
 @Setter
 public class DatosTarjetaCiudades {

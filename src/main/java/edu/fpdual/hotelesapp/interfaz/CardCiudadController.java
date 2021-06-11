@@ -8,16 +8,14 @@ import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.objetos.DatosTarjetaCiudades;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 import edu.fpdual.hotelesapp.objetos.Usuario;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 /**
  * Clase Card Ciudad Controller
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class CardCiudadController {
 	/**
@@ -62,26 +60,21 @@ public class CardCiudadController {
 	/**
 	 * Metodo para cambiar a la vista de Hoteles
 	 * @param event Evento de click
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	@FXML
 	public void toBuscadorCiudad() throws IOException {
 		Conector con = new Conector();
 		ManejadorHotel mh = new ManejadorHotel();
-		
-//TODO: aqui da error al cargar el archivo
 		ArrayList<Hotel> hotelesMostrar = mh.hotelesCiudad(con,nomCiudad.getText());
 		try {
 			// crear la clase que controla el archivo FXML
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("aplication.fxml"));
 			// creamos el panel a partir del loader
 			BorderPane aplicacion = (BorderPane) loader.load();
-
 			// creamos el objeto controlador que queremos usar
 			AplicationController aplicationController = loader.<AplicationController>getController();
 			// usamos sus metodos
-			;
-			System.out.println("toBuscadorCiudad "+parent);
 			aplicationController.setMyPanel(parent);
 			aplicationController.setUsuario(user);
 			parent.setCenter(aplicationController.listaHoteles(hotelesMostrar));

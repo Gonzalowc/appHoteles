@@ -13,7 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-
+/**
+ * 
+ * @author g.waack.carneado
+ *
+ */
 public class InsertRoomController {
 	/**
 	 * Campo de texto con el id del hotel
@@ -77,14 +81,12 @@ public class InsertRoomController {
 	}
 	/**
 	 * Metodo para insertar habitacion
-	 * @throws IOException
+	 * @throws IOException Error
 	 */
 	public void insertRoom() throws IOException{
 		Conector con = new Conector();
 		ManejadorHabitacion mh = new ManejadorHabitacion();
-
 		Habitacion h = new Habitacion(hotel, Integer.parseInt(txtNumPers.getText()),null,null,false,Double.parseDouble(txtPrice.getText()), null);
-		
 		if(mh.crearHabitacion(con, h)) {
 			lblCorrectInsert.setVisible(true);
 			lblErrorInsert.setVisible(false);

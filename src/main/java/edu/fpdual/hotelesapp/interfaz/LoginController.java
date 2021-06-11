@@ -26,7 +26,7 @@ import javafx.stage.StageStyle;
  * Clase Login Controller
  * 
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class LoginController {
 	@FXML

@@ -1,5 +1,15 @@
 package edu.fpdual.hotelesapp.mail;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Path;
+import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -7,16 +17,11 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Path;
-import java.util.HashMap;
 /**
  * Clase para generar un codigoQR con logo
+ * 
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class QRGenerator {
 	@SuppressWarnings("unchecked")
@@ -29,8 +34,8 @@ public class QRGenerator {
 		int height = 300;
 		String format = "jpg";
 		String ruta = System.getProperty("user.home");
-		String rutaCompleta = ruta+"/Documents/reserva"+1+".pdf";
-		String content = rutaCompleta+"Imagen.png";// Contenido del código QR
+		String rutaCompleta = ruta + "/Documents/reserva" + 1 + ".pdf";
+		String content = rutaCompleta + "Imagen.png";// Contenido del código QR
 
 		/**
 		 * Definir sugerencias HashMap
@@ -55,9 +60,11 @@ public class QRGenerator {
 			/**
 			 * Finalmente, usamos la clase de función MultiformatWriter para llamar a la
 			 * función echoed y devolver un valor, luego escribimos en el archivo
-			 */												/*content*/			
-			BitMatrix bitMatrix = multiFormatWriter.encode("iVBORw0KGgoAAAANSUhEUgAACa8AAA20CAIAAAB3e7Q/AAAACXBIWXMAAC4jAAAuIwF4pT92AACAAElEQVR4AQBGkbluAP" , BarcodeFormat.QR_CODE, width, height, hints);
-			String rutaCompleta2 = ruta+"/Documents/codigoQR.png";
+			 */ /* content */
+			BitMatrix bitMatrix = multiFormatWriter.encode(
+					"iVBORw0KGgoAAAANSUhEUgAACa8AAA20CAIAAAB3e7Q/AAAACXBIWXMAAC4jAAAuIwF4pT92AACAAElEQVR4AQBGkbluAP",
+					BarcodeFormat.QR_CODE, width, height, hints);
+			String rutaCompleta2 = ruta + "/Documents/codigoQR.png";
 			Path file = new File(rutaCompleta2).toPath();
 			MatrixToImageWriter.writeToPath(bitMatrix, format, file);
 			/**
@@ -69,12 +76,11 @@ public class QRGenerator {
 			 */
 			BufferedImage bufferedImage = ImageIO.read(new File(file.toString()));
 			Graphics2D graphics = bufferedImage.createGraphics();
-System.out.println("ruta "+ruta);
 			/**
 			 * Leer la imagen del logo
 			 */
 			BufferedImage logo = ImageIO
-					.read(new File(ruta+"\\ejemplosConJavaFX\\apphoteles\\src\\main\\resources\\img\\logo2.png"));
+					.read(new File(ruta + "\\ejemplosConJavaFX\\apphoteles\\src\\main\\resources\\img\\logo2.png"));
 
 			/**
 			 * Establece el tamaño del logo, si es demasiado grande cubrirá el código QR,
@@ -86,14 +92,14 @@ System.out.println("ruta "+ruta);
 			int logoHeight = logo.getHeight() > bufferedImage.getHeight() * 2 / 10
 					? (bufferedImage.getHeight() * 2 / 10)
 					: logo.getHeight();
-			
+
 			/**
 			 * Establecer la ubicación donde se coloca la imagen del logotipo, centrar
 			 * 
 			 */
 			int x = (bufferedImage.getWidth() - logoWidth) / 2;
 			int y = (bufferedImage.getHeight() - logoHeight) / 2;
-			
+
 			graphics.drawImage(logo, x, y, logoWidth, logoHeight, null);
 			graphics.drawRoundRect(x, y, logoWidth, logoHeight, 15, 15);
 			/**
@@ -103,16 +109,16 @@ System.out.println("ruta "+ruta);
 			graphics.setColor(Color.WHITE);
 			graphics.drawRect(x, y, logoWidth, logoHeight);
 			graphics.dispose();
-			
+
 			logo.flush();
 			bufferedImage.flush();
-			
-			ImageIO.write(bufferedImage, format, new File(ruta+"\\Documents\\codigoQR2.png"));
+
+			ImageIO.write(bufferedImage, format, new File(ruta + "\\Documents\\codigoQR2.png"));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("Imagen QR generada");
 	}
 }

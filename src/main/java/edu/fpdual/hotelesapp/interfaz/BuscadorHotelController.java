@@ -15,7 +15,11 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
+/**
+ * 
+ * @author g.waack.carneado
+ *
+ */
 public class BuscadorHotelController {
 
 	/**
@@ -37,7 +41,7 @@ public class BuscadorHotelController {
 	 */
 	private ArrayList<Hotel> hoteles;
 	/**
-	 * Lista de usuarios
+	 * Usuario logueado
 	 */
 	private Usuario user;
 
@@ -79,17 +83,7 @@ public class BuscadorHotelController {
 	 */
 	@FXML
 	public void hacerBusqueda() throws IOException {
-//		// crear la clase que controla el archivo FXML
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("aplication.fxml"));
-//		// creamos el panel a partir del loader
-//		BorderPane aux = (BorderPane) loader.load();
-//		// creamos el objeto controlador que queremos usar
-//		AplicationController aplicationController = loader.<AplicationController>getController();
-//		// usamos sus metodos
-
 		ArrayList<Hotel> hotelesFilt = filtrarHoteles();
-		// aplicationController.setHotelesMostrar(hotelesFilt);
-		/*----------------------------------*/
 		final int ANCHO = 3;
 		int alto = (hotelesFilt.size() % 3 != 0) ? (int) (hotelesFilt.size() / 3) + 1 : (int) (hotelesFilt.size() / 3);
 		ScrollPane scrollPane = new ScrollPane();
@@ -105,7 +99,6 @@ public class BuscadorHotelController {
 				if (count < hotelesFilt.size()) {
 					try {
 						Hotel h = hotelesFilt.get(count);
-
 						// crear la clase que controla el archivo FXML
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("cardHotel.fxml"));
 						// creamos el panel a partir del loader
@@ -126,12 +119,9 @@ public class BuscadorHotelController {
 			}
 		}
 		scrollPane.setContent(grid);
-		/*-----------------------------------------------------------------------*/
-
 		if (parent != null) {
 			parent.setCenter(scrollPane);
 		}
-
 	}
 
 }

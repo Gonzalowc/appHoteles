@@ -12,7 +12,12 @@ import edu.fpdual.hotelesapp.objetos.Habitacion;
 import edu.fpdual.hotelesapp.objetos.Registro;
 import edu.fpdual.hotelesapp.objetos.Servicio;
 import javafx.collections.ObservableList;
-
+/**
+ * 
+ * 
+ * @author g.waack.carneado
+ *
+ */
 public class ManejadorRelHabitacionServicio {
 	public void addConjuntoServiciosHabitacion(Connection con2, Habitacion habitacion,
 			ObservableList<Servicio> serviciosHab, String serviciosID) {
@@ -61,7 +66,6 @@ public class ManejadorRelHabitacionServicio {
 				tablaServicios.addCell(result.getString(3));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

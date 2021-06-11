@@ -15,7 +15,7 @@ import edu.fpdual.hotelesapp.objetos.Usuario;
 /**
  * Clase Manejador Habitacion para realizar todas las consultas en cuanto a habitaciones
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class ManejadorHabitacion {
 	/**
@@ -83,16 +83,13 @@ public class ManejadorHabitacion {
 		try(PreparedStatement stmt = con2.prepareStatement(sql)){
 			stmt.setString(1, "%"+localizacion+"%");
 			ResultSet result = stmt.executeQuery();
-			
 			result.beforeFirst();
 			ArrayList<Habitacion> habs = new ArrayList<Habitacion>();
 			while(result.next()) {
 				Habitacion habitacion = new Habitacion(result);
 				habs.add(habitacion);
 			}
-			
 			return habs;
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +129,6 @@ public class ManejadorHabitacion {
 	 */
 	public ArrayList<Habitacion> listaHabitaciones(Conector con){
 		Connection con2 = con.getMySQLConnection();
-		
 		try(Statement stmt = con2.createStatement()){
 			String sql = "SELECT * FROM Habitacion";
 			ResultSet result= stmt.executeQuery(sql);

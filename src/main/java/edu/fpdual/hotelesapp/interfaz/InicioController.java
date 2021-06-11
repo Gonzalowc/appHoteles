@@ -16,10 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
 /**
  * Clase de Controlador de inicio
+ * 
  * @author angela.bonilla.gomez
- *
+ * @author g.waack.carneado
  */
 public class InicioController {
 	/**
@@ -44,23 +46,27 @@ public class InicioController {
 	 * Lista de ciudades
 	 */
 	private ArrayList<DatosTarjetaCiudades> ciudades;
-	
+
 	public void setUser(Usuario user) {
-		this.user=user;
+		this.user = user;
 	}
+
 	public Usuario getUser() {
 		return user;
 	}
-	
-	public ArrayList<DatosTarjetaCiudades> getCiudades(){
+
+	public ArrayList<DatosTarjetaCiudades> getCiudades() {
 		return ciudades;
 	}
+
 	public void setPanelCiudades(GridPane panel) {
 		this.panelCiudades.setContent(panel);
 	}
+
 	public void setParent(BorderPane parent) {
 		this.parent = parent;
 	}
+
 	/**
 	 * Metodo para rellenar localizaciones
 	 */
@@ -69,42 +75,16 @@ public class InicioController {
 		Conector con = new Conector();
 		ciudades = manejadorHotel.listaHotelesOrdenCantidadCiudad(con);
 	}
-//	@FXML
-//	public void cambiosCiudades() {
-//		Timer modificador = new Timer(true);
-//		modificador.scheduleAtFixedRate(new TimerTask() {
-//			@Override
-//			public void run() {
-//				int posicion = (int)(Math.random()*ciudades.size());
-//				try {
-//					DatosTarjetaCiudades ciudad = ciudades.get(posicion);
-//
-//					// crear la clase que controla el archivo FXML
-//					FXMLLoader loader = new FXMLLoader(getClass().getResource("cardCiudad.fxml"));
-//					// creamos el panel a partir del loader
-//					Pane aux = (Pane) loader.load();
-//					// creamos el objeto controlador que queremos usar
-//					CardCiudadController cardCiudadController = loader.<CardCiudadController>getController();
-//					// usamos sus metodos
-//					cardCiudadController.setDataCard(ciudad);
-//					//chc.setParentPane(myPanel);
-//					panelCambiar.getChildren().add(aux);
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		},0, 2000);
-//	}
-	
+
 	/**
 	 * Metodo para generar un panel con la lista de ciudades y rellenar los datos
-	 * @return GridPane
+	 * 
+	 * @return GridPane panel relleno con cardCiudad
 	 */
-	public GridPane listaCiudades(){
+	public GridPane listaCiudades() {
 		rellenarLocalizaciones();
 		final int ANCHO = 3;
-		int alto = (ciudades.size() % 3 != 0) ? (int) (ciudades.size() / 3) + 1
-				: (int) (ciudades.size() / 3);
+		int alto = (ciudades.size() % 3 != 0) ? (int) (ciudades.size() / 3) + 1 : (int) (ciudades.size() / 3);
 		GridPane grid = new GridPane();
 
 		grid.setHgap(10);
@@ -128,9 +108,7 @@ public class InicioController {
 						cardCiudadController.setParent(parent);
 						cardCiudadController.setDataCard(ciudad);
 						cardCiudadController.setUser(user);
-						System.out.println("listaCiudad: InicioController: "+parent);
 						grid.add(aux, j, i, 1, 1);
-						System.out.println("Tarjeta "+i+" "+j);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -138,9 +116,7 @@ public class InicioController {
 				count++;
 			}
 		}
-		//cambiosCiudades();
 		return grid;
-		
 	}
-	
+
 }
