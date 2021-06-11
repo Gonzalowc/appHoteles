@@ -27,8 +27,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 /**
  * Clase para el registro de reservas
+ * 
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
  * @author g.moreno.rodriguez
@@ -123,7 +125,6 @@ public class ReservaRegistroController {
 	public void setUser(Usuario user) {
 		this.user = user;
 	}
-	
 
 	public Usuario getUser() {
 		return user;
@@ -134,7 +135,7 @@ public class ReservaRegistroController {
 	 */
 	public void rellenarTabla() {
 		// crear observableList de Registro
-		
+
 		Conector con = new Conector();
 		ManejadorRegistro manejadorRegistro = new ManejadorRegistro();
 		ArrayList<Registro> registrosDB = manejadorRegistro.getRegistrosPorUsuario(con, user.getNombre());
@@ -151,23 +152,30 @@ public class ReservaRegistroController {
 		fechaSalida.setCellValueFactory(new PropertyValueFactory<>("fecha_salida"));
 		precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
 		id_Services.setCellValueFactory(new PropertyValueFactory<>("id_Services"));
-		//Rellenar tabla
+		// Rellenar tabla
 		tabla.setItems(registros);
 	}
 
 	/**
 	 * Metodo para comprobar la fecha
+	 * 
 	 * @param fecha que se introduce
 	 * @return La comparacion de la fecha
 	 */
 	public int comprobarFecha(String fecha) {
 		ArrayList<String> fechaSeparada = (ArrayList<String>) Arrays.asList(fecha.split("-"));
-		LocalDate fechaComprobar =  LocalDate.of(Integer.parseInt(fechaSeparada.get(0)),Integer.parseInt(fechaSeparada.get(1)),Integer.parseInt(fechaSeparada.get(2)));
+		LocalDate fechaComprobar = LocalDate.of(Integer.parseInt(fechaSeparada.get(0)),
+				Integer.parseInt(fechaSeparada.get(1)), Integer.parseInt(fechaSeparada.get(2)));
 		LocalDate ahora = LocalDate.now();
-				
+
 		return fechaComprobar.compareTo(ahora);
 	}
 
+	/**
+	 * Genera un panel con la lista de fechas No disponibles
+	 * 
+	 * @throws IOException Error
+	 */
 	@FXML
 	public void setInfoDates() throws IOException {
 		Registro registroSelect = tabla.getSelectionModel().getSelectedItem();
@@ -188,6 +196,13 @@ public class ReservaRegistroController {
 		padre.setAlwaysOnTop(true);
 		padre.showAndWait();
 	}
+
+	/**
+	 * Rellena el formulario con los datos del registro que se haya seleccionado en
+	 * la tabla
+	 * 
+	 * @throws IOException Error
+	 */
 	@FXML
 	public void rellenarFormulario() throws IOException {
 		Registro registroSelect = tabla.getSelectionModel().getSelectedItem();
@@ -195,7 +210,7 @@ public class ReservaRegistroController {
 		info.setVisible(false);
 		txtnHotel.setText(registroSelect.getNombreHotel());
 		txtLocalizacion.setText(registroSelect.getLocalizacion());
-		txtEstrellas.setText(Integer.toString( registroSelect.getEstrellas()));
+		txtEstrellas.setText(Integer.toString(registroSelect.getEstrellas()));
 		txtPersonas.setText(Integer.toString(registroSelect.getNum_personas()));
 		txtFechEntry.setText(registroSelect.getFecha_Entrada());
 		txtFechExit.setText(registroSelect.getFecha_salida());
@@ -204,7 +219,12 @@ public class ReservaRegistroController {
 		btnBorrarRegistro.setVisible(true);
 		btnGuardarCambios.setVisible(false);
 	}
-	
+
+	/**
+	 * Activa los campos del formulario
+	 * 
+	 * @throws IOException Error
+	 */
 	@FXML
 	public void activarCamposFormulario() throws IOException {
 		txtnHotel.setDisable(false);
@@ -218,7 +238,11 @@ public class ReservaRegistroController {
 		btnGuardarCambios.setVisible(true);
 		info.setVisible(true);
 	}
-	public void desactivarCamposFormulario(){
+
+	/**
+	 * Desactiva los campos del formulario
+	 */
+	public void desactivarCamposFormulario() {
 		txtnHotel.setDisable(true);
 		txtLocalizacion.setDisable(true);
 		txtEstrellas.setDisable(true);
@@ -230,6 +254,13 @@ public class ReservaRegistroController {
 		btnGuardarCambios.setVisible(false);
 		btnBorrarRegistro.setVisible(false);
 	}
+
+	/**
+	 * Actualiza los datos del Registro y lo actualiza en la base de datos usando
+	 * los servicios del servlet
+	 * 
+	 * @throws IOException Error
+	 */
 	@FXML
 	public void modificarDatos() throws IOException {
 		Registro registroSelect = tabla.getSelectionModel().getSelectedItem();
@@ -243,16 +274,28 @@ public class ReservaRegistroController {
 		Gson json = new Gson();
 		String registroJSON = json.toJson(registroSelect);
 		System.out.println(registroJSON);
-		mandarURL("http://localhost:8080/appHotelesServices/api/actions/registro/modificar",registroJSON);
+		mandarURL("http://localhost:8080/appHotelesServices/api/actions/registro/modificar", registroJSON);
 		desactivarCamposFormulario();
-		actualizarDatoTabla(tabla.getSelectionModel().getSelectedIndex(),registroSelect);
+		actualizarDatoTabla(tabla.getSelectionModel().getSelectedIndex(), registroSelect);
 		tabla.getSelectionModel().clearSelection();
-		
+
 	}
+
+	/**
+	 * Actualiza los datos de la tabla por los nuevos
+	 * 
+	 * @param index posicion a cambiar
+	 * @param nuevo objeto con los nuevos datos
+	 */
 	private void actualizarDatoTabla(int index, Registro nuevo) {
-		registros.set(index,nuevo);
+		registros.set(index, nuevo);
 		tabla.setItems(registros);
 	}
+	/**
+	 * Manda un JSON por url con metodo post para la modificacion del registro
+	 * @param url url del servidor
+	 * @param json json para el body
+	 */
 	private void mandarURL(String url, String json) {
 		try {
 			URL server = new URL(url);
@@ -261,32 +304,37 @@ public class ReservaRegistroController {
 			conexionHTTP.setRequestProperty("Content-Type", "application/json; utf-8");
 			conexionHTTP.setRequestProperty("Accept", "application/json");
 			conexionHTTP.setDoOutput(true);
-			
-			try(OutputStream os = conexionHTTP.getOutputStream()) {
-			    byte[] input = json.getBytes("utf-8");
-			    os.write(input, 0, input.length);			
+
+			try (OutputStream os = conexionHTTP.getOutputStream()) {
+				byte[] input = json.getBytes("utf-8");
+				os.write(input, 0, input.length);
 			}
 			conexionHTTP.connect();
-			System.out.println("Mensaje Modificación: "+conexionHTTP.getResponseCode()+": "+conexionHTTP.getResponseMessage());
+			System.out.println("Mensaje Modificación: " + conexionHTTP.getResponseCode() + ": "
+					+ conexionHTTP.getResponseMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Borrar un Registro usando el id del registro que está seleccionado en la tabla.
+	 * @throws IOException Error
+	 */
 	@FXML
 	public void borrarRegistro() throws IOException {
 		Registro registroSelect = tabla.getSelectionModel().getSelectedItem();
 		try {
-			URL server = new URL("http://localhost:8080/appHotelesServices/api/actions/registro/delete/"+registroSelect.getId());
-			System.out.println("URL: "+server.toString());
+			URL server = new URL(
+					"http://localhost:8080/appHotelesServices/api/actions/registro/delete/" + registroSelect.getId());
+			System.out.println("URL: " + server.toString());
 			HttpURLConnection conexionHTTP = (HttpURLConnection) server.openConnection();
 			conexionHTTP.setRequestMethod("GET");
 			conexionHTTP.connect();
-			
-			System.out.println("Mensaje de borrado: "+conexionHTTP.getResponseMessage());
+
+			System.out.println("Mensaje de borrado: " + conexionHTTP.getResponseMessage());
 			conexionHTTP.disconnect();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
