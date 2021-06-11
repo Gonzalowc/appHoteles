@@ -23,13 +23,6 @@ import edu.fpdual.hotelesapp.objetos.Usuario;
  */
 public class ManejadorHabitacion {
 	
-	public Date convertToDate(LocalDate localDate) {
-		
-		ZonedDateTime zdt = localDate.atStartOfDay(ZoneId.systemDefault());
-		Instant instant = zdt.toInstant();
-		Date date = Date.from(instant);
-		return date;
-	}
 	/**
 	 * Metodo Buscar Habitacion para consultar habitacion por precio
 	 * @param con para conseguir la conexion

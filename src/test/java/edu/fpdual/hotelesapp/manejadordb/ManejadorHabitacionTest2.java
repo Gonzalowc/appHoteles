@@ -1,6 +1,6 @@
 package edu.fpdual.hotelesapp.manejadordb;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
@@ -21,12 +21,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import edu.fpdual.hotelesapp.conector.Conector;
-import edu.fpdual.hotelesapp.objetos.Hotel;
+import edu.fpdual.hotelesapp.objetos.Habitacion;
 
 @ExtendWith(MockitoExtension.class)
-class ManejadorHotelTest3 {
+class ManejadorHabitacionTest2 {
+	
 	@InjectMocks
-	ManejadorHotel h2;
+	ManejadorHabitacion mh;
+
 	@Mock
 	private Conector c;
 	
@@ -40,22 +42,20 @@ class ManejadorHotelTest3 {
 	@Mock
 	private ResultSet rs;
 	
-
-	
 	@BeforeEach
 	private void setUp() throws Exception {
 		 	MockitoAnnotations.initMocks(this);
 			when(c1.createStatement()).thenReturn(stmt);
-			when(c.getMySQLConnection()).thenReturn(c1);			
+			when(c.getMySQLConnection()).thenReturn(c1);
 			
 	}
 
 	@Test
-	public void testListaHoteles() throws SQLException {
+	public void testListaHabitaciones() throws SQLException {
+		
 		Mockito.when(c1.createStatement()).thenReturn(stmt);
 		Mockito.when(stmt.executeQuery(Mockito.anyString())).thenReturn(rs);
 		Mockito.when(rs.getInt("id")).thenReturn(1);
-		Mockito.when(rs.getString(Mockito.anyString())).thenReturn("String Prueba");
 		
 		Mockito.when(rs.next()).thenAnswer(new Answer<Boolean>() {
 
@@ -73,17 +73,15 @@ class ManejadorHotelTest3 {
 		});
 		
 		
-		ArrayList<Hotel> hoteles = h2.listaHoteles(c);
+		ArrayList<Habitacion> Habitaciones = mh.listaHabitaciones(c);
 		
-		assertNotNull(hoteles);
+		assertNotNull(Habitaciones);
 	}
 	
 	@Test
-	public void testListaHotelesFail() throws SQLException {
+	public void testListaHabitacionesFail() throws SQLException {		
 		when(stmt.executeQuery(Mockito.anyString())).thenThrow(new SQLException());
-		assertNull(h2.listaHoteles(c));
+		assertNull(mh.listaHabitaciones(c));
 	}
-	
-	
 
 }
