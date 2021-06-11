@@ -92,7 +92,6 @@ public class AplicationController {
 	 */
 	@FXML
 	public void toPrincipalVista(ActionEvent event) throws IOException{
-		System.out.println("toPrinciaplVista: AplicationController"+myPanel);
 		primeraVentana();
 	}
 

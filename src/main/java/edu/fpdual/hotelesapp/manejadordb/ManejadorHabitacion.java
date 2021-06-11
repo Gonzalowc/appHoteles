@@ -5,12 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
@@ -22,7 +18,6 @@ import edu.fpdual.hotelesapp.objetos.Usuario;
  *
  */
 public class ManejadorHabitacion {
-	
 	/**
 	 * Metodo Buscar Habitacion para consultar habitacion por precio
 	 * @param con para conseguir la conexion

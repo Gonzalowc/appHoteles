@@ -12,32 +12,18 @@
           <Menu mnemonicParsing="false" text="Inicio">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#toPrincipalVista" text="Principal" />
+                  <MenuItem mnemonicParsing="false" onAction="#toHotelesVista" text="Listado" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Hoteles">
+            <Menu mnemonicParsing="false" text="Nuevo">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Modificar" />
-                  <MenuItem mnemonicParsing="false" onAction="#toNewHotelVista" text="Nuevo" />
-                  <MenuItem mnemonicParsing="false" onAction="#toHotelesVista" text="Listado" />
-                  <MenuItem mnemonicParsing="false" text="Buscar" />
+                  <MenuItem mnemonicParsing="false" onAction="#toNewHotelVista" text="Nuevo Hotel" />
+             	 <MenuItem mnemonicParsing="false" onAction="#toNewRoomVista" text="Nueva Habitacion" />
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Habitaciones">
-            <items>
-             	 <MenuItem mnemonicParsing="false" onAction="#toNewRoomVista" text="Nueva" />
-                  <MenuItem mnemonicParsing="false" text="Modificar" />
-                  <MenuItem mnemonicParsing="false" text="Listado" />
-                  <MenuItem mnemonicParsing="false" text="Buscar" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Reservas">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#toReservaRegistro" text="Registro" />
-                  <MenuItem mnemonicParsing="false" text="Activas" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="Ajustes">
                <items>
+                  <MenuItem mnemonicParsing="false" onAction="#toReservaRegistro" text="Registro de Reservas" />
                   <MenuItem fx:id="salir" mnemonicParsing="false" text="Salir" />
                </items>
             </Menu>
