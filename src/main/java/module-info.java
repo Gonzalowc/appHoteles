@@ -14,6 +14,7 @@ module edu.fpdual.hotelesapp.hotelesapp {
 	requires pdfbox;
 	requires com.google.zxing;
 	requires com.google.zxing.javase;
+	requires gson;
     opens edu.fpdual.hotelesapp.interfaz to javafx.fxml;
     opens edu.fpdual.hotelesapp.objetos;
     opens edu.fpdual.hotelesapp.conector;

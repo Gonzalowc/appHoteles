@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="1.7976931348623157E308" prefHeight="529.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.ReservaRegistroController">
+<AnchorPane maxWidth="1.7976931348623157E308" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fpdual.hotelesapp.interfaz.ReservaRegistroController">
    <children>
-      <TableView fx:id="tabla" layoutX="22.0" layoutY="61.0" prefWidth="1140.0">
+      <TableView fx:id="tabla" layoutX="22.0" layoutY="61.0" onMouseClicked="#rellenarFormulario" prefHeight="570.0" prefWidth="815.0">
         <columns>
           <TableColumn fx:id="id_Registro" prefWidth="75.0" text="idRegistro" visible="false" />
           <TableColumn fx:id="nombreHotel" minWidth="20.0" prefWidth="130.0" text="Nombre Hotel" />
@@ -19,9 +20,74 @@
             <TableColumn fx:id="fechaSalida" minWidth="20.0" prefWidth="140.0" text="Fecha Salida" />
             <TableColumn fx:id="precio" minWidth="20.0" prefWidth="110.0" text="Precio" />
             <TableColumn fx:id="id_Services" minWidth="20.0" prefWidth="110.0" text="idServices" visible="false" />
-            <TableColumn fx:id="estado" minWidth="20.0" prefWidth="110.0" text="estado" />
-            <TableColumn fx:id="opciones" minWidth="20.0" prefWidth="250.0" text="Opciones" />
         </columns>
       </TableView>
+      <Label layoutX="858.0" layoutY="109.0" text="Nombre Hotel">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" layoutX="1075.0" layoutY="14.0" onMouseClicked="#setInfoDates" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #0000DB; -fx-background-radius: 50px;" text="i" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="848.0" layoutY="2.0" prefHeight="59.0" prefWidth="220.0" text="Señala para ver las fechas no disponibles" wrapText="true" />
+      <TextField fx:id="txtnHotel" disable="true" layoutX="858.0" layoutY="136.0" prefHeight="27.0" prefWidth="224.0" />
+      <TextField fx:id="txtLocalizacion" disable="true" layoutX="858.0" layoutY="227.0" prefHeight="27.0" prefWidth="224.0" />
+      <Label layoutX="858.0" layoutY="200.0" text="Localización">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="858.0" layoutY="292.0" text="Estrellas">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEstrellas" disable="true" layoutX="858.0" layoutY="319.0" prefHeight="39.0" prefWidth="70.0" />
+      <Label layoutX="1006.0" layoutY="292.0" text="Personas">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPersonas" disable="true" layoutX="1006.0" layoutY="319.0" prefHeight="39.0" prefWidth="76.0" />
+      <Label layoutX="858.0" layoutY="376.0" text="Fecha Entrada">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFechEntry" disable="true" layoutX="858.0" layoutY="403.0" prefHeight="39.0" prefWidth="119.0" />
+      <TextField fx:id="txtFechExit" disable="true" layoutX="997.0" layoutY="403.0" prefHeight="39.0" prefWidth="105.0" />
+      <Label layoutX="997.0" layoutY="376.0" text="Fecha Salida">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="858.0" layoutY="472.0" text="Precio">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPrecio" disable="true" layoutX="858.0" layoutY="499.0" prefHeight="39.0" prefWidth="122.0" />
+      <Label disable="true" layoutX="985.0" layoutY="499.0" prefHeight="27.0" prefWidth="42.0" text="€">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnBorrarRegistro" layoutX="1024.0" layoutY="562.0" mnemonicParsing="false" onAction="#borrarRegistro" style="-fx-background-color: FF6666;" text="Borrar" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnActivarCampos" layoutX="858.0" layoutY="562.0" mnemonicParsing="false" onAction="#activarCamposFormulario" style="-fx-background-color: lightblue;" text="Modificar" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnGuardarCambios" layoutX="858.0" layoutY="562.0" mnemonicParsing="false" onAction="#modificarDatos" style="-fx-background-color: royalblue;" text="Modificar" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
