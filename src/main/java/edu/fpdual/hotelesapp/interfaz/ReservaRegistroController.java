@@ -36,10 +36,13 @@ import javafx.stage.Stage;
 
 public class ReservaRegistroController {
 	/**
-	 * Tabla de registro
+	 * Etiqueta info
 	 */
 	@FXML
 	private Label info;
+	/**
+	 * Tabla de registro
+	 */
 	@FXML
 	private TableView<Registro> tabla;
 	/**
@@ -93,31 +96,66 @@ public class ReservaRegistroController {
 	@FXML
 	private TableColumn<Registro, String> id_Services;
 	/**
-	 * Columna de tabla de registro con el campo opciones
+	 * Campo de texto de Hotel
 	 */
 	@FXML
 	private TextField txtnHotel;
+	/**
+	 * Campo de texto de localizacion
+	 */
 	@FXML
 	private TextField txtLocalizacion;
+	/**
+	 * Campo de texto de estrellas
+	 */
 	@FXML
 	private TextField txtEstrellas;
+	/**
+	 * Campo de texto de personas
+	 */
 	@FXML
 	private TextField txtPersonas;
+	/**
+	 * Campo de texto de fecha entrada
+	 */
 	@FXML
 	private TextField txtFechEntry;
+	/**
+	 * Campo de texto de fecha salida
+	 */
 	@FXML
 	private TextField txtFechExit;
+	/**
+	 * Campo de texto de precio
+	 */
 	@FXML
 	private TextField txtPrecio;
+	/**
+	 * Boton para activar campos
+	 */
 	@FXML
 	private Button btnActivarCampos;
+	/**
+	 * Boton para guardar cambios
+	 */
 	@FXML
 	private Button btnGuardarCambios;
+	/**
+	 * Boton para borrar registro
+	 */
 	@FXML
 	private Button btnBorrarRegistro;
+	/**
+	 * Lista de registros
+	 */
 	private ObservableList<Registro> registros = FXCollections.observableArrayList();
-
+	/**
+	 * Usuario
+	 */
 	private Usuario user;
+	/**
+	 * Escenario padre
+	 */
 	private Stage padre = new Stage();
 
 	public void setUser(Usuario user) {
