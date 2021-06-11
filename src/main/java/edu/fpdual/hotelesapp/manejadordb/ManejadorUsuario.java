@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.objetos.Usuario;
@@ -18,18 +15,6 @@ import edu.fpdual.hotelesapp.objetos.Usuario;
  */
 public class ManejadorUsuario {
 	/**
-	 * Clase main para ejecutar los métodos
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Conector con = new Conector();
-		ManejadorUsuario mu = new ManejadorUsuario();
-
-		System.out.println(mu.existeUsuario(con, "pepe"));
-		System.out.println(mu.logging(con,"Gonzalo", "1234"));
-	}
-
-	/**
 	 * Metodo Validar Usuario para validar los credenciales introducidos por el usuario
 	 * @param con para conseguir la conexion
 	 * @param usuario user de la persona que se ha registrado
@@ -39,7 +24,6 @@ public class ManejadorUsuario {
 	public boolean validarUsuario(Conector con, String usuario, String passwd) {
 
 		Connection con2 = con.getMySQLConnection();
-
 		String sql = "SELECT * FROM Usuario WHERE nombre_usuario=? AND password=? AND activo=1";
 		try (PreparedStatement stmt = con2.prepareStatement(sql)) {
 			stmt.setString(1, usuario);

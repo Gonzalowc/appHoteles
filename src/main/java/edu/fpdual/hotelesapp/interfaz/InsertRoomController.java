@@ -1,15 +1,18 @@
 package edu.fpdual.hotelesapp.interfaz;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import edu.fpdual.hotelesapp.conector.Conector;
 import edu.fpdual.hotelesapp.manejadordb.ManejadorHabitacion;
-import edu.fpdual.hotelesapp.manejadordb.ManejadorHotel;
 import edu.fpdual.hotelesapp.objetos.Habitacion;
 import edu.fpdual.hotelesapp.objetos.Hotel;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 
 public class InsertRoomController {
 	@FXML
