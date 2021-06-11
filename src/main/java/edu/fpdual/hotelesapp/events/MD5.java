@@ -5,7 +5,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 /**
  * Clase MD5
  * @author angela.bonilla.gomez
- *
+ * @author g.moreno.rodriguez
+ * @author g.waack.carneado
  */
 public class MD5 {
 

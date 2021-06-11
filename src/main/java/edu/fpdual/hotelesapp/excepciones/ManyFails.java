@@ -7,6 +7,8 @@ import edu.fpdual.hotelesapp.mail.Sender;
 /**
  * Clase Many Fails que se trata de una excepcion propia
  * @author angela.bonilla.gomez
+ * @author g.moreno.rodriguez
+ * @author g.waack.carneado
  *
  */
 public class ManyFails extends Exception{

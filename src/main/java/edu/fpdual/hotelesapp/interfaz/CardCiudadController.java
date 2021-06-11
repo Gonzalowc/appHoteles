@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
  * Clase Card Ciudad Controller
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class CardCiudadController {
 	/**

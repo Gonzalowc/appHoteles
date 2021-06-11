@@ -6,6 +6,7 @@ import lombok.Setter;
  * Clase para los datos de hoteles en las tarjetas de ciudades
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  *
  */
 @Getter

@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
  * Clase manejador para la relacion de habitacion con servicio
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class ManejadorRelHabitacionServicio {
 	/**

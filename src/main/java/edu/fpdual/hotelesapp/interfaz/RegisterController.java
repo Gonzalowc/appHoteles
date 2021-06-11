@@ -16,6 +16,7 @@ import javafx.stage.Stage;
  * Clase Register Controller
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class RegisterController {
 	/**

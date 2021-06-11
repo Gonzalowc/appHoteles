@@ -13,6 +13,7 @@ import lombok.Setter;
  * Clase Habitacion
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 @Getter
 @Setter

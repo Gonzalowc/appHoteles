@@ -13,6 +13,7 @@ import javafx.stage.StageStyle;
  * JavaFX App
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class App extends Application {
 

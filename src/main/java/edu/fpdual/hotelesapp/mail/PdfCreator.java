@@ -29,6 +29,8 @@ import edu.fpdual.hotelesapp.manejadordb.ManejadorRelHotelServicio;
  * Clase PDFCreator para generar un pdf con los datos de la reserva y el usuario
  * 
  * @author angela.bonilla.gomez
+ * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  *
  */
 public class PdfCreator {

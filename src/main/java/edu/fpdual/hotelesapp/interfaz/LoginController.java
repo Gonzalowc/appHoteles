@@ -27,6 +27,7 @@ import javafx.stage.StageStyle;
  * 
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class LoginController {
 	/**

@@ -31,6 +31,7 @@ import javafx.stage.Stage;
  * Clase para el registro de reservas
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 
 public class ReservaRegistroController {

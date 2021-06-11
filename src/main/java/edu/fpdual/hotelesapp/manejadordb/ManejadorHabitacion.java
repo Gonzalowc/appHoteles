@@ -16,6 +16,7 @@ import edu.fpdual.hotelesapp.objetos.Usuario;
  * Clase Manejador Habitacion para realizar todas las consultas en cuanto a habitaciones
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class ManejadorHabitacion {
 	/**

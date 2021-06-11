@@ -21,6 +21,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
  * 
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class QRGenerator {
 	@SuppressWarnings("unchecked")

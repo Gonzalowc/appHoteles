@@ -18,6 +18,7 @@ import edu.fpdual.hotelesapp.objetos.Hotel;
  * Clase Manejador Hotel para realizar todas las consultas en cuanto a hoteles
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class ManejadorHotel {
 

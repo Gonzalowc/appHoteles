@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
  * Clase Card Room Controller
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class CardRoomController {
 	/**

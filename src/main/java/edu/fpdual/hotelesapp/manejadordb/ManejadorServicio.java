@@ -14,6 +14,7 @@ import edu.fpdual.hotelesapp.objetos.TipoServicio;
  * Clase Manejador Servicio para realizar todas las consultas en cuanto a los servicios
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class ManejadorServicio {
 

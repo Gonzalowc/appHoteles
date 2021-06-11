@@ -15,7 +15,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 /**
  * 
+ * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  *
  */
 public class InsertRoomController {

@@ -15,6 +15,8 @@ import edu.fpdual.hotelesapp.objetos.Registro;
 /**
  * Clase para el manejador de registro
  * @author angela.bonilla.gomez
+ * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  *
  */
 public class ManejadorRegistro {

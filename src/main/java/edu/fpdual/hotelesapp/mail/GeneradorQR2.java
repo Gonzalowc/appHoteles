@@ -18,6 +18,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
  * Clase para generar un codigoQR 
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class GeneradorQR2 {
 	public static void main(String[] args) {

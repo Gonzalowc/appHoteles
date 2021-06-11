@@ -11,6 +11,8 @@ import org.apache.pdfbox.util.ImageIOUtil;
 /**
  * Clase para convertir el pdf a imagen
  * @author angela.bonilla.gomez
+ * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  *
  */
 public class PdfToImageConverter {

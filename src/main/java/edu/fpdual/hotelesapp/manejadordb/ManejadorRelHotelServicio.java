@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
  * Clase manejador para la relacion de servicios con hoteles
  * @author angela.bonilla.gomez
  * @author g.waack.carneado
+ * @author g.moreno.rodriguez
  */
 public class ManejadorRelHotelServicio {
 	/**
